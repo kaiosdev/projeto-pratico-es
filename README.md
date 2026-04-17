@@ -46,7 +46,7 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
 
 <table align="center">
   <tr>
-    <td align="center"><a href="[https://github.com/kaiosdev/]"><img src="https://github.com/kaio-sobral-moreira.png" width="100px;" alt=""/><br /><sub><b>Kaio Sobral</b></sub></a><br />Scrum Master</td>
+    <td align="center"><a href="[https://github.com/kaiosdev/]"><img src="https://github.com/kaiosdev.png" width="100px;" alt=""/><br /><sub><b>Kaio Sobral</b></sub></a><br />Scrum Master</td>
     <td align="center"><b>Felipe</b><br />Backlog/User Stories</td>
     <td align="center"><b>Marcos</b><br />Design Thinking I</td>
   </tr>
