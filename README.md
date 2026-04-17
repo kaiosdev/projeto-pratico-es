@@ -35,10 +35,10 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
 
 | Arquivo | Descrição |
 | :--- | :--- |
-| [`1_plano-de-trabalho.md`](https://github.com/kaiosdev/Projeto-Eng-Software-A/blob/main/especificacao/1_plano_de_trabalho.md) | Escopo, tecnologias e divisão de papéis da equipe. |
+| [`1_plano-de-trabalho.md`](/especificacao/1_plano_de_trabalho.md) | Escopo, tecnologias e divisão de papéis da equipe. |
 | [`2_design-thinking.md`](/especificacao/2_design-thinking.md) | Golden Circle, Análise SWOT, Personas e Ideação. |
-| [`3_backlog-do-produto.md`](./especificacao/3_backlog-do-produto.md) | Lista priorizada de Histórias de Usuário (User Stories). |
-| [`4_backlog-do-sprint.md`](./especificacao/4_backlog-do-sprint.md) | Acompanhamento das tarefas individuais e links das Dailys. |
+| [`3_backlog-do-produto.md`](/especificacao/3_backlog-do-produto.md) | Lista priorizada de Histórias de Usuário (User Stories). |
+| [`4_backlog-do-sprint.md`](/especificacao/4_backlog-do-sprint.md) | Acompanhamento das tarefas individuais e links das Dailys. |
 
 ---
 
