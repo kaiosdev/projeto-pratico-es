@@ -17,5 +17,5 @@ O Slow Down é um aplicativo móvel voltado ao cuidado e prevenção do burnout,
 * **Marcelo Barros (@marecelobarrosdasilva-bit):** Personas, Ideação & Análise de Mercado.
 
 ## 4. Ambiente de Desenvolvimento
-* **Linguagem/Framework:** Python / Pygame.
+* **Linguagem/Framework:** A definir
 * **Gestão:** GitHub Projects, Notion e Git.
