@@ -15,7 +15,7 @@
   |:---|:---|
   | **Responsável** | Nádia |
   | **Projeto** | SlowDown |
-  | **Quadro Kanban** | [Acessar GitHub Projects]https://github.com/users/kaiosdev/projects/6) |
+  | **Quadro Kanban** | ([Acessar GitHub Projects]https://github.com/users/kaiosdev/projects/6) |
   | **Sprint** | Sprint 1 — 28/03/2026 a 25/04/2026 |
 </div>
 
