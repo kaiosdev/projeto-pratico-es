@@ -13,9 +13,9 @@
 
   | Campo | Informação |
   |:---|:---|
-  | **Responsável** | Marcos Oliveira |
+  | **Responsável** | Marcos Oliveira e Marcelo Barros |
   | **Projeto** | SlowDown |
-  | **Metodologia** | Design Thinking (Inspiração e Ideação) |
+  | **Metodologia** | Design Thinking |
   | **Status da Entrega** | Concluído |
 </div>
 
