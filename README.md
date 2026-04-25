@@ -1,9 +1,9 @@
 <div align="center">
   <h1>🌱 Slow Down</h1>
-  <p><i>Aplicativo de Apoio ao Cuidado contra o Burnout </i></p>
+  <p><i>Aplicativo de Apoio ao Cuidado contra o Burnout</i></p>
 
   <img src="https://img.shields.io/badge/Status-Sprint%201-blue?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/Engenharia_de_Software_I-ICET--UFAM-green?style=for-the-badge" alt="Disciplina">
+  <img src="https://img.shields.io/badge/Engenharia_de_Software_A-ICET--UFAM-green?style=for-the-badge" alt="Disciplina">
   <img src="https://img.shields.io/github/repo-size/kaiosdev/projeto-pratico-es?style=for-the-badge" alt="Repo Size">
 </div>
 
@@ -11,9 +11,9 @@
 
 ## 📝 Sobre o Projeto
 
-O **Slow Down** é uma solução móvel desenvolvida para auxiliar na prevenção e controle do burnout, com foco inicial nos trabalhadores do setor de agronegócio. O sistema combina monitoramento de saúde, gamificação e suporte offline para garantir o bem-estar em ambientes com conectividade limitada.
+O **Slow Down** é uma solução móvel desenvolvida para auxiliar na prevenção e controle do burnout ocupacional, voltado a trabalhadores de qualquer setor profissional. O sistema combina monitoramento de saúde, gamificação e suporte offline para garantir o bem-estar, mesmo em ambientes com conectividade limitada (como áreas rurais, indústrias e hospitais).
 
-> **Problema Central:** Aumento expressivo de afastamentos por esgotamento físico e mental no campo (dados de 2023 apontam 421 benefícios aprovados pelo INSS no setor).
+> **Problema Central:** O burnout é reconhecido pela OMS como fenômeno ocupacional. O aplicativo atua na prevenção silenciosa do esgotamento, oferecendo suporte acessível antes que o estresse se torne incapacitante.
 
 ---
 
@@ -23,11 +23,9 @@ O **Slow Down** é uma solução móvel desenvolvida para auxiliar na prevençã
 - **Missões Diárias e XP:** Sistema de tarefas (ex: 5 min de meditação) que geram pontos de experiência para desbloquear itens e evoluções para o Pet.
 - **Sistema de Conquistas:** Ganho de emblemas digitais, como o "Mente Blindada", ao atingir metas reais de saúde mental.
 - **Monitoramento Emocional:** Termômetro diário para registro de humor e identificação de picos de estresse.
-- **Sessões de Meditação e Musicoterapia:** Conteúdos relaxantes com suporte total a modo offline.
-- **Integração com Smartwatches:** Monitoramento da frequência cardíaca para análise automatizada de sinais de fadiga.
-- **Acessibilidade:** Navegação *hands-free* via comandos de voz para utilização durante o trabalho.
+- **Sleepcasts e Meditação:** Conteúdos de áudio relaxantes e histórias descritivas com suporte total ao modo offline.
+- **Acessibilidade:** Navegação *hands-free* via comandos de voz para utilização prática e sem uso das mãos.
 
----
 
 ## 📁 Estrutura do Repositório
 
@@ -40,7 +38,6 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
 | [`3_backlog-do-produto.md`](/especificacao/3_backlog-do-produto.md) | Lista priorizada de Histórias de Usuário (User Stories). |
 | [`4_backlog-do-sprint.md`](/especificacao/4_backlog-do-sprint.md) | Acompanhamento das tarefas individuais e links das Dailys. |
 
----
 
 ## 👥 Equipe do Projeto
 
@@ -51,7 +48,7 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
     <td align="center"><a href="https://github.com/marcox-oliveira"><img src="https://github.com/marcox-oliveira.png" width="100px;" alt=""/><br /><sub><b>Marcos Oliveira</b></sub></a><br />Design Thinking I</td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/Evelly-Siqueira"><img src="https://github.com/Evelly-Siqueira.png" width="100px;" alt=""/><br /><sub><b>Evelly Siqueira</b></sub></a><br />Documentação/Markdown</td>
+    <td align="center"><a href="https://github.com/Evelly-Siqueira"><img src="https://github.com/Evelly-Siqueira.png" width="100px;" alt=""/><br /><sub><b>Evelly Rebecca</b></sub></a><br />Documentação/Markdown</td>
     <td align="center"><a href="https://github.com/nadileao"><img src="https://github.com/nadileao.png" width="100px;" alt=""/><br /><sub><b>Nádia Leão</b></sub></a><br />Gestão de Sprints</td>
     <td align="center"><a href="https://github.com/marecelobarrosdasilva-bit"><img src="https://github.com/marecelobarrosdasilva-bit.png" width="100px;" alt=""/><br /><sub><b>Marcelo Barros</b></sub></a><br />Personas/Ideação</td>
   </tr>
@@ -67,6 +64,9 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
 
 ---
 
+
 <div align="center">
+
   <sub>Desenvolvido para a disciplina de Engenharia de Software I - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
+
 </div>
