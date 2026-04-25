@@ -1,33 +1,21 @@
 <div align="center">
-    <tr>
-      <td align="center" style="background-color: #f8f9fa;">
-        <h1 style="color: #1a73e8; margin-bottom: 5px;">💡 DESIGN THINKING: SLOW DOWN</h1>
-        <p><i>Fase I e II - Engenharia de Software A</i></p>
-        <img src="https://img.shields.io/badge/Versão-1.2-blue?style=for-the-badge" alt="Versão">
-        <img src="https://img.shields.io/badge/Status-Sprint%201-green?style=for-the-badge" alt="Status">
-      </td>
-    </tr>
-  </table>
+  <h1 style="color: #1a73e8;">💡 DESIGN THINKING: SLOW DOWN</h1>
+  <p><i>Fase I e II - Engenharia de Soft A</i></p>
 
-  <br>
+  <img src="https://img.shields.io/badge/Versão-1.2-blue?style=for-the-badge" alt="Versão">
+  <img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" alt="Status">
+
+  <br><br>
 
   | Campo | Informação |
   |:---|:---|
-  | **Responsável** | Marcos Oliveira e Marcelo Barros |
+  | **Responsáveis** | Marcos Oliveira e Marcelo Barros |
   | **Projeto** | SlowDown |
   | **Metodologia** | Design Thinking |
   | **Status da Entrega** | Concluído |
 </div>
 
-
-## 🕒 HISTÓRICO DE VERSÕES
-
-| Versão | Descrição | Autor | Data |
-|:---|:---|:---|:---|
-| 1.0 | Elaboração inicial das fases de Inspiração e SWOT. | Marcos Oliveira | 10/04/2026 |
-| 1.1 | Inclusão de descrições detalhadas e alinhamento visual. | Marcos Oliveira | 25/04/2026 |
-| 1.2 | Reposicionamento do Golden Circle e SWOT para escopo universal de burnout ocupacional; personas ampliadas para além do agronegócio. | Marcos Oliveira | 25/04/2026 |
-
+---
 
 ## 1. INSPIRAÇÃO - GOLDEN CIRCLE
 
@@ -75,37 +63,39 @@ A **Análise SWOT** (ou FOFA) é utilizada para avaliar a situação do aplicati
   <p><i><b>Descrição da Imagem:</b> Matriz dividida em quatro quadrantes coloridos representando as Forças (Superior Esquerdo), Fraquezas (Superior Direito), Oportunidades (Inferior Esquerdo) e Ameaças (Inferior Direito), listando os pontos críticos internos e externos mapeados pela equipe.</i></p>
 </div>
 
+
 ## 2.1 Soluções Existentes
 
-# Calm
-<img width="1298" height="683" alt="image" src="https://github.com/user-attachments/assets/e71418a1-d399-4daf-b535-eea205a01bbd" />
+### Calm
+<img width="1298" alt="Interface do Calm" src="https://github.com/user-attachments/assets/e71418a1-d399-4daf-b535-eea205a01bbd" />
 
-**Descrição:** Para quem busca viver uma vida mais produtiva e aliviar o estresse, o Calm pode um ótimo app de saúde mental. Disponível na App Store e Google Play Store, o aplicativo foca em lidar com problemas de ansiedade, insônia e depressão. Atualmente, o software conta com exercícios de respiração e alongamento, músicas relaxantes, aulas de meditação guiada, dentre outras funcionalidades. Você consegue baixar e já usar alguns recursos do app na versão gratuita, ou escolher uma assinatura para ter acesso a todo conteúdo.
+**Descrição:** Para quem busca viver uma vida mais produtiva e aliviar o estresse, o Calm pode ser um ótimo app de saúde mental. Disponível na App Store e Google Play Store, o aplicativo foca em lidar com problemas de ansiedade, insônia e depressão. Atualmente, o software conta com exercícios de respiração e alongamento, músicas relaxantes, aulas de meditação guiada, dentre outras funcionalidades. Você consegue baixar e já usar alguns recursos do app na versão gratuita, ou escolher uma assinatura para ter acesso a todo conteúdo.
 
-# Sanvello
-<img width="1301" height="682" alt="image" src="https://github.com/user-attachments/assets/868ce855-d646-4704-9ebc-4a6f7e532f07" />
+### Sanvello
+<img width="1301" alt="Interface do Sanvello" src="https://github.com/user-attachments/assets/868ce855-d646-4704-9ebc-4a6f7e532f07" />
 
-**Descrição:** Sanvello é um aplicativo que busca fornecer suporte terapêutico por meio de programas de atenção plena, rastreamento de humor e guia de meditação. A ferramenta também conta uma versão gratuita e paga, além de oferecer práticas autodirigidas e serviços de telessaúde. Outra vantagem, é que o usuário tem acesso ao recurso "Comunidade", com fórum de discussões monitorados por profissionais da saúde mental.
+**Descrição:** Sanvello é um aplicativo que busca fornecer suporte terapêutico por meio de programas de atenção plena, rastreamento de humor e guia de meditação. A ferramenta também conta com uma versão gratuita e paga, além de oferecer práticas autodirigidas e serviços de telessaúde. Outra vantagem é que o usuário tem acesso ao recurso "Comunidade", com fórum de discussões monitorados por profissionais da saúde mental.
 
-# Headspace
-<img width="1298" height="628" alt="image" src="https://github.com/user-attachments/assets/09e41558-9dba-44fd-be46-18064d0f1cfe" />
+### Headspace
+<img width="1298" alt="Interface do Headspace" src="https://github.com/user-attachments/assets/09e41558-9dba-44fd-be46-18064d0f1cfe" />
 
 **Descrição:** O Headspace é um programa que estimula o foco e a concentração e visa criar um ciclo de sono reparador. Para isso, ele oferece ferramentas de meditação personalizadas, para trabalhar objetivos específicos, como melhorar o sono e controlar a ansiedade.
 
-# Happify
-<img width="1301" height="727" alt="image" src="https://github.com/user-attachments/assets/bd34bc3b-e27f-41d3-8430-e2153b38bbb3" />
+### Happify
+<img width="1301" alt="Interface do Happify" src="https://github.com/user-attachments/assets/bd34bc3b-e27f-41d3-8430-e2153b38bbb3" />
 
-**Descrição:** Focado na psicologia positiva, o Happify oferece jogos e tarefas para aliviar o estresse, elevar o bom humor e bem estar. A ideia é aumentar os níveis de felicidade do usuário, por meio de atividades orientadas com base em objetivos. De acordo o site da empresa 86% dos usuários se sentem mais felizes em dois meses de utilização do app.
+**Descrição:** Focado na psicologia positiva, o Happify oferece jogos e tarefas para aliviar o estresse, elevar o bom humor e bem estar. A ideia é aumentar os níveis de felicidade do usuário, por meio de atividades orientadas com base em objetivos. De acordo com o site da empresa, 86% dos usuários se sentem mais felizes em dois meses de utilização do app.
 
-# Cíngulo
-<img width="1262" height="707" alt="image" src="https://github.com/user-attachments/assets/7d43f42b-dc2b-4bf2-911f-c7c189ca8c61" />
+### Cíngulo
+<img width="1262" alt="Interface do Cíngulo" src="https://github.com/user-attachments/assets/7d43f42b-dc2b-4bf2-911f-c7c189ca8c61" />
 
-**Descrição:** Baseado em terapia digital, o Cíngulo é um app que oferece guia de autoavaliação, diário emocional e programas personalizados com sessões em áudio e texto. Além disso, utiliza a inteligência artificial para te ajudar a resolver questões de saúde emocional. A healtthtech ganhou o prêmio de um dos melhores aplicativos em 2019.
+**Descrição:** Baseado em terapia digital, o Cíngulo é um app que oferece guia de autoavaliação, diário emocional e programas personalizados com sessões em áudio e texto. Além disso, utiliza a inteligência artificial para te ajudar a resolver questões de saúde emocional. A healthtech ganhou o prêmio de um dos melhores aplicativos em 2019.
 
-# Buddify
-<img width="1300" height="685" alt="image" src="https://github.com/user-attachments/assets/53d6e1f8-c381-4172-8591-d6b52739699f" />
+### Buddhify
+<img width="1300" alt="Interface do Buddhify" src="https://github.com/user-attachments/assets/53d6e1f8-c381-4172-8591-d6b52739699f" />
 
 **Descrição:** O Buddhify é um app de saúde mental que oferece técnicas de mindfulness, permitindo ao usuário integrar a meditação durante as tarefas do seu dia a dia. A ideia é possibilitar a meditação em trânsito, sem que você tenha que disponibilizar um tempo específico para isso.
+
 
 ## 2.2 Quadro Comparativo de Soluções Existentes
 
@@ -116,6 +106,7 @@ A **Análise SWOT** (ou FOFA) é utilizada para avaliar a situação do aplicati
 | **Público-alvo** | Adultos em geral, foco em estresse e sono | Adultos com ansiedade e depressão leve | Adultos buscando foco e meditação | Adultos buscando bem-estar e positividade | Adultos com questões emocionais gerais | Adultos praticantes de mindfulness | Trabalhadores do agronegócio com risco de burnout |
 | **Pontos fortes** | Conteúdo vasto; marca consolidada; sono e respiração | Comunidade monitorada; telessaúde integrada; TCC | Meditação personalizada por objetivo; design intuitivo | Gamificação leve; psicologia positiva; tarefas diárias | IA personalizada; diário emocional; premiado | Meditação no cotidiano; sem agenda fixa | Gamificação profunda (mascote/XP); offline total; integração smartwatch; voz; foco em burnout rural |
 | **Pontos fracos / limitações** | ❌ Sem offline — genérico; sem foco em burnout ocupacional | ❌ Caro — telessaúde limitada a alguns países | ❌ Sem versão grátis — sem comunidade; sem suporte profissional | Pouca profundidade terapêutica; gamificação superficial | Depende de conexão; sem integração de wearables | ❌ Sem versão grátis — sem comunidade; sem monitoramento de saúde | ⚠️ Em desenvolvimento — marca nova; base de usuários ainda a construir |
+
 
 ## 3. CONHECENDO O USUÁRIO - PERSONAS
 
@@ -131,3 +122,9 @@ Para guiar o desenvolvimento focado no usuário, definimos 3 personas baseadas n
 As ideias geradas pela equipe para a evolução do Slow Down estão documentadas e categorizadas no Notion. O processo de ideação priorizou funcionalidades como o **Pet Virtual**, **Missões de XP** e o **Botão S.O.S**.
 
 👉 **[Acessar Quadro de Ideação no Notion](https://olive-ankle-b99.notion.site/337b9fbbb879804d8201d7467ea98f58?v=337b9fbbb87980f0abd5000cac026dda&source=copy_link)**
+
+---
+
+<div align="center">
+  <p>Trabalho requisitado pelo <b>Prof. Dr. Andrey Rodrigues</b> para a disciplina de <b>Engenharia de Soft A</b> - ICET/UFAM.</p>
+</div>
