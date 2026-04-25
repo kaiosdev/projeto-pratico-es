@@ -2,7 +2,7 @@
     <tr>
       <td align="center" style="background-color: #f8f9fa;">
         <h1 style="color: #1a73e8; margin-bottom: 5px;">📋 BACKLOG DO PRODUTO: SLOW DOWN</h1>
-        <p><i>Histórias de Usuário - Engenharia de Software I</i></p>
+        <p><i>Histórias de Usuário - Engenharia de Software A</i></p>
         <img src="https://img.shields.io/badge/Versão-1.3-blue?style=for-the-badge" alt="Versão">
         <img src="https://img.shields.io/badge/Status-Priorizado-green?style=for-the-badge" alt="Status">
       </td>
