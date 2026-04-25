@@ -109,11 +109,27 @@ A **Análise SWOT** (ou FOFA) é utilizada para avaliar a situação do aplicati
 
 ## 3. CONHECENDO O USUÁRIO - PERSONAS
 
-Para guiar o desenvolvimento focado no usuário, definimos 3 personas baseadas na técnica PATHY, representando diferentes contextos profissionais afetados pelo burnout:
+Para guiar o desenvolvimento focado no usuário, definimos 3 personas baseadas na técnica PATHY, representando diferentes contextos profissionais afetados pelo burnout.
 
-1.  **Geilson:** Trabalhador em ambiente de trabalho físico intenso (campo, construção, logística) que busca monitorar o estresse físico e emocional mesmo sem acesso estável à internet.
-2.  **Arleson:** Gestor de equipe em qualquer setor que precisa de ferramentas de engajamento para si e para sua equipe.
-3.  **Ana:** Profissional de alta performance (saúde, educação, tecnologia) que utiliza o app para equilibrar uma rotina pesada com pausas de meditação e autocuidado.
+---
+
+### Persona 1 — Geilson Alves
+
+<img width="1132" height="1424" alt="WhatsApp Image 2026-04-25 at 19 16 08" src="https://github.com/user-attachments/assets/e2e4e8a6-93a9-47f8-b260-8794ca8a5eda" />
+<img width="1132" height="893" alt="WhatsApp Image 2026-04-25 at 19 16 08 (1)" src="https://github.com/user-attachments/assets/3d76cc10-9014-42f0-aeeb-2a867fea4891" />
+
+
+### Persona 2 — Arleson Mota
+
+<img width="1132" height="1379" alt="WhatsApp Image 2026-04-25 at 19 17 16" src="https://github.com/user-attachments/assets/101a7efb-b2ea-4d64-adab-2b92aa6f75c2" />
+<img width="1132" height="1104" alt="WhatsApp Image 2026-04-25 at 19 17 17" src="https://github.com/user-attachments/assets/6237bf57-cd1f-4633-95e7-6183e52a8717" />
+
+
+
+### Persona 3 — Ana Beatriz Lemos
+
+<img width="1132" height="1600" alt="WhatsApp Image 2026-04-25 at 19 19 45" src="https://github.com/user-attachments/assets/d23e20d8-2ff0-46dc-bf61-535fa5761b32" />
+<img width="1132" height="763" alt="WhatsApp Image 2026-04-25 at 19 19 48" src="https://github.com/user-attachments/assets/464263d9-c73c-4f30-9d05-b0754e5a9c9e" />
 
 
 ## 4. IDEAÇÃO E BRAINSTORMING
@@ -125,7 +141,5 @@ As ideias geradas pela equipe para a evolução do Slow Down estão documentadas
 ---
 
 <div align="center">
-
-  <sub>Desenvolvido para a disciplina de Engenharia de Software I - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
-
+  <p>Trabalho requisitado pelo <b>Prof. Dr. Andrey Rodrigues</b> para a disciplina de <b>Engenharia de Software A</b> - ICET/UFAM.</p>
 </div>
