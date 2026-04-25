@@ -3,7 +3,7 @@
       <td align="center" style="background-color: #f8f9fa;">
         <h1 style="color: #2e7d32; margin-bottom: 5px;">🌱 PLANO DE TRABALHO: SLOW DOWN</h1>
         <p><i>Engenharia de Software I - ICET/UFAM</i></p>
-        <img src="https://img.shields.io/badge/Versão-1.1-blue?style=for-the-badge" alt="Versão">
+        <img src="https://img.shields.io/badge/Versão-1.2-blue?style=for-the-badge" alt="Versão">
         <img src="https://img.shields.io/badge/Status-Em_Desenvolvimento-green?style=for-the-badge" alt="Status">
       </td>
     </tr>
@@ -26,23 +26,25 @@
 | Versão | Descrição | Autor | Data |
 |:---|:---|:---|:---|
 | 1.0 | Elaboração inicial do Plano de Trabalho. | Evelly Siqueira | 20/03/2026 |
+| 1.1 | Revisão geral do documento. | Evelly Siqueira | 10/04/2026 |
+| 1.2 | Ampliação do contexto para burnout como problema ocupacional universal; reposicionamento do público-alvo. | Evelly Siqueira | 25/04/2026 |
 
 
 ## 1. INTRODUÇÃO
 
-O agronegócio é um pilar da economia brasileira, representando cerca de 25% do PIB. No entanto, o setor enfrenta um aumento significativo nos afastamentos por transtornos mentais, com 421 benefícios aprovados pelo INSS em 2023 devido ao esgotamento físico e mental. O **SlowDown** é um aplicativo voltado à promoção da saúde mental desses trabalhadores, focado na prevenção e identificação da Síndrome de Burnout.
+O burnout é reconhecido pela Organização Mundial da Saúde (OMS) desde 2019 como um fenômeno ocupacional resultante do estresse crônico no ambiente de trabalho que não foi gerenciado com sucesso. No Brasil, o problema atinge proporções alarmantes em múltiplos setores da economia — saúde, educação, tecnologia, indústria e agronegócio —, com milhões de trabalhadores afetados anualmente. No setor do agronegócio, por exemplo, foram registrados 421 benefícios aprovados pelo INSS em 2023 apenas por esgotamento físico e mental, evidenciando a gravidade do problema também em ambientes de trabalho com conectividade limitada. O **SlowDown** é um aplicativo voltado à promoção da saúde mental de trabalhadores de qualquer setor, focado na prevenção e identificação precoce da Síndrome de Burnout antes que ela se torne incapacitante.
 
 ### 1.1 Objeto
-Evoluir um aplicativo focado na prevenção do burnout no agronegócio através de monitoramento emocional e ferramentas de autogestão do estresse.
+Evoluir um aplicativo focado na prevenção do burnout ocupacional em trabalhadores de qualquer setor profissional, através de monitoramento emocional contínuo e ferramentas de autogestão do estresse, com suporte offline para ambientes de conectividade limitada.
 
 ### 1.2 Motivação e Justificativa
-A alta incidência de esgotamento emocional no setor justifica o desenvolvimento de uma solução acessível que utilize dispositivos móveis para promover o bem-estar de forma contínua.
+A alta incidência de esgotamento emocional em diferentes setores da economia brasileira justifica o desenvolvimento de uma solução acessível e adaptável a diferentes perfis de trabalhadores, que utilize dispositivos móveis para promover o bem-estar de forma contínua. A ausência de ferramentas preventivas — focadas em antecipar o burnout antes do colapso, e não apenas em tratá-lo — representa uma lacuna concreta que o SlowDown se propõe a preencher.
 
 
 ## 2. INFORMAÇÕES GERAIS
 
 ### 2.1 Escopo Geral
-O escopo abrange o desenvolvimento e manutenção evolutiva de um aplicativo mobile focado em monitoramento de estresse, missões diárias de autocuidado e apoio emocional.
+O escopo abrange o desenvolvimento e manutenção evolutiva de um aplicativo mobile focado em monitoramento de estresse, missões diárias de autocuidado e apoio emocional, destinado a trabalhadores de qualquer setor profissional. O suporte offline garante acessibilidade em ambientes com conectividade instável ou ausente.
 
 #### 2.1.1 Escopo Específico
 * Monitoramento de humor e níveis de estresse com termómetro diário.
