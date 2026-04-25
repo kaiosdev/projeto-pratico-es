@@ -50,5 +50,7 @@ O detalhamento completo (Critérios de Aceitação e Regras de Negócio) das 17 
 ---
 
 <div align="center">
-  <p>Trabalho requisitado pelo <b>Prof. Dr. Andrey Rodrigues</b> para a disciplina de <b>Engenharia de Software A</b> - ICET/UFAM.</p>
+
+  <sub>Desenvolvido para a disciplina de Engenharia de Software I - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
+
 </div>
