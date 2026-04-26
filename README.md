@@ -61,6 +61,7 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
 - **[Sessão de Brainstorming (Notion)](https://olive-ankle-b99.notion.site/337b9fbbb879804d8201d7467ea98f58?v=337b9fbbb87980f0abd5000cac026dda&source=copy_link)**
 - **[Tabela de Daily Scrum (Notion)](https://olive-ankle-b99.notion.site/337b9fbbb879809eaba8e4c396261dd8?v=337b9fbbb879808aaa2d000c3a648f09&source=copy_link)**
 - **[Quadro do Backlog (GitHub Projects)](https://github.com/users/kaiosdev/projects/5)**
+- **[Quadro do Backlog do Sprint (GitHub Projects)](https://github.com/users/kaiosdev/projects/6)**
 
 ---
 
