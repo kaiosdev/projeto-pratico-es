@@ -129,3 +129,5 @@ O processo de ideação priorizou funcionalidades como o **Pet Virtual**, **Miss
 <div align="center">
   <p>Trabalho requisitado pelo <b>Prof. Dr. Andrey Rodrigues</b> para a disciplina de <b>Engenharia de Software A</b> - ICET/UFAM.</p>
 </div>
+
+nsnsss
