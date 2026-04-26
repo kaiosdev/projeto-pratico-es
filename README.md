@@ -48,7 +48,7 @@ A documentação técnica do projeto está organizada na pasta `especificacao/`,
     <td align="center"><a href="https://github.com/marcox-oliveira"><img src="https://github.com/marcox-oliveira.png" width="100px;" alt=""/><br /><sub><b>Marcos Oliveira</b></sub></a><br />Design Thinking I</td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/Evelly-Siqueira"><img src="https://github.com/Evelly-Siqueira.png" width="100px;" alt=""/><br /><sub><b>Evelly Rebecca</b></sub></a><br />Documentação/Markdown</td>
+    <td align="center"><a href="https://github.com/Evelly-Siqueira"><img src="https://github.com/Evelly-Siqueira.png" width="100px;" alt=""/><br /><sub><b>Evelly Rebeca</b></sub></a><br />Documentação/Markdown</td>
     <td align="center"><a href="https://github.com/nadileao"><img src="https://github.com/nadileao.png" width="100px;" alt=""/><br /><sub><b>Nádia Leão</b></sub></a><br />Gestão de Sprints</td>
     <td align="center"><a href="https://github.com/marecelobarrosdasilva-bit"><img src="https://github.com/marecelobarrosdasilva-bit.png" width="100px;" alt=""/><br /><sub><b>Marcelo Barros</b></sub></a><br />Personas/Ideação</td>
   </tr>
