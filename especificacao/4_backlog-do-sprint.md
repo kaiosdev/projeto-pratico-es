@@ -24,7 +24,6 @@
 | Versão | Descrição | Autor | Data |
 |:---|:---|:---|:---|
 | 1.0 | Criação do Backlog do Sprint com base nas Dailys registradas no Notion. | Nádia | 25/04/2026 |
-| 1.1 | Atualização com registros completos do Marcelo Barros e correções gerais. | Nádia | 25/04/2026 |
 
 ---
 
@@ -173,3 +172,4 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 20/04 | Nádia | Dificuldade em usar o GitHub corretamente. | Pareamento com Kaio resolveu o problema. |
 | 25/04 | Nádia | Depende de outros terminarem suas partes. | Acompanhado até fechamento do Sprint. |
 | 06/04 | Evelly | Atrasos na entrega do Backlog pelo Felipe. | Levantamento de requisitos seguiu com dados parciais. |
+
