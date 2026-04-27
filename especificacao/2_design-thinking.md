@@ -102,12 +102,14 @@ A **Análise SWOT** (ou FOFA) avalia a situação do aplicativo considerando fat
 
 ## 2.2 Quadro Comparativo de Soluções Existentes
 
-| Critério | Calm | Sanvello | Headspace | Happify | Cíngulo | Buddhify | ⭐ Slow Down |
+| Critérios / Soluções | Solução A — Calm | Solução B — Sanvello | Solução C — Headspace | Solução D — Happify | Solução E — Cíngulo | Solução F — Buddhify | ⭐ Nossa Solução — Slow Down |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| **Tecnologia** | Mobile/Web | Mobile/Web | Mobile/Web | Mobile/Web | Mobile/IA | Mobile | **Mobile/IA/Offline** |
-| **Público** | Geral | Ansiedade | Adultos | Bem-estar | Emocional | Mindfulness | **Trabalhadores** |
-| **Diferencial** | Marca | Telessaúde | Intuitivo | Jogos | IA | Cotidiano | **Gamificação/Offline** |
-| **Limitação** | Conexão | Custo | Pago | Superficial | Conexão | Pago | **Novo Player** |
+| **Modelo de Negócio** | Freemium / Assinatura Premium | Freemium / Plano Clínico Pago | Freemium / Assinatura Anual ou Mensal | Freemium / Assinatura Premium | Freemium / Plano Terapêutico Pago | Compra única (app pago) | **Freemium com sistema de XP e Recompensas** |
+| **Tecnologia Utilizada** | Mobile / Web | Mobile / Web + Telessaúde | Mobile / Web + IA | Mobile / Web + Gamificação | Mobile / IA Emocional | Mobile | **Mobile / IA / Offline nativo** |
+| **Público-Alvo** | Público geral com estresse e ansiedade | Pessoas com ansiedade e depressão | Adultos que buscam foco e produtividade | Pessoas em busca de bem-estar e felicidade | Pessoas com dificuldades emocionais | Praticantes de mindfulness no cotidiano | **Trabalhadores de qualquer setor expostos ao burnout** |
+| **Pontos Fortes** | Marca global consolidada; vasta biblioteca de conteúdo em áudio e vídeo | Telessaúde integrada; rastreamento de humor; comunidade de apoio | Interface intuitiva; meditações guiadas personalizadas por IA | Jogos baseados em psicologia positiva; abordagem lúdica e engajante | IA emocional avançada; autoavaliação guiada; terapia digital acessível | Meditações contextualizadas às atividades do dia a dia; sem sessões longas | **Suporte offline nativo; gamificação como motor de engajamento; abordagem preventiva do burnout; acessível a qualquer trabalhador** |
+| **Pontos Fracos / Limitações** | Requer conexão constante; custo elevado no plano premium | Custo do plano clínico elevado; dependência total de conexão | Funcionalidades principais apenas na versão paga | Conteúdo superficial para casos mais sérios; pouca profundidade clínica | Dependência de conexão à internet; base de usuários ainda concentrada no Brasil | App pago sem versão gratuita; conteúdo limitado em português | **Novo player no mercado; sem validação clínica formal ainda** |
+
 
 <br>
 
