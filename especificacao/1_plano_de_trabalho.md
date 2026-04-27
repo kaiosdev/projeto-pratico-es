@@ -23,9 +23,9 @@
 
 | Versão | Descrição | Autor | Data |
 |:---|:---|:---|:---|
-| 1.0 | Elaboração inicial do Plano de Trabalho. | Evelly Rebecca | 10/04/2026 |
+| 1.0 | Elaboração inicial do Plano de Trabalho. | Evelly Rebeca | 10/04/2026 |
 | 1.1 | Edição dos custos e resumo financeiro. | Felipe Rangel | 20/04/2026 |
-| 1.2 | Ampliação do contexto e revisão final de consistência. | Evelly Rebecca | 26/04/2026 |
+| 1.2 | Ampliação do contexto e revisão final de consistência. | Evelly Rebeca | 26/04/2026 |
 
 ---
 
@@ -169,7 +169,7 @@ O desenvolvimento segue a abordagem ágil dividida em:
 
 | Integrante | Papel | Responsabilidades Principais |
 |:---|:---|:---|
-| **Evelly Rebecca** | Documentação | Redação do Plano de Trabalho e revisão técnica. |
+| **Evelly Rebeca** | Documentação | Redação do Plano de Trabalho e revisão técnica. |
 | **Felipe Rangel** | Backlog Owner | Escrita das Histórias de Usuário e critérios de aceitação. |
 | **Kaio Sobral** | Scrum Master | Gestão do repositório, infraestrutura e supervisão das Dailys. |
 | **Marcelo Barros** | Mercado/Personas | Análise de concorrentes e criação das Personas. |
