@@ -2,7 +2,6 @@
   <h1 style="color: #1a73e8;">🏃 BACKLOG DO SPRINT: SLOW DOWN</h1>
   <p><i>Sprint 1 - Engenharia de Software A</i></p>
 
-  <img src="https://img.shields.io/badge/Versão-1.0-blue?style=for-the-badge" alt="Versão">
   <img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" alt="Status">
 
   <br><br>
@@ -17,12 +16,10 @@
 
 ---
 
-
 ## 1. SOBRE O BACKLOG DO SPRINT
 
 O **Backlog do Sprint** acompanha as atividades individuais executadas por cada membro da equipe durante o Sprint 1. As tarefas abaixo foram extraídas diretamente dos registros das **Dailys no Notion**, refletindo o que cada integrante reportou ao longo do período. O Scrum Master (Kaio) é responsável por revisar e remover impedimentos; a Nádia é responsável por manter este quadro sincronizado.
 
----
 
 ## 2. DAILYS POR MEMBRO
 
@@ -47,7 +44,6 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 23/04 | Cobrou registros. | Revisão e aplicação dos templates Markdown finais nos arquivos técnicos. | Nenhum. |
 | 25/04 | Aplicou templates. | Estruturação do README.md com HTML e revisão final de toda a documentação. | Nenhum. |
 
----
 
 ### 👤 Felipe Rangel Silvestre — Backlog do Produto & Histórias de Usuário
 
@@ -63,7 +59,6 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 22/04 | Revisão concluída. | Verificação final do quadro Kanban junto com o Scrum Master. | Nenhum. |
 | 25/04 | Atribuiu labels. | Revisão final das regras de negócio das histórias principais. | Nenhum. |
 
----
 
 ### 👤 Marcos de Oliveira — Design Thinking Fase I
 
@@ -79,7 +74,6 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 21/04 | Finalizou o `.md`. | Seleção de imagens e rascunho dos slides para a apresentação. | Nenhum. |
 | 25/04 | Slides rascunhados. | Revisão geral da documentação de Design Thinking com o Kaio. | Nenhum. |
 
----
 
 ### 👤 Evelly Rebecca — Documentação & Plano de Trabalho
 
@@ -94,7 +88,6 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 21/04 | Revisou escopo. | Formatação final do arquivo `1_plano-de-trabalho.md` em Markdown. | Nenhum. |
 | 25/04 | Markdown pronto. | Edição final do Plano de Trabalho e revisão ortográfica técnica. | Nenhum. |
 
----
 
 ### 👤 Nádia Maria Leão — GitHub Projects & Backlog do Sprint
 
@@ -111,7 +104,6 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 23/04 | Documentou sprint. | Revisão dos links de acompanhamento e status das tarefas. | Nenhum. |
 | 25/04 | Revisão concluída. | Sincronização final e fechamento da Sprint 1 no board. | Nenhum. |
 
----
 
 ### 👤 Marcelo Barros — Personas, Ideação & Análise de Mercado
 
@@ -127,42 +119,47 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 22/04 | Consolidação de ideias. | Revisão final da página do Notion e geração do link público para o repositório. | Nenhum. |
 | 25/04 | Link público gerado. | Revisão final do arquivo `2_design-thinking.md` com a inclusão das soluções de mercado. | Nenhum. |
 
----
 
 ## 3. RESUMO DO SPRINT
 
 | Membro | Dailys Registradas | Impedimentos Relatados |
 |:---|:---|:---|
-| Kaio | 16 | 4 |
-| Felipe | 9 | 2 |
+| Kaio | 16 | 7 |
+| Felipe | 9 | 3 |
 | Marcos | 9 | 3 |
 | Evelly | 8 | 2 |
-| Nádia | 10 | 3 |
+| Nádia | 10 | 4 |
 | Marcelo | 9 | 2 |
-| **Total** | **61** | **16** |
+| **Total** | **61** | **21** |
 
----
 
 ## 4. IMPEDIMENTOS REGISTRADOS
+
+Abaixo estão consolidados todos os **21 impedimentos** reportados pela equipe durante as Dailys, bem como as ações corretivas tomadas.
 
 | Data | Membro | Impedimento | Ação tomada |
 |:---|:---|:---|:---|
 | 28/03 | Nádia | Sem permissão para criar board no GitHub. | Kaio liberou permissões em 30/03. |
 | 28/03 | Kaio | Nádia relatou falta de permissão no GitHub. | Permissões liberadas na sequência. |
+| 28/03 | Marcos | Dificuldade em achar conteúdos pertinentes (Design Thinking). | Estudo aprofundado e refinamento realizado. |
+| 04/04 | Felipe | Dúvida na priorização das Histórias de Usuário. | Refinamento e alinhamento com a equipe. |
 | 04/04 | Marcelo | Dificuldade em definir critérios objetivos para o quadro comparativo. | Refinamento seguiu com critérios internos da equipe. |
-| 05/04 | Nádia | Depende de outros terminarem suas partes. | Acompanhado até fechamento do Sprint. |
+| 05/04 | Nádia | Depende de outros terminarem suas partes para preencher o board. | Acompanhamento ativo até fechamento do Sprint. |
+| 05/04 | Marcos | Falta de dados externos para ameaças (SWOT). | Dados levantados e matriz consolidada posteriormente. |
 | 06/04 | Evelly | Atrasos na entrega do Backlog pelo Felipe. | Levantamento de requisitos seguiu com dados parciais. |
 | 07/04 | Kaio | Gargalos no cronograma pela complexidade da análise inicial. | Reunião de alinhamento realizada em 08/04. |
-| 07/04 | Felipe | Atrasos na definição das personas pelo Marcelo. | Refinamento seguiu com dados parciais. |
-| 08/04 | Kaio | Tempo limitado da equipe para entregas simultâneas. | Reajuste de ritmo e prioridades. |
-| 09/04 | Nádia | Gargalo no fluxo de atualização das tarefas. | Sincronização realizada em 13/04. |
-| 10/04 | Kaio | Atrasos acumulados nas fases de Inspiração. | Verificação técnica das US realizada. |
-| 11/04 | Felipe | Gargalo no tempo para detalhar as 14 US exigidas. | Ajuste de prioridades no Projects. |
-| 11/04 | Kaio | Ritmo da equipe precisou ser reajustado. | Suporte à Nádia e rebalanceamento. |
-| 11/04 | Marcelo | Instabilidade na plataforma HubSpot durante modelagem das Personas. | Exportação realizada após estabilização da plataforma. |
+| 07/04 | Felipe | Atrasos na definição das personas pelo Marcelo. | Refinamento das US seguiu com dados parciais. |
+| 08/04 | Kaio | Tempo limitado da equipe para entregas simultâneas. | Reajuste de ritmo e prioridades do Sprint. |
+| 08/04 | Marcos | Complexidade na classificação dos riscos (SWOT). | Matriz montada, integrada e validada com a equipe. |
+| 09/04 | Nádia | Gargalo no fluxo de atualização das tarefas no GitHub. | Sincronização e ajuste de prazos realizados em 13/04. |
+| 10/04 | Kaio | Atrasos acumulados nas fases de Inspiração. | Verificação técnica das US realizada para destravar o fluxo. |
+| 10/04 | Evelly | Tempo limitado devido a outras demandas do projeto. | Metodologia e papéis definidos para otimizar o tempo. |
+| 11/04 | Kaio | Ritmo da equipe precisou ser reajustado. | Suporte à Nádia e rebalanceamento do Backlog. |
+| 11/04 | Felipe | Gargalo no tempo para detalhar as 14 US exigidas. | Ajuste de prioridades e detalhamento no GitHub Projects. |
+| 11/04 | Marcelo | Instabilidade na plataforma HubSpot durante modelagem. | Exportação realizada com sucesso após estabilização. |
 | 20/04 | Kaio | Nádia relatou dificuldade com comandos Git. | Pareamento realizado entre Kaio e Nádia. |
-| 20/04 | Nádia | Dificuldade em usar o GitHub corretamente. | Pareamento com Kaio resolveu o problema. |
-| 21/04 | Kaio | Alguns membros irregulares nas Dailys. | Cobrança de registros realizada. |
+| 20/04 | Nádia | Dificuldade em usar o GitHub corretamente. | Pareamento com Kaio resolveu o problema de uso. |
+| 21/04 | Kaio | Alguns membros irregulares nos registros das Dailys. | Cobrança ativa de registros e regularização do fluxo. |
 
 ---
 
