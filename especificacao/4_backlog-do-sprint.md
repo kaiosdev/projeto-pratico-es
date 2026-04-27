@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 style="color: #1a73e8;">🏃 BACKLOG DO SPRINT: SLOW DOWN</h1>
+  <h1 style="color: #1a73e8;">🔄 BACKLOG DO SPRINT: SLOW DOWN</h1>
   <p><i>Sprint 1 - Engenharia de Software A</i></p>
 
   <img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" alt="Status">
@@ -75,7 +75,7 @@ O **Backlog do Sprint** acompanha as atividades individuais executadas por cada 
 | 25/04 | Slides rascunhados. | Revisão geral da documentação de Design Thinking com o Kaio. | Nenhum. |
 
 
-### 👤 Evelly Rebecca — Documentação & Plano de Trabalho
+### 👤 Evelly Rebeca — Documentação & Plano de Trabalho
 
 | Data | O que fez | O que planejou fazer | Impedimentos |
 |:---|:---|:---|:---|
