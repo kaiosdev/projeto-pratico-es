@@ -1,4 +1,24 @@
-# Tecnologias e Ferramentas Utilizadas (Tech Stack Map)
+<div align="center">
+
+# 💻 TECNOLOGIAS E FERRAMENTAS (TECH STACK)
+*Trabalho Prático II — Engenharia de Software A*
+
+<img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" alt="Status">
+
+<br><br>
+
+| Campo | Informação |
+|:---|:---|
+| **Responsável** | Evelly |
+| **Projeto** | Slow Down |
+| **Documento** | Tech Stack Map |
+| **Status da Entrega** | Concluído |
+
+</div>
+
+<br>
+
+---
 
 Este documento apresenta o ecossistema tecnológico selecionado para o desenvolvimento do sistema **Slow Down**, organizado por camadas e propósitos técnicos, garantindo o alinhamento com os requisitos não-funcionais de desempenho, segurança e funcionamento offline, além de viabilizar a futura implementação ágil do Produto Mínimo Viável (MVP).
 
@@ -18,8 +38,12 @@ Por fim, a fundação do ciclo de vida do desenvolvimento de software e do desig
 
 ## 2. Mapa Visual da Tech Stack
 
-![Mapa Visual da Tech Stack](./imagens/tech-stack-map.png)
-*Figura 1: Organização visual das tecnologias do Slow Down por propósito e camadas.*
+<div align="center">
+  <img src="./imagens/tech-stack-map.png" alt="Mapa Visual da Tech Stack" width="800" />
+  <p><i><b>Figura 1:</b> Organização visual das tecnologias do Slow Down por propósito e camadas.</i></p>
+</div>
+
+<br>
 
 ---
 
@@ -38,3 +62,13 @@ A tabela abaixo detalha formalmente a atribuição de cada componente tecnológi
 | **Controle de Versão e CI/CD** | Git + GitHub | Infraestrutura essencial para a gerência de configuração. Permite o versionamento seguro do código, rastreabilidade de commits e trabalho colaborativo eficiente por meio de branches. |
 | **Gerenciamento Ágil** | GitHub Projects | Utilizado para a manutenção do Backlog do Produto e do Sprint, garantindo o acompanhamento visual das tarefas (Kanban) perfeitamente integrado ao repositório do código-fonte. |
 | **Design e Modelagem** | Figma + Visual Paradigm | O Figma será utilizado para a prototipagem de alta fidelidade das interfaces do MVP, enquanto o Visual Paradigm será a ferramenta oficial para projetar os diagramas UML e estruturais do Modelo C4. |
+
+<br>
+
+---
+
+<div align="center">
+
+  <sub>Desenvolvido para a disciplina de Engenharia de Software A - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
+
+</div>
