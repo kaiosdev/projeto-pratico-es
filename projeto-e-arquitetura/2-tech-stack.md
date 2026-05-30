@@ -27,10 +27,11 @@ A tabela abaixo detalha formalmente a atribuição de cada componente tecnológi
 
 | Camada / Propósito | Nome da Tecnologia | Justificativa de Uso |
 | :--- | :--- | :--- |
-| **Frontend Mobile** | Flutter | Permite o desenvolvimento multiplataforma (Android e iOS) com um único código fonte de alto desempenho. Essencial para renderizar os gráficos e gerenciar o cache local para o modo offline. |
+| **Frontend Mobile** | Flutter | Permite o desenvolvimento multiplataforma (Android e iOS) com um único código fonte. Essencial para renderizar os gráficos e gerenciar o cache local para o modo offline. |
 | **Backend (API REST)** | Node.js + Express | Ambiente de execução JavaScript leve e assíncrono. Ideal para construir a camada controladora (Controller) da API com alta escalabilidade e baixa latência. |
-| **Banco de Dados** | MySQL | Sistema relacional consolidado e de alta performance. Oferece excelente integração com Node.js e garante a integridade do armazenamento dos históricos de estresse. |
+| **Banco de Dados** | MySQL | Sistema relacional consolidado e de alta performance. Oferece excelente integração com Node.js e garante a integridade do armazenamento dos históricos emocionais. |
 | **Autenticação (Segurança)** | Firebase Authentication | Provedor seguro que padroniza o fluxo de login via E-mail/Senha e Google OAuth, eliminando a complexidade de gerenciar criptografia de senhas no banco principal. |
 | **Integração de Hardware** | APIs Google Fit / HealthKit | APIs nativas fundamentais para estabelecer a comunicação com os sensores dos dispositivos, permitindo a leitura padronizada de dados biométricos (BPM). |
 | **Controle de Versão e CI/CD** | Git + GitHub | Infraestrutura essencial para a gerência de configuração. Permite o versionamento seguro do código, rastreabilidade de commits e trabalho colaborativo por meio de branches. |
-| **Gerenciamento Ágil** | GitHub Projects | Utilizado para a manutenção do Backlog do Produto e do Sprint, garantindo o acompanhamento visual das tarefas (Kanban) integrado diretamente ao repositório. |
+| **Gerenciamento Ágil** | GitHub Projects | Utilizado para a manutenção do Backlog do Produto e do Sprint, garantindo o acompanhamento visual das tarefas (Kanban) integrado ao repositório. |
+| **Design e Modelagem** | Figma + Visual Paradigm | O Figma será utilizado para a prototipagem de alta fidelidade das interfaces e criação do MVP, enquanto o Visual Paradigm será a ferramenta oficial para projetar os diagramas estruturais e UML do Modelo C4. |
