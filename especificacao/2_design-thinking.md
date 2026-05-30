@@ -120,21 +120,21 @@ A **Análise SWOT** (ou FOFA) avalia a situação do aplicativo considerando fat
 
 <div align="center">
 
-### Persona 1 — Geilson Alves
+### Persona 1 — Geilson Alves (Premium)
 <img width="800" alt="Persona Geilson Alves - Perfil" src="https://github.com/user-attachments/assets/e2e4e8a6-93a9-47f8-b260-8794ca8a5eda" />
 <img width="800" alt="Persona Geilson Alves - Mapa de Empatia" src="https://github.com/user-attachments/assets/3d76cc10-9014-42f0-aeeb-2a867fea4891" />
 <p><i><b>Descrição Geilson:</b> Trabalhador de campo focado em esforço físico. O mapa de empatia destaca a dor do esgotamento e a necessidade de ferramentas que funcionem sem internet estável.</i></p>
 
 <br>
 
-### Persona 2 — Arleson Mota
+### Persona 2 — Arleson Mota (Padrão) 
 <img width="800" alt="Persona Arleson Mota - Perfil" src="https://github.com/user-attachments/assets/101a7efb-b2ea-4d64-adab-2b92aa6f75c2" />
 <img width="800" alt="Persona Arleson Mota - Mapa de Empatia" src="https://github.com/user-attachments/assets/6237bf57-cd1f-4633-95e7-6183e52a8717" />
 <p><i><b>Descrição Arleson:</b> Gestor preocupado com a produtividade e saúde da equipe. Seu mapa de empatia revela a pressão por resultados e o desejo de ferramentas de engajamento preventivo.</i></p>
 
 <br>
 
-### Persona 3 — Ana Beatriz Lemos
+### Persona 3 — Ana Beatriz Lemos (Acessibilidade)
 <img width="800" alt="Persona Ana Beatriz - Perfil" src="https://github.com/user-attachments/assets/d23e20d8-2ff0-46dc-bf61-535fa5761b32" />
 <img width="800" alt="Persona Ana Beatriz - Mapa de Empatia" src="https://github.com/user-attachments/assets/464263d9-c73c-4f30-9d05-b0754e5a9c9e" />
 <p><i><b>Descrição Ana:</b> Profissional de tecnologia com alta carga mental. O mapa detalha a dificuldade em desconectar e a busca por pausas de autocuidado em uma rotina acelerada.</i></p>
