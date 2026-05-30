@@ -26,13 +26,13 @@ Este documento apresenta o ecossistema tecnológico selecionado para o desenvolv
 
 O ecossistema do **Slow Down** foi projetado seguindo o modelo de arquitetura Cliente/Servidor distribuído, com o backend estruturado sob o padrão MVC.
 
-O fluxo de dados inicia-se no **Frontend Mobile**, desenvolvido em **Flutter** e focado exclusivamente na plataforma **Android**. O aplicativo gerencia a interface do usuário e a lógica local (como o cache de áudio para o modo offline) e conecta-se diretamente a sensores de hardware do dispositivo por meio da API nativa **Google Fit**, responsável por capturar os batimentos cardíacos (BPM). Para viabilizar a acessibilidade e o suporte interativo, o frontend integra-se à **Google Speech-to-Text API** para navegação por voz e à **Gemini API** para o processamento de linguagem natural do Chatbot de apoio emocional. O controle de assinaturas do plano Premium é processado de forma segura e nativa através do **Google Play Billing**. Para assegurar que o usuário seja alertado sobre picos de estresse mesmo com o aplicativo fechado, o serviço de mensageria **Firebase Cloud Messaging (FCM)** foi integrado para gerenciar notificações push.
+O fluxo de dados inicia-se no **Frontend Mobile**, desenvolvido em **Flutter** e focado exclusivamente na plataforma **Android**. O aplicativo gerencia a interface do usuário e a lógica local (como o cache de áudio para o modo offline) e conecta-se diretamente a sensores de hardware do dispositivo por meio da API nativa **Google Fit**, responsável por capturar os batimentos cardíacos (BPM). Para viabilizar a acessibilidade e o suporte interativo, o frontend integra-se à **Google Speech-to-Text API** para navegação por voz e à **Gemini API** para o processamento de linguagem natural do Chatbot de apoio emocional. O controle de assinaturas do plano Premium é processado via **Stripe API (Modo Sandbox)**, permitindo validar o fluxo financeiro de forma segura e autêntica sem a necessidade de publicação em lojas. Para assegurar que o usuário seja alertado sobre picos de estresse mesmo com o aplicativo fechado, o serviço de mensageria **Firebase Cloud Messaging (FCM)** foi integrado para gerenciar notificações push.
 
-A comunicação com o ecossistema de backend é realizada por meio de requisições HTTP em uma API REST padronizada com formato JSON. O **Backend**, construído em **Node.js com Express**, atua como a camada controladora (Controller) da arquitetura, processando as requisições, validando sessões de usuário e aplicando as regras de negócio complexas do sistema, como o cálculo do Índice de Estresse, a progressão de XP (Gamificação) e as interações do Pet Virtual.
+A comunicação com o ecossistema de backend é realizada por meio de requisições HTTP em uma API REST padronizada com formato JSON. O **Backend**, construído em **Node.js com Express**, atua como a camada controladora (Controller) da arquitetura, processando as requisições, validando sessões e aplicando as regras de negócio complexas do sistema (cálculo de Índice de Estresse, gamificação e interações do Pet Virtual).
 
-A persistência de dados sensíveis e dos históricos emocionais é delegada à camada de dados (Model), operada pelo banco de dados relacional **MySQL**, que assegura a integridade transacional das informações de saúde e oferece excelente integração com o ambiente Node.js. Para garantir a segurança nas etapas de autenticação, o fluxo de login tradicional e o login social (Google OAuth) são operados pelo **Firebase Authentication**, mitigando riscos de segurança e acelerando a validação de identidade.
+A persistência de dados sensíveis é delegada à camada de dados (Model), operada pelo **MySQL**, garantindo integridade transacional. Para a autenticação, o fluxo de login tradicional e o login social (Google OAuth) são operados pelo **Firebase Authentication**.
 
-Por fim, a fundação do ciclo de vida do desenvolvimento e do design é sustentada pelo **Git e GitHub** para o controle de versão colaborativo, **GitHub Projects** para a gestão ágil das tarefas da equipe (Kanban), e a utilização conjunta do **Figma** e **Visual Paradigm** para a prototipação de alta fidelidade das interfaces e modelagem rigorosa dos diagramas arquiteturais C4.
+Por fim, a fundação do ciclo de vida do desenvolvimento é sustentada pelo **Git/GitHub** para controle de versão, **GitHub Projects** para a gestão ágil (Kanban), e a utilização conjunta do **Figma** e **Visual Paradigm** para a prototipação e modelagem arquitetural C4.
 
 ---
 
@@ -47,23 +47,21 @@ Por fim, a fundação do ciclo de vida do desenvolvimento e do design é sustent
 
 ---
 
-## 3. Tabela Detalhada de Tecnologias (Obrigatória)
-
-A tabela abaixo detalha formalmente a atribuição de cada componente tecnológico à sua respectiva camada arquitetural, acompanhada da justificativa de engenharia de software para sua escolha:
+## 3. Tabela Detalhada de Tecnologias
 
 | Camada / Propósito | Nome da Tecnologia | Justificativa de Uso |
 | :--- | :--- | :--- |
-| **Frontend Mobile** | Flutter | Framework ágil focado na versão Android. Essencial para renderizar a gamificação (Pet Virtual) e gerenciar o cache local para execução das Histórias de Usuário offline. |
-| **Backend (API REST)** | Node.js + Express | Ambiente de execução JavaScript leve e assíncrono. Ideal para construir a camada controladora (Controller) responsável pelo motor de relatórios, validação de missões e XP. |
-| **Banco de Dados** | MySQL | Sistema relacional consolidado e de alta performance. Garante a integridade do armazenamento dos históricos emocionais, inventário do Pet e parâmetros de saúde. |
-| **Autenticação (Segurança)** | Firebase Authentication | Provedor seguro que padroniza o fluxo de login e gerencia as sessões dos diferentes perfis (Padrão, Premium e Acessibilidade) sem armazenar senhas brutas no banco. |
-| **IA & Acessibilidade** | Gemini API + Speech-to-Text | Tecnologias encarregadas de transformar comandos de voz em ações no app e de prover respostas contextualizadas e empáticas através do Chatbot assistente. |
-| **Pagamentos** | Google Play Billing | Gateway oficial e nativo do ecossistema Android para validar a conversão de usuários Padrão para Premium e liberar o acesso irrestrito às ferramentas do aplicativo. |
-| **Notificações Push** | Firebase Cloud Messaging (FCM) | Serviço essencial para disparar os alertas visuais e vibratórios de frequência cardíaca elevada e os lembretes de autocuidado em segundo plano. |
-| **Integração de Hardware** | API Google Fit | API nativa fundamental para estabelecer a comunicação direta com os sensores Android, permitindo a leitura padronizada de dados biométricos em tempo real. |
-| **Controle de Versão e CI/CD** | Git + GitHub | Infraestrutura essencial para a gerência de configuração. Permite o versionamento seguro do código, rastreabilidade de commits e trabalho colaborativo por meio de branches. |
-| **Gerenciamento Ágil** | GitHub Projects | Utilizado para a manutenção do Backlog do Produto e do Sprint, garantindo o acompanhamento visual das tarefas (Kanban) integrado ao repositório do código-fonte. |
-| **Design e Modelagem** | Figma + Visual Paradigm | O Figma prototipará em alta fidelidade as interfaces do MVP, enquanto o Visual Paradigm projetará a estrutura UML e os diagramas do Modelo C4. |
+| **Frontend Mobile** | Flutter | Framework ágil focado em Android. Essencial para renderizar a gamificação e gerenciar o cache local para execução das HUs offline. |
+| **Backend (API REST)** | Node.js + Express | Ambiente de execução JavaScript assíncrono. Ideal para a camada controladora (Controller) e processamento de regras de negócio. |
+| **Banco de Dados** | MySQL | Sistema relacional consolidado. Garante a integridade do histórico emocional, inventário do Pet e parâmetros de saúde. |
+| **Autenticação** | Firebase Auth | Provedor que padroniza o fluxo de login sem armazenar senhas brutas, garantindo segurança ao sistema. |
+| **IA & Acessibilidade** | Gemini API + Speech-to-Text | Tecnologias para transformar comandos de voz em ações e prover suporte contextualizado via chatbot assistente. |
+| **Pagamentos** | Stripe API (Sandbox) | Gateway flexível para gestão de assinaturas Premium, validando o fluxo financeiro no ambiente de teste do MVP. |
+| **Notificações Push** | Firebase FCM | Serviço essencial para alertas visuais/vibratórios de frequência cardíaca e lembretes de autocuidado em background. |
+| **Integração Hardware** | API Google Fit | Comunicação direta com sensores Android para leitura padronizada de dados biométricos em tempo real. |
+| **Controle de Versão** | Git + GitHub | Infraestrutura para gerência de configuração, rastreabilidade de commits e trabalho colaborativo por branches. |
+| **Gerenciamento Ágil** | GitHub Projects | Manutenção do Backlog do Produto e Sprints, garantindo acompanhamento visual integrado ao código. |
+| **Design e Modelagem** | Figma + Visual Paradigm | Prototipagem de alta fidelidade das interfaces e modelagem rigorosa dos diagramas do Modelo C4. |
 
 <br>
 
