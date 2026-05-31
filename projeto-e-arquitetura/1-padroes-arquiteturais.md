@@ -17,12 +17,11 @@ O padrão arquitetural adotado para o desenvolvimento do **SlowDown** foi o **MV
 
 <div align="center">
 
-```
 <img width="717" height="472" alt="MVC MARCO TÚLIO" src="https://github.com/user-attachments/assets/f0b8a7cb-9ae0-41af-9f96-79878557890f" />
 
-```
 
 </div>
+
 
 | Componente | Responsabilidade |
 |:---:|:---|
