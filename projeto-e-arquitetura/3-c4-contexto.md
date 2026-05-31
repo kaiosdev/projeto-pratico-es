@@ -16,6 +16,9 @@
 
 </div>
 
+# Diagrama de Contexto (Nivel 1) - SLOW DOWN
+<img width="1131" height="832" alt="Diagrama de Contexto-Página-2 drawio (3)" src="https://github.com/user-attachments/assets/fa273aa5-bedf-4077-b3b7-2a92f0fc27db" />
+
 ---
 
 ## 1. Sobre o Diagrama de Contexto
@@ -27,13 +30,10 @@ O diagrama é organizado em **três camadas verticais** sobre fundo quadriculado
 | Camada | Conteúdo |
 |:---|:---|
 | **Superior** | 3 personas (usuários) conectadas ao sistema central via setas rotuladas *"Acessa"* |
-| **Central** | Sistema SlowDown — hub integrador de todas as conexões |
+| **Central** | Sistema Slow Down — hub integrador de todas as conexões |
 | **Inferior** | 6 sistemas externos em duas fileiras, com setas tracejadas e rótulos por tipo de integração |
 
 ---
-# Diagrama de Contexto
-<img width="1131" height="832" alt="Diagrama de Contexto-Página-2 drawio (3)" src="https://github.com/user-attachments/assets/fa273aa5-bedf-4077-b3b7-2a92f0fc27db" />
-
 
 ## 2. Atores — Personas do Sistema
 
@@ -106,7 +106,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ---
 
-### 💓 Google Fit API — [Software System] ⭐ *Novo*
+### 💓 Google Fit API — [Software System] 
 
 **Sistema externo adicionado na revisão do Sprint 2.** Coleta dados biométricos, especialmente a frequência cardíaca, para enriquecer o monitoramento de estresse do usuário. Obrigatório para a US-04. Motivado pela persona Geilson, que realiza atividade física intensa em campo.
 
@@ -114,7 +114,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ---
 
-### 🎙️ Google Speech-to-Text — [Software System] ⭐ *Novo*
+### 🎙️ Google Speech-to-Text — [Software System] 
 
 **Sistema externo adicionado na revisão do Sprint 2.** Realiza a conversão de comandos de voz em texto, sendo essencial para a acessibilidade da Ana Beatriz. Alinha-se diretamente à característica inovadora de *"Integração de Voz"* registrada na seção 2.3 do Plano de Trabalho como diferencial do projeto. Cobre a US-05.
 
