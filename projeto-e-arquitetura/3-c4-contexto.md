@@ -1,6 +1,6 @@
 <div align="center">
-  <h1 style="color: #1a73e8;">🗺️ DESCRIÇÃO DO DIAGRAMA DE CONTEXTO C4: SLOW DOWN</h1>
-  <p><i>Nível 1 (Contexto) — Revisão Sprint 2 — Engenharia de Software A</i></p>
+  <h1 style="color: #1a73e8;">🗺️ DIAGRAMA DE CONTEXTO C4: SLOW DOWN</h1>
+  <p><i>Nível 1 — Contexto do Sistema — Engenharia de Software A</i></p>
 
   <img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" alt="Status">
 
@@ -9,19 +9,20 @@
   | Campo | Informação |
   |:---|:---|
   | **Responsáveis** | Marcos Oliveira e Marcelo Barros |
-  | **Projeto** | SlowDown |
-  | **Metodologia** | Modelo C4 — Simon Brown |
+  | **Projeto** | Slow Down |
   | **Nível C4** | Contexto (Nível 1) |
   | **Status da Entrega** | Concluído |
 
 </div>
 
-# Diagrama de Contexto (Nivel 1) - SLOW DOWN
-<img width="1131" height="832" alt="Diagrama de Contexto-Página-2 drawio (3)" src="https://github.com/user-attachments/assets/fa273aa5-bedf-4077-b3b7-2a92f0fc27db" />
-
 ---
 
-## 1. Sobre o Diagrama de Contexto
+## 1. VISÃO GERAL DO SISTEMA
+
+O **Slow Down** é um aplicativo móvel voltado à prevenção do burnout ocupacional. No nível de contexto C4, descrevemos quem interage com o sistema e com quais serviços externos ele se comunica, sem entrar em detalhes de arquitetura interna.
+
+---
+## Sobre o Diagrama de Contexto
 
 O **Diagrama de Contexto C4** representa o **Nível 1** do modelo C4, proposto por Simon Brown. Seu objetivo é delimitar as fronteiras do sistema, que faz parte do software que estamos construindo e identificar os atores externos que interagem com ele, sejam pessoas (usuários) ou sistemas externos (dependências técnicas).
 
@@ -122,47 +123,27 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ---
 
-## 6. Alterações em Relação à Versão Anterior
+## 6. DIAGRAMA DE CONTEXTO C4
 
-| # | Tipo | Elemento | Descrição da Alteração |
-|:---|:---|:---|:---|
-| 1 | 🔴 Removido | Plataforma de Streaming de Áudio | APIs externas de streaming exigem conexão constante, quebrando a regra de funcionamento offline (US-18). Os conteúdos de meditação, playlists e sleepcasts (US-01, US-02, US-17) passam a ser gerenciados internamente pelo app. |
-| 2 | 🟡 Atualizado | Gateway de Pagamento | Google Play Billing e Apple IAP removidos. O MVP usa exclusivamente **Stripe API (Sandbox)** para o ambiente Android. |
-| 3 | 🟡 Atualizado | Chatbot | Referência genérica "API de LLM" substituída especificamente por **Gemini API**, tornando a dependência técnica rastreável. |
-| 4 | 🟢 Adicionado | Google Fit API | Nova dependência obrigatória para US-04. Coleta dados biométricos (frequência cardíaca). Motivada pela persona Geilson. |
-| 5 | 🟢 Adicionado | Google Speech-to-Text | Nova dependência para US-05. Conversão de voz em texto para acessibilidade da Ana Beatriz. Diferencial inovador registrado no Plano de Trabalho. |
+> O diagrama abaixo ilustra as relações entre os usuários, o sistema Slow Down e os sistemas externos integrados.
+<img width="1131" height="832" alt="Diagrama de Contexto-Página-2 drawio (3)" src="https://github.com/user-attachments/assets/fa273aa5-bedf-4077-b3b7-2a92f0fc27db" />
 
----
 
-## 7. Convenções Visuais
+**Legenda:**
 
-| Elemento | Representação |
+| Elemento | Descrição |
 |:---|:---|
-| **Personas** | Caixas azul escuro com foto, nome, plano e descrição. Ícones de silhueta humana. |
-| **Sistema central** | Caixa azul médio, maior e centralizada, com tag `[App Mobile]`. |
-| **Sistemas externos (existentes)** | Caixas cinza claro com tag `[Software System]` e descrição técnica. |
-| **Sistemas externos (novos)** | Mesma estrutura dos existentes; adicionados na fileira B nesta revisão. |
-| **Setas personas → sistema** | Sólidas, rótulo *"Acessa"*. |
-| **Setas sistema → externos** | Tracejadas, com rótulos específicos por tipo de integração. |
-| **Fundo** | Grade quadriculada — padrão Draw.io para documentação técnica. |
-
----
-
-## 8. Rastreabilidade com o Backlog do Produto
-
-| Sistema Externo | User Story | Prioridade | Persona(s) |
-|:---|:---|:---|:---|
-| Serviço de Autenticação | US-15 — Criar conta e fazer login | 🔥 Alta | Geilson, Ana, Arleson |
-| Serviço de Notificações Push | US-14 — Configurar notificações personalizadas | 🔥 Alta | Ana, Geilson |
-| Gateway de Pagamento (Stripe) | US-16 — Visualizar e assinar plano premium | 🟡 Média | Ana, Arleson |
-| Chatbot (Gemini API) | US-07 — Interagir com chatbot de incentivo | 🔥 Alta | Ana, Geilson |
-| Google Fit API | US-04 — Navegação por comandos de voz / biométrica | 🟡 Média | Arleson |
-| Google Speech-to-Text | US-05 — Registrar estado emocional diariamente | 🔥 Alta | Ana, Geilson |
+| 🟦 **Usuário (Pessoa)** | Ator humano que interage diretamente com o sistema |
+| 🟩 **SlowDown (Sistema)** | O sistema central que está sendo modelado |
+| 🟨 **Sistema Externo** | Serviço de terceiros com o qual o SlowDown se integra |
+| **→ Seta sólida** | Interação principal (uso direto do sistema) |
+| **→ Seta tracejada** | Integração com sistema externo |
 
 ---
 
 <div align="center">
-
   <sub>Desenvolvido para a disciplina de Engenharia de Software A - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
-
 </div>
+
+---
+
