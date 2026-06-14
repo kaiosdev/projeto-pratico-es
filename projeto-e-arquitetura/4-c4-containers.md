@@ -3,7 +3,7 @@
 # 📦 DIAGRAMA DE CONTAINERS C4: SLOW DOWN
 *Nível 2 — Arquitetura de Containers — Engenharia de Software A*
 
-<img src="https://img.shields.io/badge/Status-Em_Desenvolvimento-2e7d32?style=for-the-badge" alt="Status">
+<img src="https://img.shields.io/badge/Status-Concluído-2e7d32?style=for-the-badge" alt="Status">
 
 <br><br>
 
@@ -12,7 +12,7 @@
 | **Responsáveis** | Marcos Oliveira e Marcelo Barros |
 | **Projeto** | SlowDown |
 | **Nível C4** | Containers (Nível 2) |
-| **Status da Entrega** | Pendente (Aguardando Imagem) |
+| **Status da Entrega** | Concluído |
 
 </div>
 
@@ -49,10 +49,7 @@ O sistema SlowDown é composto por três contêineres principais, estruturados d
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
 <img width="1930" height="1439" alt="Diagrama de Container" src="https://github.com/user-attachments/assets/a1ddba26-61f7-43ae-92b7-b361dd6a6c4f" />
-<!-- A equipe de design inserirá a imagem final do diagrama aqui -->
-<div align="center">
-  <p><i>[ ⚠️ Imagem do Diagrama C4 Nível 2 será inserida aqui pelos Arquitetos ]</i></p>
-</div>
+
 
 **Legenda:**
 
