@@ -1,48 +1,419 @@
-<img width="3800" height="1801" alt="Diagrama sem nome-Diagrama de código  (2)" src="https://github.com/user-attachments/assets/b30bb63f-f95b-48c4-84aa-9cfb4334ff97" />
-
-
 <div align="center">
 
 # 🏗️ DIAGRAMA DE CÓDIGO (ESTRUTURAL) C4: SLOW DOWN
-*Nível 4 — Diagrama de Classes UML — Engenharia de Software A*
+### Nível 4 — Diagrama de Classes UML
 
 <img src="https://img.shields.io/badge/Status-Concluído-2e7d32?style=for-the-badge" alt="Status">
 
-<br><br>
+<br>
 
 | Campo | Informação |
 |:---|:---|
 | **Responsáveis** | Nádia Leão |
 | **Projeto** | SlowDown |
 | **Nível C4** | Código / Estrutural (Nível 4) |
+| **Artefato** | Diagrama de Classes UML |
 | **Status da Entrega** | Concluído |
 
 </div>
 
 ---
 
-## 1. OBJETIVO DO NÍVEL DE CÓDIGO
+# 📖 1. OBJETIVO
 
-O **Diagrama de Código** representa o **Nível 4** do modelo C4. Neste nível, detalhamos a estrutura interna do sistema por meio de um **Diagrama de Classes UML**, que representa as principais entidades do domínio do SlowDown, seus atributos, métodos e os relacionamentos entre elas.
+O **Diagrama de Código (Nível 4 do Modelo C4)** representa a visão mais detalhada da arquitetura do sistema **SlowDown**, descrevendo a estrutura interna do domínio por meio de um **Diagrama de Classes UML**.
 
-As classes estão diretamente alinhadas com:
-- Os **componentes** identificados no Nível 3 (documento `5-c4-componentes.md`)
-- As **entidades do banco de dados** (camada Model — MySQL)
-- As **Histórias de Usuário** do TP1 (documento `3_backlog-do-produto.md`)
+Neste nível são apresentados:
+
+- As principais entidades do sistema;
+- Os atributos e operações de cada classe;
+- As regras de negócio encapsuladas nos modelos;
+- Os relacionamentos e multiplicidades entre os objetos;
+- A organização lógica do domínio da aplicação.
+
+O objetivo deste artefato é demonstrar como os requisitos funcionais definidos no backlog foram traduzidos em uma estrutura de software consistente, escalável e alinhada aos princípios de orientação a objetos.
 
 ---
 
-## 2. VISÃO GERAL DAS CLASSES PRINCIPAIS
+# 🖼️ 2. VISÃO GERAL DO DIAGRAMA
 
-O diagrama contempla as seguintes classes de domínio do SlowDown:
+## Figura 1 — Diagrama de Classes UML Completo
 
-| Classe | Camada MVC | Responsabilidade Principal |
-|:---|:---:|:---|
-| `User` | Model | Perfil, credenciais e plano do usuário |
-| `EmotionalLog` | Model | Registro emocional diário com dados biométricos |
-| `Insight` | Model | Resultado gerado pelo InsightEngine para um usuário |
-| `Mission` | Model | Definição de uma missão de autocuidado |
-| `UserMission` | Model | Progresso de um usuário em uma missão específica |
+<div align="center">
+
+<img width="100%" alt="Diagrama de Código UML do SlowDown" src="https://github.com/user-attachments/assets/b30bb63f-f95b-48c4-84aa-9cfb4334ff97"/>
+
+**Figura 1 — Diagrama de Classes UML completo do domínio do SlowDown.**
+
+</div>
+
+O diagrama apresenta a modelagem estrutural das principais funcionalidades do sistema, organizadas em módulos de domínio responsáveis por autenticação, monitoramento emocional, análise de estresse, gamificação, conteúdo de meditação, notificações e assistência conversacional.
+
+A arquitetura evidencia a centralidade da entidade **Usuário**, que atua como ponto de integração entre os diferentes componentes do sistema.
+
+---
+
+# 🧩 3. VISÃO GERAL DOS MÓDULOS
+
+| Módulo | Responsabilidade |
+|---------|------------------|
+| 🔐 Autenticação | Cadastro, login e gerenciamento de sessões |
+| 👤 Perfil do Usuário | Preferências, acessibilidade e personalização |
+| 💳 Assinaturas | Controle de planos e recursos premium |
+| 😊 Bem-estar Emocional | Registro diário de emoções |
+| ❤️ Monitoramento Cardíaco | Coleta e análise de BPM |
+| 📊 Inteligência Analítica | Cálculo de estresse e geração de relatórios |
+| 🎯 Gamificação | Missões, pet virtual e conquistas |
+| 🤖 Assistente Conversacional | Chatbot de apoio emocional |
+| 🎧 Conteúdo Guiado | Meditações e acompanhamento de sessões |
+| 🔔 Notificações | Alertas e lembretes personalizados |
+
+---
+
+# 👤 4. USUÁRIO COMO CENTRO DO DOMÍNIO
+
+A classe `Usuario` representa a principal entidade do sistema e funciona como agregadora dos demais módulos.
+
+Através dela, o usuário pode:
+
+- Gerenciar sua conta;
+- Configurar preferências pessoais;
+- Registrar estados emocionais;
+- Acompanhar indicadores de estresse;
+- Participar de missões;
+- Evoluir seu pet virtual;
+- Utilizar o chatbot;
+- Consumir conteúdos de meditação;
+- Receber notificações;
+- Gerenciar sua assinatura.
+
+A maioria das entidades do sistema possui relacionamento direto ou indireto com `Usuario`, evidenciando seu papel central dentro da modelagem.
+
+---
+
+# 🔐 5. AUTENTICAÇÃO E CONTROLE DE ACESSO
+
+O módulo de autenticação é composto pelas classes:
+
+- `Usuario`
+- `SessaoAutenticacao`
+- `Assinatura`
+
+## Usuario
+
+Responsável pela identidade digital do usuário.
+
+### Principais funcionalidades
+
+- Cadastro tradicional;
+- Cadastro via Google OAuth;
+- Recuperação de senha;
+- Validação de força de senha;
+- Ativação e desativação de conta.
+
+## SessaoAutenticacao
+
+Responsável pelo gerenciamento das sessões ativas.
+
+### Funcionalidades
+
+- Emissão de JWT;
+- Renovação de tokens;
+- Revogação de acesso;
+- Controle de expiração;
+- Validação de sessão.
+
+## Assinatura
+
+Responsável pelo gerenciamento dos planos disponíveis na plataforma.
+
+### Funcionalidades
+
+- Confirmação de pagamento;
+- Cancelamento;
+- Verificação de acesso premium;
+- Processamento de expiração;
+- Integração com gateway de pagamento.
+
+---
+
+# ⚙️ 6. PERFIL E PERSONALIZAÇÃO
+
+A classe `Perfil` concentra as preferências e configurações individuais do usuário.
+
+## Recursos disponíveis
+
+- Configuração de estilo de orientação;
+- Ajustes de acessibilidade;
+- Controle de onboarding;
+- Definição de limites personalizados de BPM;
+- Configurações de experiência.
+
+### Estilos suportados
+
+- Bíblico
+- Psicológico
+- Motivacional
+
+Essas preferências influenciam diretamente a experiência do usuário dentro da aplicação.
+
+---
+
+# 😊 7. REGISTRO EMOCIONAL
+
+O monitoramento emocional é realizado pela classe `RegistroEmocional`.
+
+Cada registro pode ser realizado utilizando diferentes métodos de entrada:
+
+- Número;
+- Emoji;
+- Cor.
+
+Os valores são convertidos para uma escala padronizada de 1 a 10, permitindo análises históricas e comparações ao longo do tempo.
+
+## Principais funcionalidades
+
+- Registro diário de humor;
+- Atualização do estado emocional;
+- Inclusão de observações;
+- Sincronização em nuvem;
+- Verificação de registros duplicados.
+
+---
+
+# ❤️ 8. MONITORAMENTO CARDÍACO
+
+A classe `LeituraCardiaca` representa as leituras de frequência cardíaca capturadas pelo dispositivo.
+
+## Dados armazenados
+
+- Valor BPM;
+- Momento da coleta;
+- Contexto da leitura;
+- Estado de anomalia;
+- Alertas disparados.
+
+## Funcionalidades
+
+- Coleta contínua;
+- Identificação de anomalias;
+- Emissão de alertas;
+- Cálculo de médias periódicas.
+
+Esses dados são utilizados posteriormente para cálculo dos indicadores emocionais.
+
+---
+
+# 📊 9. ÍNDICE DE ESTRESSE E RELATÓRIOS
+
+## Índice de Estresse
+
+A classe `IndiceEstresse` consolida dados emocionais e fisiológicos.
+
+### Critérios de cálculo
+
+| Fonte | Contribuição |
+|---------|-------------|
+| Registro emocional | 60% |
+| Frequência cardíaca | 40% |
+
+O resultado permite:
+
+- Detectar períodos críticos;
+- Identificar padrões de comportamento;
+- Apoiar recomendações futuras;
+- Alimentar relatórios analíticos.
+
+---
+
+## Relatórios
+
+A classe `Relatorio` gera análises históricas da evolução do usuário.
+
+### Períodos disponíveis
+
+- 7 dias;
+- 14 dias;
+- 30 dias.
+
+### Recursos
+
+- Exportação PDF (Premium);
+- Texto alternativo para acessibilidade;
+- Histórico de picos de estresse;
+- Estatísticas consolidadas.
+
+---
+
+# 🎯 10. GAMIFICAÇÃO
+
+O sistema utiliza técnicas de gamificação para incentivar hábitos saudáveis.
+
+As principais entidades envolvidas são:
+
+- `Missao`
+- `Pet`
+- `EmblemaDigital`
+
+---
+
+## Missões
+
+As missões representam desafios de autocuidado realizados pelo usuário.
+
+### Tipos
+
+- Simples
+- Avançada
+
+Cada missão concluída gera experiência para progressão do usuário.
+
+---
+
+## Pet Virtual
+
+O pet funciona como representação visual do progresso alcançado.
+
+### Características
+
+- Evolução por níveis;
+- Controle de felicidade;
+- Renomeação limitada;
+- Penalização por inatividade.
+
+A evolução do pet está diretamente relacionada ao engajamento do usuário.
+
+---
+
+## Emblemas Digitais
+
+Representam conquistas obtidas ao longo da jornada.
+
+### Categorias
+
+- Básico
+- Premium
+
+Os emblemas são desbloqueados automaticamente quando determinadas metas são alcançadas.
+
+---
+
+# 🤖 11. ASSISTENTE CONVERSACIONAL
+
+O módulo conversacional é composto pelas classes:
+
+- `Conversa`
+- `Mensagem`
+
+Seu objetivo é oferecer apoio emocional e acompanhamento contínuo ao usuário.
+
+## Funcionalidades
+
+- Histórico de conversas;
+- Registro de mensagens;
+- Personalização do estilo de orientação;
+- Detecção de situações de risco;
+- Acionamento de protocolos de crise.
+
+---
+
+## Detecção de Crise
+
+A classe `Mensagem` possui mecanismos especializados para identificar sinais de vulnerabilidade emocional.
+
+Entre eles:
+
+- Hard Match;
+- Soft Match NLP;
+- Score de confiança;
+- Detecção de gatilhos críticos.
+
+Quando necessário, o sistema pode exibir recursos de apoio imediato.
+
+---
+
+# 🎧 12. MEDITAÇÃO E CONTEÚDO GUIADO
+
+O módulo de conteúdo é composto pelas classes:
+
+- `Meditacao`
+- `Locutor`
+- `ProgressoSessao`
+
+## Recursos disponíveis
+
+- Reprodução em segundo plano;
+- Diferentes durações;
+- Controle de progresso;
+- Continuação de sessões interrompidas;
+- Disponibilidade offline para usuários Premium.
+
+Cada conteúdo pode ser associado a um locutor específico, permitindo personalização da experiência.
+
+---
+
+# 🔔 13. NOTIFICAÇÕES
+
+A classe `Notificacao` gerencia os lembretes e interações automáticas do sistema.
+
+## Categorias
+
+- Lembrete de prática;
+- Missão diária;
+- Evolução de progresso;
+- Interações do sistema.
+
+## Funcionalidades
+
+- Agendamento;
+- Cancelamento;
+- Agrupamento de notificações;
+- Controle de envio.
+
+Esses mecanismos auxiliam na manutenção do engajamento dos usuários.
+
+---
+
+# 🔗 14. PRINCIPAIS RELACIONAMENTOS
+
+Os relacionamentos mais relevantes observados no diagrama são:
+
+| Origem | Destino | Cardinalidade |
+|----------|----------|----------|
+| Usuario | Perfil | 1 : 1 |
+| Usuario | Assinatura | 1 : 1 |
+| Usuario | SessaoAutenticacao | 1 : N |
+| Usuario | RegistroEmocional | 1 : N |
+| Usuario | LeituraCardiaca | 1 : N |
+| Usuario | Conversa | 1 : N |
+| Usuario | Notificacao | 1 : N |
+| Usuario | Relatorio | 1 : N |
+| Usuario | Pet | 1 : 1 |
+| Usuario | Missao | N : N |
+| Usuario | EmblemaDigital | N : N |
+
+Essas associações demonstram que a entidade `Usuario` atua como núcleo agregador de informações e comportamentos da plataforma.
+
+---
+
+# ✅ 15. CONCLUSÃO
+
+O Diagrama de Classes UML do **SlowDown** apresenta uma modelagem abrangente e alinhada aos requisitos definidos para a aplicação.
+
+A estrutura contempla funcionalidades de autenticação, monitoramento emocional, análise fisiológica, gamificação, suporte conversacional e consumo de conteúdo guiado, fornecendo uma base sólida para implementação, manutenção e evolução futura do sistema.
+
+Além de representar a arquitetura interna do software, o diagrama também estabelece a rastreabilidade entre os requisitos de negócio e os componentes responsáveis por sua execução.
+
+---
+
+<div align="center">
+
+<sub>
+Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
+Professor: Dr. Andrey Rodrigues
+</sub>
+
+</div>| `UserMission` | Model | Progresso de um usuário em uma missão específica |
 | `Achievement` | Model | Emblema conquistado por um usuário |
 | `Pet` | Model | Estado do pet virtual associado ao usuário |
 | `AudioContent` | Model | Metadados de sessão de meditação ou paisagem sonora |
