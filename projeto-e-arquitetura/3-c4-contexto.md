@@ -42,15 +42,15 @@ As três personas foram definidas durante a fase de Design Thinking (documento `
 
 ### 👤 Geilson Alves — [Persona 1] · Plano Premium
 
-Representa trabalhadores de atividade física intensa como operários rurais, técnicos industriais e profissionais do agronegócio que atuam frequentemente em regiões com conectividade instável ou ausente. É o principal motivador do modo offline nativo (US-18) e da integração com a Google Fit API (US-04).
+Representa trabalhadores de atividade física intensa como operários rurais, técnicos industriais e profissionais do agronegócio que atuam frequentemente em regiões com conectividade instável ou ausente. É o principal motivador do modo offline nativo (US-19) e do download de playlists para uso offline (US-02).
 
 ### 👤 Arleson Mota — [Persona 2] · Plano Padrão
 
-Gestor de equipes que utiliza o SlowDown tanto para cuidar da própria saúde mental quanto para acompanhar o bem-estar dos colaboradores sob sua supervisão. Utiliza relatórios semanais e mensais (US-09) e o recurso de Pessoa Próxima (US-10).
+Gestor de equipes que utiliza o SlowDown tanto para cuidar da própria saúde mental quanto para acompanhar o bem-estar dos colaboradores sob sua supervisão. É o motivador direto do monitoramento de frequência cardíaca (US-04) e utiliza relatórios gráficos de evolução emocional (US-10) e o recurso de Pessoa Próxima (US-11).
 
 ### 👤 Ana Beatriz Lemos — [Persona 3] · Acessibilidade
 
-Profissional de tecnologia com alta carga cognitiva, que enfrenta dificuldade em desconectar ao fim do expediente. Motiva diretamente a integração com o Google Speech-to-Text para navegação por comandos de voz (US-04 do backlog original).
+Profissional de tecnologia com alta carga cognitiva, que enfrenta dificuldade em desconectar ao fim do expediente. Motiva diretamente a integração com o Google Speech-to-Text para navegação por comandos de voz (US-05).
 
 ---
 
@@ -75,7 +75,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ### 🔐 Serviço de Autenticação — [Software System]
 
-**Firebase Auth / OAuth 2.0.** Responsável pelo cadastro seguro, login e gerenciamento de sessões dos usuários. Cobre a US-15 (criar conta e fazer login no aplicativo).
+**Firebase Auth / OAuth 2.0.** Responsável pelo cadastro seguro, login e gerenciamento de sessões dos usuários. Cobre a US-16 (criar conta e fazer login no aplicativo).
 
 - **Rótulo da seta:** *Consome*
 
@@ -83,7 +83,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ### 🔔 Serviço de Notificações Push — [Software System]
 
-**Firebase Cloud Messaging (FCM).** Envia lembretes personalizados de missões diárias, alertas de bem-estar e incentivos para manutenção do hábito de autocuidado. Cobre a US-14 (configurar notificações personalizadas).
+**Firebase Cloud Messaging (FCM).** Envia lembretes personalizados de missões diárias, alertas de bem-estar e incentivos para manutenção do hábito de autocuidado. Cobre a US-15 (configurar notificações personalizadas).
 
 - **Rótulo da seta:** *Recebe alertas de*
 
@@ -91,7 +91,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ### 💳 Gateway de Pagamento — [Software System]
 
-**Stripe API (Sandbox).** Processa assinaturas do plano premium e eventuais compras in-app. Ambiente de testes para o MVP Android. As referências anteriores a Google Play Billing e Apple IAP foram removidas nesta revisão, pois o MVP roda exclusivamente no Android. Cobre a US-16 (upgrade para plano premium).
+**Stripe API (Sandbox).** Processa assinaturas do plano premium e eventuais compras in-app. Ambiente de testes para o MVP Android. As referências anteriores a Google Play Billing e Apple IAP foram removidas nesta revisão, pois o MVP roda exclusivamente no Android. Cobre a US-17 (visualizar e assinar plano premium).
 
 - **Rótulo da seta:** *Processa compras via*
 
@@ -109,7 +109,7 @@ Conforme documentado no Plano de Trabalho (`1_plano-de-trabalho.md`), o sistema 
 
 ### 💓 Google Fit API — [Software System] 
 
-**Sistema externo adicionado na revisão do Sprint 2.** Coleta dados biométricos, especialmente a frequência cardíaca, para enriquecer o monitoramento de estresse do usuário. Obrigatório para a US-04. Motivado pela persona Geilson, que realiza atividade física intensa em campo.
+**Sistema externo adicionado na revisão do Sprint 2.** Coleta dados biométricos, especialmente a frequência cardíaca, para enriquecer o monitoramento de estresse do usuário. Obrigatório para a US-04. Motivado pela persona Arleson, que deseja acompanhar sua frequência cardíaca para monitorar sinais físicos de esgotamento sem drenar excessivamente a bateria do dispositivo.
 
 - **Rótulo da seta:** *Consome dados biométricos*
 
