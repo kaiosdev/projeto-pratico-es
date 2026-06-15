@@ -39,7 +39,9 @@ O MVC organiza o sistema em três camadas principais:
 
 **Figura 1 – Arquitetura MVC aplicada ao sistema SlowDown.**
 
-*[Inserir figura da arquitetura]*
+<img width="1774" height="441" alt="MVC" src="https://github.com/user-attachments/assets/b53036ad-7ee6-4335-8022-39b2bcb41273" />
+
+
 
 ---
 
@@ -143,9 +145,11 @@ Além do banco de dados MySQL, o sistema integra serviços externos que compleme
 
 O funcionamento da arquitetura MVC no SlowDown ocorre da seguinte forma:
 
-```
- Inserir imagem
-```
+
+<img width="1774" height="439" alt="fluxo geral" src="https://github.com/user-attachments/assets/0a2bccc9-88b4-4d81-a93d-ca15de39ab1a" />
+
+
+
 
 ### Sequência de execução
 
