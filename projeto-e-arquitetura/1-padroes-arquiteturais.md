@@ -11,143 +11,129 @@
 
 ---
 
-## 1. MVC — Model-View-Controller
+## 4. Padrões Arquiteturais
 
-O padrão arquitetural adotado para o desenvolvimento do **SlowDown** foi o **MVC (Model-View-Controller)**. Esse padrão organiza a aplicação em três componentes principais:
+### 4.1 Descrição do Padrão Arquitetural
 
-<div align="center">
+O padrão arquitetural adotado para o desenvolvimento do **SlowDown** foi o **Model-View-Controller (MVC)**. Esse padrão é amplamente utilizado no desenvolvimento de sistemas por promover a separação de responsabilidades entre os componentes da aplicação, facilitando a organização, manutenção e evolução do software.
 
-<img width="717" height="472" alt="MVC MARCO TÚLIO" src="https://github.com/user-attachments/assets/f0b8a7cb-9ae0-41af-9f96-79878557890f" />
-
-
-</div>
-
+O MVC organiza o sistema em três camadas principais:
 
 | Componente | Responsabilidade |
 |:---:|:---|
-| **Model** | Gerencia os dados e as regras de negócio da aplicação |
-| **View** | Responsável pela interface e apresentação das informações ao usuário |
-| **Controller** | Recebe interações do usuário e coordena a comunicação entre interface e dados |
+| **Model** | Responsável pelos dados, regras de negócio e persistência das informações da aplicação |
+| **View** | Responsável pela interface gráfica e pela interação com o usuário |
+| **Controller** | Recebe as solicitações da interface, processa as regras necessárias e coordena a comunicação entre a View e o Model |
 
-> **Característica central:** a separação de responsabilidades entre os componentes reduz o acoplamento e torna o sistema mais organizado, manutenível e escalável. Alterações na interface podem ser realizadas sem impactar as regras de negócio e vice-versa.
+> **Característica central:** a divisão clara entre apresentação, processamento e dados reduz o acoplamento entre os componentes do sistema. Essa organização permite que alterações na interface não impactem diretamente as regras de negócio e vice-versa, favorecendo a reutilização de código e a escalabilidade da aplicação.
 
 ### No contexto do SlowDown
 
-| Camada | Elementos |
+| Camada | Tecnologia |
 |:---|:---|
-| **Model** | Usuários, registros emocionais, missões, conquistas, sessões de meditação, chatbot, configurações |
-| **View** | Login, onboarding, termômetro emocional, relatórios, pet virtual, configurações |
-| **Controller** | Intermediação entre ações do usuário e processamento das funcionalidades do sistema |
+| **View** | Framework Flutter |
+| **Controller** | API REST desenvolvida em Node.js e Express |
+| **Model** | Regras de negócio e acesso aos dados armazenados no banco de dados MySQL, além das integrações com serviços externos |
+
+> A organização da arquitetura MVC utilizada no projeto pode ser observada na Figura 1.
+
+**Figura 1 – Arquitetura MVC aplicada ao sistema SlowDown.**
+
+*[Inserir figura da arquitetura]*
 
 ---
 
-## 2. Justificativa da Escolha
+### 4.2 Justificativa da Escolha
 
-A arquitetura MVC foi escolhida por atender adequadamente às necessidades do **SlowDown**, que reúne diversas funcionalidades independentes, como monitoramento emocional, meditações guiadas, chatbot, gamificação, sistema de conquistas, relatórios e suporte offline.
+O padrão MVC foi escolhido por atender adequadamente às necessidades do sistema **SlowDown**, uma aplicação voltada ao apoio da saúde mental preventiva que integra diversas funcionalidades, como monitoramento emocional, meditações guiadas, chatbot inteligente, gamificação, relatórios de evolução emocional, notificações personalizadas e suporte offline.
 
-Como essas funcionalidades **compartilham dados do usuário e regras de negócio**, a separação proposta pelo MVC ajuda a manter o código organizado e evita que a lógica da aplicação fique misturada com a interface — o que facilita o desenvolvimento colaborativo, permite maior reutilização de código e reduz a complexidade à medida que novas funcionalidades são adicionadas.
+Como essas funcionalidades **compartilham dados e regras de negócio**, a utilização do MVC contribui para manter o sistema organizado e modular, evitando que a lógica da aplicação fique misturada à interface gráfica.
+
+Além disso, o padrão ajuda a resolver problemas comuns em projetos de software:
+
+- Alto acoplamento entre componentes
+- Dificuldade de manutenção e evolução do código
+- Baixa reutilização de funcionalidades
+- Crescimento desorganizado da aplicação
+- Dificuldade de trabalho colaborativo entre os membros da equipe
 
 ### Contribuição para os Requisitos Não Funcionais
 
 | Requisito | Contribuição do MVC |
 |:---|:---|
-| **Manutenção** | Permite correções e evoluções sem afetar toda a aplicação |
-| **Escalabilidade** | Facilita a inclusão de novos recursos e módulos |
-| **Usabilidade** | Possibilita evoluir a interface de forma independente das regras de negócio |
+| **Manutenibilidade** | Permite correções e evoluções sem afetar toda a aplicação |
+| **Escalabilidade** | Facilita a inclusão de novos recursos e módulos sem comprometer a estrutura principal |
 | **Confiabilidade** | Centraliza a lógica do sistema, reduzindo inconsistências |
-| **Suporte Offline** | Facilita o gerenciamento local dos dados e a sincronização posterior |
+| **Usabilidade** | Possibilita evoluir a interface de forma independente das regras de negócio |
 
 ---
 
-## 3. Aplicação do MVC no SlowDown
+### 4.3 Camada de Apresentação — View
 
-A arquitetura MVC permite distribuir responsabilidades de forma clara entre os componentes do sistema:
+> Desenvolvida com o framework **Flutter**, a camada View é responsável por toda a interface gráfica e pela exibição das informações processadas pelo sistema.
 
-```
-┌─────────────────────────────────────────────────────┐
-│                 Aplicação SlowDown                  │
-│                                                     │
-│   ┌──────────┐    ┌──────────────┐   ┌──────────┐  │
-│   │   VIEW   │◄───│  CONTROLLER  │──►│  MODEL   │  │
-│   │          │───►│              │◄──│          │  │
-│   │ Telas do │    │ Intermediário│   │ Dados e  │  │
-│   │   App    │    │ de ações     │   │  Regras  │  │
-│   └──────────┘    └──────────────┘   └──────────┘  │
-└─────────────────────────────────────────────────────┘
-```
-
-Essa separação **favorece a organização do código**, reduz o acoplamento entre componentes e facilita futuras evoluções da aplicação.
-
----
-
-## 4. Detalhamento dos Componentes
-
-### 4.1 Camada de Apresentação — View
-
-> Localizada na camada mais próxima do usuário, a **View** é responsável por toda a interface gráfica e pela exibição das informações processadas pelo sistema.
-
-Telas presentes nessa camada:
+Telas e funcionalidades presentes nessa camada:
 
 - Login e Cadastro
 - Onboarding
 - Termômetro Emocional
 - Sessões de Meditação
-- Chatbot
+- Chatbot Assistente
 - Pet Virtual
 - Sistema de Missões e Conquistas
 - Relatórios de Evolução Emocional
-- Notificações e Configurações
+- Configurações e Notificações
 
-> **Atenção:** a View **não possui regras de negócio**. Sua responsabilidade é capturar interações do usuário e apresentar dados de forma clara, intuitiva e acessível.
+> **Atenção:** a View **não possui regras de negócio**. Sua responsabilidade é capturar as ações do usuário e apresentar as informações processadas pelo sistema de maneira intuitiva e acessível.
 
 ---
 
-### 4.2 Camada de Controle — Controller
+#### 4.3.1 Camada de Controle — Controller
 
-> O **Controller** atua como intermediário entre a interface e as regras de negócio, recebendo ações do usuário, validando informações e coordenando a execução dos processos necessários.
+> O **Controller** é implementado por meio de uma **API REST em Node.js e Express**, atuando como intermediário entre a interface e as regras de negócio.
 
 Principais responsabilidades no SlowDown:
 
-- Gerenciamento do fluxo de autenticação e acesso ao sistema
-- Registro dos estados emocionais informados pelos usuários
-- Controle das sessões de meditação e conteúdos de áudio
-- Processamento das missões diárias, XP e desbloqueio de conquistas
-- Gerenciamento das interações com o chatbot
-- Controle das notificações personalizadas
-- Gerenciamento da sincronização de dados entre modo offline e online
+- Processar autenticação de usuários
+- Receber e validar registros emocionais
+- Gerenciar sessões de meditação
+- Processar missões, XP e conquistas
+- Coordenar interações com o chatbot
+- Controlar notificações personalizadas
+- Gerenciar a sincronização entre os modos online e offline
+- Intermediar o acesso às regras de negócio e aos dados armazenados
 
 ---
 
-### 4.3 Camada de Modelo — Model
+#### 4.3.2 Camada de Modelo — Model
 
-> O **Model** representa o núcleo de dados e regras de negócio do sistema, mantendo a integridade das informações e garantindo que as regras de negócio sejam aplicadas de forma consistente.
+> O **Model** concentra os dados, as regras de negócio da aplicação e o acesso ao banco de dados **MySQL**, mantendo a integridade das informações de forma consistente.
 
 Principais elementos do Model:
 
 | Categoria | Elementos |
 |:---|:---|
 | **Usuários** | Perfis e dados de cadastro |
-| **Saúde Emocional** | Registros emocionais, histórico de humor e estresse |
-| **Conteúdo** | Sessões de meditação e áudios |
-| **Gamificação** | Sistema de missões, XP, emblemas e dados do pet virtual |
-| **Sistema** | Configurações de notificações, relatórios e métricas |
-| **Offline** | Informações armazenadas para funcionamento sem conexão |
+| **Saúde Emocional** | Histórico emocional e registros de humor |
+| **Conteúdo** | Sessões de meditação e conteúdos de áudio |
+| **Gamificação** | Sistema de missões, XP, conquistas e dados do pet virtual |
+| **Sistema** | Relatórios, métricas de utilização e configurações do usuário |
+| **Offline** | Dados armazenados localmente para funcionamento sem conexão |
 
 ---
 
-### 4.4 Persistência de Dados e Serviços Externos
+#### 4.3.4 Persistência de Dados e Serviços Externos
 
-Os dados dos usuários, registros emocionais, progresso das missões, conquistas, preferências e histórico de utilização são armazenados em **banco de dados**, permitindo recuperação, atualização e sincronização entre diferentes sessões de uso.
-
-A aplicação integra serviços externos para funcionalidades específicas:
+Além do banco de dados MySQL, o sistema integra serviços externos que complementam as funcionalidades do aplicativo:
 
 | Serviço | Finalidade |
 |:---|:---|
-| **Autenticação** | Gerenciamento seguro de contas de usuário |
-| **Notificações Push** | Lembretes personalizados de autocuidado |
-| **Reconhecimento de Voz** | Acessibilidade e navegação mãos-livres |
-| **IA / Chatbot (API)** | Processamento de linguagem natural e respostas adaptativas |
-| **Sincronização em Nuvem** | Suporte ao modo offline com sincronização posterior |
+| **Firebase Auth** | Autenticação segura de usuários |
+| **Firebase Cloud Messaging (FCM)** | Notificações push personalizadas |
+| **Gemini API** | Chatbot com inteligência artificial |
+| **Speech-to-Text** | Reconhecimento de voz e acessibilidade |
+| **Stripe API (Sandbox)** | Validação do fluxo de assinaturas Premium |
+| **Google Fit API** | Obtenção de dados biométricos e sensores do dispositivo |
 
 > Essas integrações permanecem **desacopladas das regras de negócio**, permitindo futuras expansões ou substituições sem impactar a estrutura principal da aplicação.
 
@@ -158,35 +144,22 @@ A aplicação integra serviços externos para funcionalidades específicas:
 O funcionamento da arquitetura MVC no SlowDown ocorre da seguinte forma:
 
 ```
-  Usuário
-    │
-    ▼
-┌───────┐     ação      ┌────────────┐    processa    ┌─────────┐
-│  VIEW │ ─────────────►│ CONTROLLER │───────────────►│  MODEL  │
-│       │               │            │◄───────────────│         │
-│       │◄──────────────│            │    resultado   │  dados  │
-└───────┘  atualiza UI  └────────────┘                └─────────┘
-    │                                                      │
-    ▼                                                      ▼
-Resultado                                         Banco de Dados
-ao Usuário                                        / Serv. Externos
+ Inserir imagem
 ```
 
 ### Sequência de execução
 
 | Etapa | Ação |
 |:---:|:---|
-| **1** | O usuário interage com uma tela da aplicação (View) |
-| **2** | A ação é recebida pelo Controller |
-| **3** | O Controller processa a solicitação e aciona o Model |
-| **4** | O Model executa as regras de negócio e acessa os dados necessários |
+| **1** | O usuário interage com uma tela da aplicação (View — Flutter) |
+| **2** | A ação é enviada para a API REST (Controller — Node.js + Express) |
+| **3** | O Controller processa a requisição e aciona o Model |
+| **4** | O Model executa as regras de negócio e acessa os dados no MySQL ou serviços externos |
 | **5** | O resultado retorna ao Controller |
 | **6** | O Controller atualiza a View com as informações processadas |
-| **7** | A interface apresenta o resultado ao usuário |
+| **7** | A interface Flutter apresenta o resultado ao usuário |
 
 > Esse fluxo garante uma **separação clara de responsabilidades**, contribuindo para a organização do sistema, facilidade de manutenção, escalabilidade e evolução contínua da aplicação.
-
-*Fonte: Elaborado pelos autores (2026).*
 
 ---
 
@@ -194,7 +167,7 @@ ao Usuário                                        / Serv. Externos
 
 A arquitetura **MVC** foi escolhida por oferecer uma solução simples, robusta e amplamente utilizada pela indústria para aplicações que exigem gerenciamento de dados, interação constante com o usuário e evolução contínua das funcionalidades.
 
-Sua adoção permite que o SlowDown mantenha uma estrutura organizada desde as primeiras versões do projeto, facilitando o **desenvolvimento colaborativo** da equipe e garantindo maior qualidade na implementação das funcionalidades previstas no backlog.
+Sua adoção permite que o SlowDown mantenha uma estrutura organizada desde as primeiras versões do projeto, com camadas bem definidas: **Flutter** na apresentação, **Node.js + Express** no controle e **MySQL** na persistência dos dados. Isso facilita o **desenvolvimento colaborativo** da equipe e garante maior qualidade na implementação das funcionalidades previstas no backlog.
 
 Além de atender aos objetivos do projeto e às necessidades do domínio da saúde mental preventiva, o MVC fornece uma base sólida para futuras expansões da plataforma, preservando manutenibilidade, escalabilidade, confiabilidade e experiência do usuário ao longo de todo o ciclo de vida da aplicação.
 

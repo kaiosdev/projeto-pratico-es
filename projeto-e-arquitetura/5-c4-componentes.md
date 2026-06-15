@@ -9,7 +9,7 @@
 
 | Campo | Informação |
 |:---|:---|
-| **Responsáveis** | Marcos Oliveira e Marcelo Barros |
+| **Responsáveis** | Nádia Leão |
 | **Projeto** | SlowDown |
 | **Nível C4** | Componentes (Nível 3) |
 | **Status da Entrega** | Concluído |
