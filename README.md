@@ -39,20 +39,20 @@ O sistema segue o padrão **Model-View-Controller (MVC)** e a modelagem arquitet
 ### 📌 TP1 — Especificação
 | Arquivo | Descrição |
 | :--- | :--- |
-| `1_plano-de-trabalho.md` | Escopo, tecnologias e papéis da equipe. |
-| `2_design-thinking.md` | Golden Circle, SWOT e Personas. |
-| `3_backlog-do-produto.md` | Lista priorizada de Histórias de Usuário. |
+| [1_plano-de-trabalho.md](1-especificacao/1_plano-de-trabalho.md) | Escopo, tecnologias e papéis da equipe. |
+| [2_design-thinking.md](1-especificacao/2_design-thinking.md) | Golden Circle, SWOT e Personas. |
+| [3_backlog-do-produto.md](1-especificacao/3_backlog-do-produto.md) | Lista priorizada de Histórias de Usuário. |
 
 ### 🏗️ TP2 — Arquitetura C4
 | Arquivo | Descrição |
 | :--- | :--- |
-| `1-padroes-arquiteturais.md` | Definição do padrão MVC. |
-| `2-tech-stack.md` | Mapeamento detalhado das tecnologias. |
-| `3-c4-contexto.md` | Nível 1: Contexto do sistema. |
-| `4-c4-containers.md` | Nível 2: Arquitetura de containers. |
-| `5-c4-componentes.md` | Nível 3: Diagrama de componentes. |
-| `6-c4-codigo.md` | Nível 4: Diagrama de classes UML. |
-| `7-rastreabilidade.md` | Matriz de rastreabilidade (HUs x Arquitetura). |
+| [1-padroes-arquiteturais.md](2-projeto-e-arquitetura/1-padroes-arquiteturais.md) | Definição do padrão MVC. |
+| [2-tech-stack.md](2-projeto-e-arquitetura/2-tech-stack.md) | Mapeamento detalhado das tecnologias. |
+| [3-c4-contexto.md](2-projeto-e-arquitetura/3-c4-contexto.md) | Nível 1: Contexto do sistema. |
+| [4-c4-containers.md](2-projeto-e-arquitetura/4-c4-containers.md) | Nível 2: Arquitetura de containers. |
+| [5-c4-componentes.md](2-projeto-e-arquitetura/5-c4-componentes.md) | Nível 3: Diagrama de componentes. |
+| [6-c4-codigo.md](2-projeto-e-arquitetura/6-c4-codigo.md) | Nível 4: Diagrama de classes UML. |
+| [7-rastreabilidade.md](2-projeto-e-arquitetura/7-rastreabilidade.md) | Matriz de rastreabilidade (HUs x Arquitetura). |
 
 ## 👥 Equipe do Projeto
 
