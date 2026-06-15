@@ -1,15 +1,15 @@
-🏗️ DIAGRAMA DE CÓDIGO (ESTRUTURAL) C4: SLOWDOWN
+<div align="center">🏗️ DIAGRAMA DE CÓDIGO (ESTRUTURAL) C4: SLOW DOWN
 
 Nível 4 — Diagrama de Classes UML
 
-Campo| Informação
-Responsável| Nádia Leão
+<img src="https://img.shields.io/badge/Status-Concluído-2e7d32?style=for-the-badge" alt="Status"><br>Campo| Informação
+Responsáveis| Nádia Leão
 Projeto| SlowDown
 Nível C4| Código / Estrutural (Nível 4)
 Artefato| Diagrama de Classes UML
 Status da Entrega| Concluído
 
----
+</div>---
 
 📖 1. OBJETIVO
 
@@ -31,11 +31,9 @@ O objetivo deste artefato é demonstrar como os requisitos funcionais definidos 
 
 Figura 1 — Diagrama de Classes UML Completo
 
-"Diagrama de Código UML do SlowDown" (https://github.com/user-attachments/assets/b30bb63f-f95b-48c4-84aa-9cfb4334ff97)
+<div align="center"><img width="100%" alt="Diagrama de Código UML do SlowDown" src="https://github.com/user-attachments/assets/b30bb63f-f95b-48c4-84aa-9cfb4334ff97"/>Figura 1 — Diagrama de Classes UML completo do domínio do SlowDown.
 
-Figura 1 — Diagrama de Classes UML completo do domínio do SlowDown.
-
-O diagrama apresenta a modelagem estrutural das principais funcionalidades do sistema, organizadas em módulos de domínio responsáveis por autenticação, monitoramento emocional, análise de estresse, gamificação, conteúdo de meditação, notificações e assistência conversacional.
+</div>O diagrama apresenta a modelagem estrutural das principais funcionalidades do sistema, organizadas em módulos de domínio responsáveis por autenticação, monitoramento emocional, análise de estresse, gamificação, conteúdo de meditação, notificações e assistência conversacional.
 
 A arquitetura evidencia a centralidade da entidade Usuário, que atua como ponto de integração entre os diferentes componentes do sistema.
 
@@ -61,7 +59,7 @@ Módulo| Responsabilidade
 
 A classe "Usuario" representa a principal entidade do sistema e funciona como agregadora dos demais módulos.
 
-Por meio dela, o usuário pode:
+Através dela, o usuário pode:
 
 - Gerenciar sua conta;
 - Configurar preferências pessoais;
@@ -138,9 +136,9 @@ Recursos disponíveis
 
 Estilos suportados
 
-- Bíblico;
-- Psicológico;
-- Motivacional.
+- Bíblico
+- Psicológico
+- Motivacional
 
 Essas preferências influenciam diretamente a experiência do usuário dentro da aplicação.
 
@@ -148,9 +146,9 @@ Essas preferências influenciam diretamente a experiência do usuário dentro da
 
 😊 7. REGISTRO EMOCIONAL
 
-A classe "RegistroEmocional" é responsável pelo acompanhamento emocional do usuário.
+O monitoramento emocional é realizado pela classe "RegistroEmocional".
 
-Cada registro pode ser realizado utilizando diferentes formas de entrada.
+Cada registro pode ser realizado utilizando diferentes métodos de entrada.
 
 Métodos de registro
 
@@ -177,11 +175,11 @@ A classe "LeituraCardiaca" representa as leituras de frequência cardíaca captu
 
 Dados armazenados
 
-- Frequência cardíaca registrada;
+- Valor da frequência cardíaca;
 - Momento da coleta;
 - Contexto da leitura;
 - Estado de anomalia;
-- Alertas emitidos.
+- Alertas disparados.
 
 Funcionalidades
 
@@ -214,6 +212,8 @@ O resultado permite:
 - Apoiar recomendações futuras;
 - Alimentar relatórios analíticos.
 
+---
+
 Relatórios
 
 A classe "Relatorio" gera análises históricas da evolução do usuário.
@@ -236,20 +236,24 @@ O sistema utiliza técnicas de gamificação para incentivar hábitos saudáveis
 
 As principais entidades envolvidas são:
 
-- "Missao";
-- "Pet";
-- "EmblemaDigital".
+- "Missao"
+- "Pet"
+- "EmblemaDigital"
+
+---
 
 Missões
 
-Representam desafios de autocuidado realizados pelo usuário.
+As missões representam desafios de autocuidado realizados pelo usuário.
 
 Tipos
 
-- Simples;
-- Avançada.
+- Simples
+- Avançada
 
 Cada missão concluída contribui para a progressão do usuário dentro da plataforma.
+
+---
 
 Pet Virtual
 
@@ -264,14 +268,16 @@ Características
 
 A evolução do pet está diretamente relacionada ao engajamento do usuário.
 
+---
+
 Emblemas Digitais
 
 Representam conquistas obtidas ao longo da jornada.
 
 Categorias
 
-- Básico;
-- Premium.
+- Básico
+- Premium
 
 Os emblemas são desbloqueados automaticamente quando determinadas metas são alcançadas.
 
@@ -281,8 +287,8 @@ Os emblemas são desbloqueados automaticamente quando determinadas metas são al
 
 O módulo conversacional é composto pelas classes:
 
-- "Conversa";
-- "Mensagem".
+- "Conversa"
+- "Mensagem"
 
 Seu objetivo é oferecer apoio emocional e acompanhamento contínuo ao usuário.
 
@@ -293,6 +299,8 @@ Funcionalidades
 - Personalização do estilo de orientação;
 - Detecção de situações de risco;
 - Acionamento de protocolos de apoio.
+
+---
 
 Detecção de Situações Críticas
 
@@ -309,13 +317,13 @@ Quando necessário, o sistema pode exibir recursos de apoio imediato.
 
 ---
 
-🎧 12. MEDITAÇÃO 
+🎧 12. MEDITAÇÃO E CONTEÚDO GUIADO
 
 O módulo de conteúdo é composto pelas classes:
 
-- "Meditacao";
-- "Locutor";
-- "ProgressoSessao".
+- "Meditacao"
+- "Locutor"
+- "ProgressoSessao"
 
 Recursos disponíveis
 
@@ -323,7 +331,7 @@ Recursos disponíveis
 - Diferentes modalidades de conteúdo;
 - Controle de progresso;
 - Continuação de sessões interrompidas;
-- Recursos adicionais para usuários elegíveis.
+- Disponibilidade de recursos adicionais para usuários elegíveis.
 
 Cada conteúdo pode ser associado a um locutor específico, permitindo personalização da experiência.
 
@@ -355,17 +363,18 @@ Esses mecanismos auxiliam na manutenção do engajamento dos usuários.
 
 Os relacionamentos mais relevantes observados no diagrama são:
 
-- Usuário e Perfil;
-- Usuário e Assinatura;
-- Usuário e Sessão de Autenticação;
-- Usuário e Registro Emocional;
-- Usuário e Leitura Cardíaca;
-- Usuário e Conversa;
-- Usuário e Notificação;
-- Usuário e Relatório;
-- Usuário e Pet;
-- Usuário e Missão;
-- Usuário e Emblema Digital.
+Origem| Destino| Cardinalidade
+Usuario| Perfil| 1 : 1
+Usuario| Assinatura| 1 : 1
+Usuario| SessaoAutenticacao| 1 : N
+Usuario| RegistroEmocional| 1 : N
+Usuario| LeituraCardiaca| 1 : N
+Usuario| Conversa| 1 : N
+Usuario| Notificacao| 1 : N
+Usuario| Relatorio| 1 : N
+Usuario| Pet| 1 : 1
+Usuario| Missao| N : N
+Usuario| EmblemaDigital| N : N
 
 Essas associações demonstram que a entidade "Usuario" atua como núcleo agregador de informações e comportamentos da plataforma.
 
@@ -381,5 +390,7 @@ Além de representar a arquitetura interna do software, o diagrama também estab
 
 ---
 
-Desenvolvido para a disciplina de Engenharia de Software A – ICET/UFAM
+<div align="center"><sub>
+Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
 Professor: Dr. Andrey Rodrigues
+</sub></div>
