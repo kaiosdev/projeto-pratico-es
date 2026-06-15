@@ -60,7 +60,7 @@ O sistema utiliza serviços externos especializados para ampliar suas funcionali
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
 
-<img width="1813" height="1051" alt="Diagrama de containers" src="https://github.com/user-attachments/assets/7bd58bb9-4fb5-48b6-ab79-21030128cad8" />
+<img width="1547" height="1051" alt="Diagrama sem nome drawio (1)" src="https://github.com/user-attachments/assets/ac093fe2-8252-4177-8d78-f7e353e2d3c6" />
 
 <div align="center">
   <p><i>[ Figura: Diagrama de Containers do Aplicativo SlowDown ]</i></p>
