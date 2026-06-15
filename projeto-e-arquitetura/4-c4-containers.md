@@ -52,9 +52,8 @@ O sistema SlowDown é composto por três contêineres principais, estruturados d
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
 
-<img width="1813" height="1052" alt="container" src="https://github.com/user-attachments/assets/c38bbd91-6348-441a-9c29-f9dd456b56e1" />
+<img width="1813" height="1051" alt="diagrama de containers drawio" src="https://github.com/user-attachments/assets/8e0f0330-cf97-401e-936d-b793e7abcd5b" />
 
-<!-- A equipe de design inserirá a imagem final do diagrama aqui -->
 <div align="center">
   <p><i>[ ⚠️ Imagem do Diagrama C4 Nível 2 será inserida aqui pelos Arquitetos ]</i></p>
 </div>
@@ -63,8 +62,8 @@ O sistema SlowDown é composto por três contêineres principais, estruturados d
 
 | Elemento | Descrição |
 |:---|:---|
-| 🟦 **Usuário (Pessoa)** | Ator humano que interage com o sistema |
-| 🔵 **Container (Azul Escuro)** | Contêineres que compõem o próprio SlowDown |
+| 🔵 **Usuário (Pessoa)** | Ator humano que interage com o sistema |
+| 🟦 **Container** | Contêineres que compõem o próprio SlowDown |
 | 🟨 **Sistema Externo** | Serviços e APIs de terceiros |
 | **→ Setas de Fluxo** | Direção da comunicação e protocolo utilizado (ex: JSON/HTTPS) |
 
