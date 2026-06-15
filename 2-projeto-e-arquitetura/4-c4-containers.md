@@ -26,7 +26,7 @@ Neste nível da modelagem C4, "abrimos" o sistema central do **SlowDown** (apres
 
 ## 2. ARQUITETURA INTERNA (OS CONTAINERS)
 
-O sistema SlowDown é composto por quatro contêineres principais, organizados de forma modular para garantir escalabilidade, manutenibilidade e integração com serviços externos especializados.
+O sistema SlowDown é composto por três contêineres principais, organizados de forma modular para garantir escalabilidade, manutenibilidade e integração com serviços externos especializados.
 
 ### 📱 1. Aplicativo Mobile (View / Cliente)
 
@@ -40,13 +40,7 @@ O sistema SlowDown é composto por quatro contêineres principais, organizados d
 - **Responsabilidade:** Centralizar as regras de negócio do sistema. Gerencia autenticação, perfis de usuários, cálculo do Índice de Estresse, gamificação, missões diárias, histórico emocional e processamento das informações recebidas pelo aplicativo.
 - **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Google Fit API para obtenção de dados físicos, ao Stripe API para processamento de pagamentos e comunica-se com o Serviço de IA para funcionalidades inteligentes.
 
-### 🤖 3. Serviço de IA
-
-- **Tecnologia:** FastAPI (Phyton)
-- **Responsabilidade:** Processar funcionalidades baseadas em Inteligência Artificial, incluindo geração de respostas para o chatbot terapêutico, análise de padrões comportamentais e recomendações personalizadas de bem-estar.
-- **Comunicação:** Recebe solicitações da API Backend e utiliza a Gemini API para processamento de linguagem natural e geração de conteúdo inteligente.
-
-### 🗄️ 4. Banco de Dados Relacional
+### 🗄️ 3. Banco de Dados Relacional
 
 - **Tecnologia:** MySQL
 - **Responsabilidade:** Armazenar de forma estruturada e persistente todas as informações do sistema, incluindo perfis de usuários, registros emocionais, histórico de atividades, progresso no Pet Virtual, missões diárias e dados de gamificação.
