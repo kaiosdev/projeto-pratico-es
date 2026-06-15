@@ -9,16 +9,12 @@
 
 | Campo | Informação |
 |:---|:---|
-| **Responsável** | Evelly |
+| **Responsável** | Kaio Sobral |
 | **Projeto** | Slow Down |
 | **Documento** | Tech Stack Map |
 | **Status da Entrega** | Concluído |
 
 </div>
-
-<br>
-
----
 
 Este documento apresenta o ecossistema tecnológico selecionado para o desenvolvimento do sistema **Slow Down**, organizado por camadas e propósitos técnicos, garantindo o alinhamento com os requisitos não-funcionais de desempenho, segurança e funcionamento offline, além de viabilizar a futura implementação ágil do Produto Mínimo Viável (MVP).
 
@@ -34,18 +30,12 @@ A persistência de dados sensíveis é delegada à camada de dados (Model), oper
 
 Por fim, a fundação do ciclo de vida do desenvolvimento é sustentada pelo **Git/GitHub** para controle de versão, **GitHub Projects** para a gestão ágil (Kanban), e a utilização conjunta do **Figma** e **Visual Paradigm** para a prototipação e modelagem arquitetural C4.
 
----
-
 ## 2. Mapa Visual da Tech Stack
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/61ae2515-78d9-4cab-bc67-29b56954f4e3" />
+  <img src="https://github.com/user-attachments/assets/61ae2515-78d9-4cab-bc67-29b56954f4e3" alt="Mapa Visual da Tech Stack" />
   <p><i><b>Figura 1:</b> Organização visual das tecnologias do Slow Down por propósito e camadas.</i></p>
 </div>
-
-<br>
-
----
 
 ## 3. Tabela Detalhada de Tecnologias
 
@@ -63,12 +53,8 @@ Por fim, a fundação do ciclo de vida do desenvolvimento é sustentada pelo **G
 | **Gerenciamento Ágil** | GitHub Projects | Manutenção do Backlog do Produto e Sprints, garantindo acompanhamento visual integrado ao código. |
 | **Design e Modelagem** | Figma + Visual Paradigm | Prototipagem de alta fidelidade das interfaces e modelagem rigorosa dos diagramas do Modelo C4. |
 
-<br>
-
 ---
 
 <div align="center">
-
   <sub>Desenvolvido para a disciplina de Engenharia de Software A - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
-
 </div>
