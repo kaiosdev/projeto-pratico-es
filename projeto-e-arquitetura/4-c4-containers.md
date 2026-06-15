@@ -9,7 +9,7 @@
 
 | Campo | Informação |
 |:---|:---|
-| **Responsáveis** | Marcos Oliveira e Marcelo Barros |
+| **Responsáveis** | Marcos Oliveira |
 | **Projeto** | SlowDown |
 | **Nível C4** | Containers (Nível 2) |
 | **Status da Entrega** | Pendente (Aguardando Imagem) |
