@@ -1,3 +1,6 @@
+<img width="3800" height="1801" alt="Diagrama sem nome-Diagrama de código  (2)" src="https://github.com/user-attachments/assets/b30bb63f-f95b-48c4-84aa-9cfb4334ff97" />
+
+
 <div align="center">
 
 # 🏗️ DIAGRAMA DE CÓDIGO (ESTRUTURAL) C4: SLOW DOWN
