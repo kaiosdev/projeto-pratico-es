@@ -9,8 +9,6 @@
 
 </div>
 
----
-
 ## 4. Padrões Arquiteturais
 
 ### 4.1 Descrição do Padrão Arquitetural
@@ -41,10 +39,6 @@ O MVC organiza o sistema em três camadas principais:
 
 <img width="1774" height="441" alt="MVC" src="https://github.com/user-attachments/assets/b53036ad-7ee6-4335-8022-39b2bcb41273" />
 
-
-
----
-
 ### 4.2 Justificativa da Escolha
 
 O padrão MVC foi escolhido por atender adequadamente às necessidades do sistema **SlowDown**, uma aplicação voltada ao apoio da saúde mental preventiva que integra diversas funcionalidades, como monitoramento emocional, meditações guiadas, chatbot inteligente, gamificação, relatórios de evolução emocional, notificações personalizadas e suporte offline.
@@ -68,8 +62,6 @@ Além disso, o padrão ajuda a resolver problemas comuns em projetos de software
 | **Confiabilidade** | Centraliza a lógica do sistema, reduzindo inconsistências |
 | **Usabilidade** | Possibilita evoluir a interface de forma independente das regras de negócio |
 
----
-
 ### 4.3 Camada de Apresentação — View
 
 > Desenvolvida com o framework **Flutter**, a camada View é responsável por toda a interface gráfica e pela exibição das informações processadas pelo sistema.
@@ -88,8 +80,6 @@ Telas e funcionalidades presentes nessa camada:
 
 > **Atenção:** a View **não possui regras de negócio**. Sua responsabilidade é capturar as ações do usuário e apresentar as informações processadas pelo sistema de maneira intuitiva e acessível.
 
----
-
 #### 4.3.1 Camada de Controle — Controller
 
 > O **Controller** é implementado por meio de uma **API REST em Node.js e Express**, atuando como intermediário entre a interface e as regras de negócio.
@@ -104,8 +94,6 @@ Principais responsabilidades no SlowDown:
 - Controlar notificações personalizadas
 - Gerenciar a sincronização entre os modos online e offline
 - Intermediar o acesso às regras de negócio e aos dados armazenados
-
----
 
 #### 4.3.2 Camada de Modelo — Model
 
@@ -122,8 +110,6 @@ Principais elementos do Model:
 | **Sistema** | Relatórios, métricas de utilização e configurações do usuário |
 | **Offline** | Dados armazenados localmente para funcionamento sem conexão |
 
----
-
 #### 4.3.4 Persistência de Dados e Serviços Externos
 
 Além do banco de dados MySQL, o sistema integra serviços externos que complementam as funcionalidades do aplicativo:
@@ -139,17 +125,11 @@ Além do banco de dados MySQL, o sistema integra serviços externos que compleme
 
 > Essas integrações permanecem **desacopladas das regras de negócio**, permitindo futuras expansões ou substituições sem impactar a estrutura principal da aplicação.
 
----
-
 ## 5. Fluxo Geral da Arquitetura
 
 O funcionamento da arquitetura MVC no SlowDown ocorre da seguinte forma:
 
-
 <img width="1774" height="439" alt="fluxo geral" src="https://github.com/user-attachments/assets/0a2bccc9-88b4-4d81-a93d-ca15de39ab1a" />
-
-
-
 
 ### Sequência de execução
 
@@ -165,8 +145,6 @@ O funcionamento da arquitetura MVC no SlowDown ocorre da seguinte forma:
 
 > Esse fluxo garante uma **separação clara de responsabilidades**, contribuindo para a organização do sistema, facilidade de manutenção, escalabilidade e evolução contínua da aplicação.
 
----
-
 ## 6. Conclusão
 
 A arquitetura **MVC** foi escolhida por oferecer uma solução simples, robusta e amplamente utilizada pela indústria para aplicações que exigem gerenciamento de dados, interação constante com o usuário e evolução contínua das funcionalidades.
@@ -178,8 +156,5 @@ Além de atender aos objetivos do projeto e às necessidades do domínio da saú
 ---
 
 <div align="center">
-
-<sub>Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
-Professor: Dr. Andrey Rodrigues</sub>
-
+  <sub>Desenvolvido para a disciplina de Engenharia de Software A - ICET/UFAM. <br /> Professor: Dr. Andrey Rodrigues</sub>
 </div>
