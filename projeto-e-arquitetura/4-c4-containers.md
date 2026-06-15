@@ -26,25 +26,39 @@ Neste nível da modelagem C4, "abrimos" o sistema central do **SlowDown** (apres
 
 ## 2. ARQUITETURA INTERNA (OS CONTAINERS)
 
-O sistema SlowDown é composto por três contêineres principais, estruturados de acordo com o padrão arquitetural MVC:
+O sistema SlowDown é composto por quatro contêineres principais, organizados de forma modular para garantir escalabilidade, manutenibilidade e integração com serviços externos especializados.
 
 ### 📱 1. Aplicativo Mobile (View / Cliente)
 
 - **Tecnologia:** Flutter (Dart).
-- **Responsabilidade:** Fornecer a interface nativa com o usuário (Android). Gerencia o cache local de arquivos de áudio para o modo offline, captura interações (como o termômetro emocional) e renderiza a gamificação do Pet Virtual.
-- **Comunicação:** Comunica-se diretamente com o hardware nativo (Google Fit API, Microfone) e realiza chamadas assíncronas para o Backend e Firebase.
+- **Responsabilidade:** Fornecer a interface de interação com o usuário em dispositivos Android. Permite o registro e acompanhamento do bem-estar emocional, gerenciamento do Pet Virtual, execução de missões diárias, visualização de estatísticas e utilização dos recursos de acessibilidade.
+- **Comunicação:** Realiza chamadas HTTPS/JSON para a API Backend, integra-se ao Google Speech-to-Text para conversão de áudio em texto e acessa recursos nativos do dispositivo, como microfone e sensores de atividade física por meio do Google Fit API.
 
 ### ⚙️ 2. API REST Backend (Controller)
 
 - **Tecnologia:** Node.js com Express.
-- **Responsabilidade:** Atuar como o núcleo lógico do sistema. Valida sessões, executa o motor de cálculo do Índice de Estresse, distribui pontos de experiência (XP) e processa os comandos de voz e texto.
-- **Comunicação:** Recebe requisições HTTP/JSON do aplicativo, coordena integrações externas (Gemini API, Stripe) e lê/escreve informações na camada de persistência.
+- **Responsabilidade:** Centralizar as regras de negócio do sistema. Gerencia autenticação, perfis de usuários, cálculo do Índice de Estresse, gamificação, missões diárias, histórico emocional e processamento das informações recebidas pelo aplicativo.
+- **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Google Fit API para obtenção de dados físicos, ao Stripe API para processamento de pagamentos e comunica-se com o Serviço de IA para funcionalidades inteligentes.
 
-### 🗄️ 3. Banco de Dados Relacional (Model)
+### 🤖 3. Serviço de IA
 
-- **Tecnologia:** MySQL.
-- **Responsabilidade:** Armazenar de forma estruturada e durável as informações críticas do sistema, incluindo perfis de usuários, registros históricos de saúde mental, inventários do Pet Virtual e logs de missões diárias.
-- **Comunicação:** Recebe conexões seguras (via TCP/IP) exclusivas do contêiner da API REST Backend.
+- **Tecnologia:** FastAPI (Phyton)
+- **Responsabilidade:** Processar funcionalidades baseadas em Inteligência Artificial, incluindo geração de respostas para o chatbot terapêutico, análise de padrões comportamentais e recomendações personalizadas de bem-estar.
+- **Comunicação:** Recebe solicitações da API Backend e utiliza a Gemini API para processamento de linguagem natural e geração de conteúdo inteligente.
+
+### 🗄️ 4. Banco de Dados Relacional
+
+- **Tecnologia:** MySQL
+- **Responsabilidade:** Armazenar de forma estruturada e persistente todas as informações do sistema, incluindo perfis de usuários, registros emocionais, histórico de atividades, progresso no Pet Virtual, missões diárias e dados de gamificação.
+- **Comunicação:** Recebe conexões seguras exclusivamente da API Backend para operações de consulta, inserção, atualização e remoção de dados.
+
+### 🔗 Integrações Externas
+O sistema utiliza serviços externos especializados para ampliar suas funcionalidades:
+- **Firebase Authentication:** Responsável pela autenticação e gerenciamento de contas dos usuários.
+- **Google Fit API:** Fornece dados relacionados à atividade física e saúde do usuário.
+- **Google Speech-to-Text:** Realiza a conversão de comandos de voz em texto para utilização nos recursos do sistema.
+- **Gemini API:** Disponibiliza os modelos de Inteligência Artificial utilizados pelo Serviço de IA.
+- **Stripe API:** Responsável pelo processamento de pagamentos e assinaturas premium.
 
 ---
 
@@ -55,7 +69,7 @@ O sistema SlowDown é composto por três contêineres principais, estruturados d
 <img width="1813" height="1051" alt="diagrama de containers drawio" src="https://github.com/user-attachments/assets/8e0f0330-cf97-401e-936d-b793e7abcd5b" />
 
 <div align="center">
-  <p><i>[ ⚠️ Imagem do Diagrama C4 Nível 2 será inserida aqui pelos Arquitetos ]</i></p>
+  <p><i>[ Figura: Diagrama de Containers do Aplicativo SlowDown ]</i></p>
 </div>
 
 **Legenda:**
