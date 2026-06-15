@@ -8,7 +8,7 @@
 
   | Campo | Informação |
   |:---|:---|
-  | **Responsáveis** | Marcos Oliveira e Marcelo Barros |
+  | **Responsáveis** | Marcelo Barros |
   | **Projeto** | Slow Down |
   | **Nível C4** | Contexto (Nível 1) |
   | **Status da Entrega** | Concluído |
