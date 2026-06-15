@@ -5,8 +5,6 @@
 
 <img src="https://img.shields.io/badge/Status-Concluído-2e7d32?style=for-the-badge" alt="Status">
 
-<br><br>
-
 | Campo | Informação |
 |:---|:---|
 | **Responsável** | Marcos Oliveira |
@@ -16,13 +14,9 @@
 
 </div>
 
----
-
 ## 1. OBJETIVO DO NÍVEL DE CONTAINERS
 
 Neste nível da modelagem C4, "abrimos" o sistema central do **SlowDown** (apresentado no Nível 1) para detalhar seus contêineres internos. O objetivo é demonstrar as responsabilidades do aplicativo móvel, da API de backend e do banco de dados, além de detalhar como eles interagem entre si e com os sistemas externos utilizando protocolos específicos.
-
----
 
 ## 2. ARQUITETURA INTERNA (OS CONTAINERS)
 
@@ -38,7 +32,7 @@ O sistema SlowDown é composto por três contêineres principais, organizados de
 
 - **Tecnologia:** Node.js com Express.
 - **Responsabilidade:** Centralizar as regras de negócio do sistema. Gerencia autenticação, perfis de usuários, cálculo do Índice de Estresse, gamificação, missões diárias, histórico emocional, funcionamento do chatbot, processamento das informações recebidas pelo aplicativo e integração com serviços externos.
-- **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Stripe API para processamento de pagamentos e comunica-se com Gemini API para funcionalidades inteligentes.
+- **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Stripe API para processamento de pagamentos e comunica-se com a Gemini API para funcionalidades inteligentes.
 
 ### 🗄️ 3. Banco de Dados Relacional
 
@@ -51,7 +45,7 @@ O sistema utiliza serviços externos especializados para ampliar suas funcionali
 - **Firebase Authentication:** Responsável pela autenticação e gerenciamento de contas dos usuários.
 - **Google Fit API:** Fornece dados relacionados à atividade física e saúde do usuário.
 - **Google Speech-to-Text:** Realiza a conversão de comandos de voz em texto para utilização nos recursos do sistema.
-- **Gemini API:** Disponibiliza os modelos de Inteligência Artificial utilizados pelo Serviço de IA.
+- **Gemini API:** Disponibiliza os modelos de Inteligência Artificial para análise emocional e funcionamento do chatbot.
 - **Stripe API:** Responsável pelo processamento de pagamentos e assinaturas premium.
 - **Firebase Cloud Messaging:** Utilizado para envio de notificações push, lembretes e mensagens motivacionais aos usuários.
 
@@ -63,16 +57,13 @@ O sistema utiliza serviços externos especializados para ampliar suas funcionali
 - Para funcionalidades específicas, o Backend utiliza serviços externos, como autenticação, IA generativa, notificações, pagamentos e coleta de dados físicos.
 - Os resultados são retornados ao Aplicativo Mobile e apresentados ao usuário.
 
----
-
 ## 3. DIAGRAMA DE CONTAINERS C4
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
 
-<img width="1529" height="1039" alt="Diagrama de containers" src="https://github.com/user-attachments/assets/ae6097bb-7ea1-40d1-8190-efa964f1870c" />
-
 <div align="center">
-  <p><i>[ Figura: Diagrama de Containers do Aplicativo SlowDown ]</i></p>
+  <img width="1529" height="1039" alt="Diagrama de containers" src="https://github.com/user-attachments/assets/ae6097bb-7ea1-40d1-8190-efa964f1870c" />
+  <p><i><b>Figura 1:</b> Diagrama de Containers do Aplicativo SlowDown.</i></p>
 </div>
 
 **Legenda:**
