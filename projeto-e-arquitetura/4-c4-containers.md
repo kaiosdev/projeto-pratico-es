@@ -9,7 +9,7 @@
 
 | Campo | Informação |
 |:---|:---|
-| **Responsáveis** | Marcos Oliveira |
+| **Responsável** | Marcos Oliveira |
 | **Projeto** | SlowDown |
 | **Nível C4** | Containers (Nível 2) |
 | **Status da Entrega** | Concluído |
@@ -29,25 +29,35 @@ Neste nível da modelagem C4, "abrimos" o sistema central do **SlowDown** (apres
 O sistema SlowDown é composto por três contêineres principais, estruturados de acordo com o padrão arquitetural MVC:
 
 ### 📱 1. Aplicativo Mobile (View / Cliente)
-*   **Tecnologia:** Flutter (Dart).
-*   **Responsabilidade:** Fornecer a interface nativa com o usuário (Android). Gerencia o cache local de arquivos de áudio para o modo offline, captura interações (como o termômetro emocional) e renderiza a gamificação do Pet Virtual.
-*   **Comunicação:** Comunica-se diretamente com o hardware nativo (Google Fit API, Microfone) e realiza chamadas assíncronas para o Backend e Firebase.
+
+- **Tecnologia:** Flutter (Dart).
+- **Responsabilidade:** Fornecer a interface nativa com o usuário (Android). Gerencia o cache local de arquivos de áudio para o modo offline, captura interações (como o termômetro emocional) e renderiza a gamificação do Pet Virtual.
+- **Comunicação:** Comunica-se diretamente com o hardware nativo (Google Fit API, Microfone) e realiza chamadas assíncronas para o Backend e Firebase.
 
 ### ⚙️ 2. API REST Backend (Controller)
-*   **Tecnologia:** Node.js com Express.
-*   **Responsabilidade:** Atuar como o núcleo lógico do sistema. Valida sessões, executa o motor de cálculo do Índice de Estresse, distribui pontos de experiência (XP) e processa os comandos de voz e texto.
-*   **Comunicação:** Recebe requisições HTTP/JSON do aplicativo, coordena integrações externas (Gemini API, Stripe) e lê/escreve informações na camada de persistência.
+
+- **Tecnologia:** Node.js com Express.
+- **Responsabilidade:** Atuar como o núcleo lógico do sistema. Valida sessões, executa o motor de cálculo do Índice de Estresse, distribui pontos de experiência (XP) e processa os comandos de voz e texto.
+- **Comunicação:** Recebe requisições HTTP/JSON do aplicativo, coordena integrações externas (Gemini API, Stripe) e lê/escreve informações na camada de persistência.
 
 ### 🗄️ 3. Banco de Dados Relacional (Model)
-*   **Tecnologia:** MySQL.
-*   **Responsabilidade:** Armazenar de forma estruturada e durável as informações críticas do sistema, incluindo perfis de usuários, registros históricos de saúde mental, inventários do Pet Virtual e logs de missões diárias.
-*   **Comunicação:** Recebe conexões seguras (via TCP/IP) exclusivas do contêiner da API REST Backend.
+
+- **Tecnologia:** MySQL.
+- **Responsabilidade:** Armazenar de forma estruturada e durável as informações críticas do sistema, incluindo perfis de usuários, registros históricos de saúde mental, inventários do Pet Virtual e logs de missões diárias.
+- **Comunicação:** Recebe conexões seguras (via TCP/IP) exclusivas do contêiner da API REST Backend.
 
 ---
 
 ## 3. DIAGRAMA DE CONTAINERS C4
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
+
+<img width="1813" height="1052" alt="container" src="https://github.com/user-attachments/assets/c38bbd91-6348-441a-9c29-f9dd456b56e1" />
+
+<!-- A equipe de design inserirá a imagem final do diagrama aqui -->
+<div align="center">
+  <p><i>[ ⚠️ Imagem do Diagrama C4 Nível 2 será inserida aqui pelos Arquitetos ]</i></p>
+</div>
 
 **Legenda:**
 
