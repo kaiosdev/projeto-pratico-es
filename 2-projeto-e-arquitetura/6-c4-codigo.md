@@ -319,7 +319,7 @@ Quando necessário, o sistema pode exibir recursos de apoio imediato.
 
 🎧 12. MEDITAÇÃO 
 
-Composto pelas classes:
+O módulo de conteúdo é composto pelas classes:
 
 - "Meditacao"
 - "Locutor"
