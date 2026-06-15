@@ -37,8 +37,8 @@ O sistema SlowDown é composto por três contêineres principais, organizados de
 ### ⚙️ 2. API REST Backend (Controller)
 
 - **Tecnologia:** Node.js com Express.
-- **Responsabilidade:** Centralizar as regras de negócio do sistema. Gerencia autenticação, perfis de usuários, cálculo do Índice de Estresse, gamificação, missões diárias, histórico emocional e processamento das informações recebidas pelo aplicativo.
-- **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Google Fit API para obtenção de dados físicos, ao Stripe API para processamento de pagamentos e comunica-se com o Serviço de IA para funcionalidades inteligentes.
+- **Responsabilidade:** Centralizar as regras de negócio do sistema. Gerencia autenticação, perfis de usuários, cálculo do Índice de Estresse, gamificação, missões diárias, histórico emocional, funcionamento do chatbot, processamento das informações recebidas pelo aplicativo e integração com serviços externos.
+- **Comunicação:** Recebe requisições HTTP/JSON do Aplicativo Mobile, realiza operações de leitura e escrita no Banco de Dados, integra-se ao Firebase Authentication para gerenciamento de usuários, ao Stripe API para processamento de pagamentos e comunica-se com Gemini API para funcionalidades inteligentes.
 
 ### 🗄️ 3. Banco de Dados Relacional
 
@@ -53,6 +53,15 @@ O sistema utiliza serviços externos especializados para ampliar suas funcionali
 - **Google Speech-to-Text:** Realiza a conversão de comandos de voz em texto para utilização nos recursos do sistema.
 - **Gemini API:** Disponibiliza os modelos de Inteligência Artificial utilizados pelo Serviço de IA.
 - **Stripe API:** Responsável pelo processamento de pagamentos e assinaturas premium.
+- **Firebase Cloud Messaging:** Utilizado para envio de notificações push, lembretes e mensagens motivacionais aos usuários.
+
+### 🔄 Fluxo Geral de Funcionamento
+
+- O usuário interage com o Aplicativo Mobile.
+- O aplicativo envia requisições para a API Backend utilizando HTTPS/JSON.
+- A API Backend processa as regras de negócio e consulta o Banco de Dados quando necessário.
+- Para funcionalidades específicas, o Backend utiliza serviços externos, como autenticação, IA generativa, notificações, pagamentos e coleta de dados físicos.
+- Os resultados são retornados ao Aplicativo Mobile e apresentados ao usuário.
 
 ---
 
@@ -60,7 +69,7 @@ O sistema utiliza serviços externos especializados para ampliar suas funcionali
 
 > O diagrama abaixo ilustra a estrutura interna de contêineres do SlowDown e o fluxo de dados com os serviços externos.
 
-<img width="1547" height="1051" alt="Diagrama sem nome drawio (1)" src="https://github.com/user-attachments/assets/ac093fe2-8252-4177-8d78-f7e353e2d3c6" />
+<img width="1529" height="1039" alt="Diagrama de containers" src="https://github.com/user-attachments/assets/ae6097bb-7ea1-40d1-8190-efa964f1870c" />
 
 <div align="center">
   <p><i>[ Figura: Diagrama de Containers do Aplicativo SlowDown ]</i></p>
