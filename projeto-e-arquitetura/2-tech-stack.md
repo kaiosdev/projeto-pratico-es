@@ -39,7 +39,7 @@ Por fim, a fundação do ciclo de vida do desenvolvimento é sustentada pelo **G
 ## 2. Mapa Visual da Tech Stack
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/61ae2515-78d9-4cab-bc67-29b56954f4e3" />" 
+  <img src="https://github.com/user-attachments/assets/61ae2515-78d9-4cab-bc67-29b56954f4e3" />
   <p><i><b>Figura 1:</b> Organização visual das tecnologias do Slow Down por propósito e camadas.</i></p>
 </div>
 
