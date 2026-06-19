@@ -4,8 +4,8 @@
 
 *Engenharia de Software A · ICET/UFAM*
 
-![Fase](https://img.shields.io/badge/Fase-Inspeção_TP3-4a90d9?style=for-the-badge&logo=github&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Concluído-2e7d32?style=for-the-badge)
+![Fase](https://img.shields.io/badge/Fase-Inspeção-4a90d9?style=for-the-badge&logo=github&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Em_Andamento-ff9800?style=for-the-badge)
 
 </div>
 
@@ -13,7 +13,21 @@
 
 Este documento detalha o processo de **Correção dos Defeitos** identificados durante a inspeção de requisitos do Trabalho Prático III. O objetivo é apresentar as análises realizadas, os problemas encontrados e as soluções implementadas para aprimorar a qualidade e a clareza das *User Stories* (US) do backlog do projeto.
 
-> **Nota de Classificação:** As validações aplicadas neste relatório filtraram os falsos positivos e utilizaram rigorosamente a taxonomia oficial de defeitos de software (Omissão, Ambiguidade, Inconsistência, Fato Incorreto e Informação Estranha).
+> **Nota de Classificação:** As validações aplicadas neste relatório filtraram os falsos positivos e utilizaram rigorosamente a taxonomia oficial de defeitos de software (Omissão, Ambiguidade, Inconsistência, Fato Incorreto e Informação Estranha). 
+> 
+> ⚠️ **Status do Relatório:** Este é um documento vivo e encontra-se **em andamento**. Atualmente, reflete as correções parciais aplicadas ao backlog (5 de 18 User Stories inspecionadas).
+
+### 1.1 Resumo Quantitativo (Parcial)
+
+Até o presente momento da inspeção, as métricas de correção de defeitos para as **5 Histórias de Usuário** avaliadas são:
+
+- **Total de Apontamentos Listados:** 15
+- **🟢 Defeitos Corrigidos:** 13
+- **🔴 Apontamentos Desconsiderados (Falsos Positivos):** 2
+
+*(Estes números serão progressivamente atualizados à medida que as demais US forem inspecionadas e inseridas neste relatório).*
+
+---
 
 ## 2. Detalhamento das Correções Implementadas
 
