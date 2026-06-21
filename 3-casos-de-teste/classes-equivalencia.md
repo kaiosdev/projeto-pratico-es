@@ -27,6 +27,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Locutor | Locutor do catálogo selecionado (4) | Nenhum locutor selecionado (5) | — |
 | Tipo de Assinatura | Usuário com plano Premium ativo (6) | Usuário com plano Gratuito (7) | Conta não autenticada (8) |
 
+Classes de Equivalência da US-01.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 4, 6 | Duração: 10; Locutor: Voz Serenidade; Plano: Premium | Sessão iniciada com sucesso |
@@ -34,6 +36,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **Caso 3** | 3, 4, 6 | Duração: Nulo; Locutor: Voz Serenidade; Plano: Premium | Sistema impede início por campo obrigatório ausente |
 | **Caso 4** | 1, 5, 6 | Duração: 10; Locutor: Nulo; Plano: Premium | Sistema solicita seleção obrigatória do locutor |
 | **Caso 5** | 1, 4, 7 | Duração: 10; Locutor: Voz Serenidade; Plano: Gratuito | Sistema bloqueia acesso e exibe tela de assinatura |
+
+Casos de Teste da US-01.
 
 ---
 
@@ -44,11 +48,15 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Espaço no Celular | Espaço livre $\ge$ tamanho do arquivo (1) | Espaço livre < tamanho do arquivo (2) | — |
 | Conexão | Conectado à Internet (3) | Sem conexão / Modo Avião (4) | — |
 
+Classes de Equivalência da US-02.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 3 | Arquivo: 50MB; Espaço: 2000MB; Rede: Conectada | Download autorizado e playlist salva na seção Offline |
 | **Caso 2** | 2, 3 | Arquivo: 50MB; Espaço: 10MB; Rede: Conectada | Download bloqueado e sistema alerta espaço insuficiente |
 | **Caso 3** | 1, 4 | Arquivo: 50MB; Espaço: 2000MB; Rede: Offline | Sistema bloqueia tentativa e solicita conexão |
+
+Casos de Teste da US-02.
 
 ---
 
@@ -60,6 +68,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Nome do Pet | Texto entre 1 e 20 caracteres (3) | Campo vazio (4) | Texto com mais de 20 caracteres (5) |
 | Felicidade | Login em 48 horas ou menos (6) | Inatividade superior a 48 horas (7) | — |
 
+Classes de Equivalência da US-03.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 3, 6 | Tempo: 8 dias; Nome: Buddy; Inatividade: 24h | Nome alterado com sucesso e felicidade mantida |
@@ -67,6 +77,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **Caso 3** | 1, 4, 6 | Tempo: 8 dias; Nome: Vazio; Inatividade: 24h | Sistema impede salvamento por campo em branco |
 | **Caso 4** | 1, 5, 6 | Tempo: 8 dias; Nome: TextoLongo...; Inatividade: 24h | Sistema impede salvamento por limite de caracteres |
 | **Caso 5** | 1, 3, 7 | Tempo: 8 dias; Nome: Buddy; Inatividade: 50h | Nome alterado, mas Pet perde 1 nível de felicidade |
+
+Casos de Teste da US-03.
 
 ---
 
@@ -76,6 +88,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | :--- | :--- | :--- | :--- |
 | Frequência Cardíaca | Normal: Entre 40 e 100 BPM (1) | Abaixo de 40 BPM (Bradicardia) (2) | Acima de 100 BPM (Taquicardia) (3) |
 | Tempo de Atualização| Tempo aceitável (ex: 10s) (4) | Muito curto (ex: 2s) (5) | Muito longo (ex: 90s) (6) |
+
+Classes de Equivalência da US-04.
 
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
@@ -87,6 +101,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **EXTRA05** | 1, 5 | BPM: 60; Intervalo: 2s | Rejeitado (Intervalo muito curto) |
 | **EXTRA06** | 1, 6 | BPM: 60; Intervalo: 90s | Rejeitado (Intervalo muito longo) |
 
+Casos de Teste da US-04.
+
 ---
 
 ### US-05 — Navegação por Comandos de Voz
@@ -96,12 +112,16 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Comando de Voz | Comando básico mapeado (ex: "abrir") (1) | Comando não mapeado/inexistente (2) | Áudio ininteligível ou silêncio (3) |
 | Permissão do Mic | Concedida (4) | Negada (5) | — |
 
+Classes de Equivalência da US-05.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 4 | Comando: "abrir meditação"; Mic: Permitido | Toca som de confirmação e abre a tela solicitada |
 | **Caso 2** | 2, 4 | Comando: "fritar batata"; Mic: Permitido | Não reconhece e avisa que o comando é inválido |
 | **Caso 3** | 3, 4 | Comando: [Ruído]; Mic: Permitido | Sistema pede para o usuário repetir a frase |
 | **Caso 4** | 1, 5 | Comando: "abrir meditação"; Mic: Negado | Bloqueia tentativa e solicita liberação do microfone |
+
+Casos de Teste da US-05.
 
 ---
 
@@ -114,6 +134,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Registro Diário | Primeiro registro do dia (7) | Registro existente atualizado na mesma data (8) | Tentativa de criar mais de um registro na mesma data (9) |
 | Horário da Notificação | Horário válido (padrão ou configurado) (10) | Horário inexistente (11) | Formato de horário inválido (12) |
 | Sincronização dos Dados | Usuário Comum ou Premium com sincronização válida (13) | Usuário Premium sem conexão (14) | Falha na sincronização por dados inconsistentes (15) |
+
+Classes de Equivalência da US-06.
 
 | Caso | Classes | Entradas | Resultado Esperado |
 | ---- | -------- | --------- | ------------------ |
@@ -129,6 +151,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | 10 | 1,4,7,10,14 | Usuário Premium realiza registro sem conexão com a internet | Registro salvo localmente e sincronização adiada |
 | 11 | 1,4,7,10,15 | Usuário Premium realiza registro com falha de sincronização causada por dados inconsistentes | Registro salvo localmente e sincronização rejeitada com registro de erro |
 
+Casos de Teste da US-06.
+
 ---
 
 ### US-07 — Termômetro Emocional com Insights
@@ -140,6 +164,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Tipo de usuário para acesso aos insights | Usuário Premium acessando insights avançados (7) | Usuário gratuito tentando acessar insights avançados (8) | Usuário sem identificação válida de plano (9) |
 | Filtro do gráfico de evolução emocional | Filtro por semana ou mês (10) | Filtro inexistente (11) | Filtro não suportado pelo sistema (12) |
 | Origem dos dados para geração dos insights | Dados registrados no próprio aplicativo (13) | Dados provenientes exclusivamente de terceiros (14) | Dados mistos contendo fontes externas não permitidas (15) |
+
+Classes de Equivalência da US-07.
 
 | Caso | Classes | Entradas | Resultado Esperado |
 | ---- | -------- | --------- | ------------------ |
@@ -155,6 +181,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | 10 | 1,4,7,10,14 | Sistema recebe apenas dados provenientes de terceiros para geração dos insights | Sistema desconsidera os dados externos e não gera insights com essas informações |
 | 11 | 1,4,7,10,15 | Sistema recebe dados do aplicativo misturados com fontes externas não permitidas | Sistema desconsidera os dados externos e gera os insights apenas com os dados válidos do aplicativo, ou bloqueia a geração caso não seja possível separar as fontes |
 
+Casos de Teste da US-07.
+
 ---
 
 ### US-08 — Chatbot Interativo com Incentivo Personalizado
@@ -166,6 +194,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Indicadores de Crise | Nenhum indicador de crise presente na mensagem ou no histórico do usuário (7) | Presença de ao menos uma palavra-chave de crise aguda conforme lista clínica (8) | Histórico do termômetro emocional registra incapacidade de atividades básicas por mais de 7 dias consecutivos (9) |
 | Acesso ao Histórico | Usuário autenticado acessa o próprio histórico de conversas (10) | Usuário não autenticado tenta acessar o histórico (11) | Usuário autenticado tenta acessar o histórico de outro usuário (12) |
 | Conteúdo Sensível sem Crise Aguda | Relato de tristeza intensa sem indicadores de crise (ex.: "Estou muito triste, sem conseguir sair da cama") (13) | Relato de abuso físico, emocional ou sexual em curso (14) | Manifestação de crise de pânico ou dissociação em tempo real (15) |
+
+Classes de Equivalência da US-08.
 
 | Caso | Classes | Entradas | Resultado Esperado |
 | ---- | ------- | -------- | ------------------ |
@@ -179,7 +209,9 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | 8 | 1,4,7,11,13 | Usuário não autenticado tenta acessar o histórico; estilo "bíblico" configurado na sessão; mensagem válida sobre bem-estar digitada; nenhum indicador de crise; conteúdo sensível sem crise aguda ausente | Acesso ao histórico negado; sistema redireciona para tela de autenticação; nenhum dado de conversa é exibido |
 | 9 | 1,4,7,12,13 | Usuário autenticado (Usuário A) tenta acessar o histórico do Usuário B; estilo "psicológico" selecionado; mensagem válida sobre bem-estar enviada; nenhum indicador de crise; conteúdo sensível sem crise aguda ausente | Acesso negado; sistema retorna erro de permissão; nenhum dado do Usuário B é exibido ou compartilhado |
 | 10 | 1,4,7,10,14 | Usuário autenticado acessa o próprio histórico; estilo "bíblico" selecionado; envia mensagem relatando abuso físico em curso; nenhum indicador adicional de crise aguda presente | Protocolo de encaminhamento acionado: fluxo interrompido, mensagem de acolhimento exibida, telefone CVV e profissional indicados; estilo substituído temporariamente pelo protocolo clínico; evento registrado com alerta no histórico |
-| 11 | 1,4,7,10,15 | Usuário autenticado acessa o próprio histórico; estilo "psicológico" selecionado; envia mensagem manifestando crise de pânico em tempo real; nenhum indicador adicional de crise aguda presente | Protocolo de encaminhamento acionado: fluxo interrompido, mensagem de acolhimento exibida, telefone CVV e profissional indicados; estilo substituído temporariamente pelo protocolo clínico; evento registrado com alerta no histórico |
+| 11 | 1,4,7,10,15 | Usuário autenticado acessa o próprio histórico; estilo "psicológico" selecionado; envia manifestando crise de pânico em tempo real; nenhum indicador adicional de crise aguda presente | Protocolo de encaminhamento acionado: fluxo interrompido, mensagem de acolhimento exibida, telefone CVV e profissional indicados; estilo substituído temporariamente pelo protocolo clínico; evento registrado com alerta no histórico |
+
+Casos de Teste da US-08.
 
 ---
 
@@ -193,19 +225,23 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Elementos Competitivos | Mini game sem pontuação competitiva, ranking ou elementos de pressão de desempenho (10) | Mini game exibindo pontuação competitiva ou ranking (11) | Mini game exibindo elementos que geram pressão de desempenho no usuário (12) |
 | Acessibilidade do Mini Game | Mini game funcionando sem conexão à internet e sem áudio obrigatório (13) | Mini game exigindo conexão à internet para funcionar (14) | Mini game exigindo áudio obrigatório, impedindo uso no modo silencioso (15) |
 
+Classes de Equivalência da US-09.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 | ---- | ------- | -------- | ------------------ |
-| 1 | 1,4,7,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo exibido; dispositivo em modo silencioso e sem conexão à internet | Mini game executado com sucesso; sessão encerrada normalmente ao fim do tempo; nenhuma pontuação ou ranking exibido; funcionamento pleno sem áudio e sem internet |
-| 2 | 2,4,7,10,13 | Usuário free acessa o mini game dentro da janela de 24 horas (primeira sessão do dia); sessão encerrada em 4 minutos; mini game utiliza toque e segurar sem combinação simultânea; nenhum elemento competitivo exibido; dispositivo em modo silencioso e sem conexão à internet | Mini game executado com sucesso; sessão diária consumida; acesso bloqueado até a próxima janela de 24 horas; funcionamento pleno sem áudio e sem internet |
-| 3 | 3,4,7,10,13 | Usuário free tenta acessar mini game com sessão diária já encerrada; mini game utilizaria toque e arrastar; nenhum elemento competitivo; dispositivo em modo silencioso e sem conexão à internet | Acesso bloqueado; app exibe mensagem informando o tempo restante para liberação e oferece opção de upgrade para premium |
-| 4 | 1,5,7,10,13 | Usuário premium acessa um mini game; usuário encerra a sessão antes de 2 minutos sem penalidade; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Saída imediata permitida sem penalidade; sessão encerrada normalmente; nenhum bloqueio ou punição aplicada ao usuário |
-| 5 | 1,6,7,10,13 | Usuário premium acessa um mini game; sessão atinge 5 minutos sem encerramento automático pelo sistema; mini game utiliza toque e segurar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Sistema aciona encerramento automático ao atingir o limite de 5 minutos; sessão finalizada independentemente da ação do usuário |
-| 6 | 1,4,8,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque, arrastar e segurar (3 tipos de interação); nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica uso de mais de 2 tipos de interação e impede a disponibilização do mini game |
-| 7 | 1,4,9,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game exige toque e arrastar de forma simultânea e combinada; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica combinação simultânea de comandos e impede a disponibilização do mini game |
-| 8 | 1,4,7,11,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; mini game exibe pontuação competitiva e ranking entre usuários; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica presença de pontuação competitiva e ranking, vetando sua disponibilização |
-| 9 | 1,4,7,12,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; mini game exibe elementos que geram pressão de desempenho no usuário; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica elementos de pressão de desempenho e impede sua disponibilização |
-| 10 | 1,4,7,10,14 | Usuário premium tenta acessar um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo sem conexão à internet e mini game exige internet para funcionar | Mini game não carrega; sistema exibe mensagem informando que o mini game não está disponível sem conexão; funcionalidade bloqueada |
-| 11 | 1,4,7,10,15 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e mini game exige áudio obrigatório para funcionar | Mini game rejeitado do catálogo; sistema identifica dependência de áudio obrigatório, vetando sua disponibilização por impedir uso no modo silencioso |
+| Caso 1 | 1,4,7,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo exibido; dispositivo em modo silencioso e sem conexão à internet | Mini game executado com sucesso; sessão encerrada normalmente ao fim do tempo; nenhuma pontuação ou ranking exibido; funcionamento pleno sem áudio e sem internet |
+| Caso 2 | 2,4,7,10,13 | Usuário free acessa o mini game dentro da janela de 24 horas (primeira sessão do dia); sessão encerrada em 4 minutos; mini game utiliza toque e segurar sem combinação simultânea; nenhum elemento competitivo exibido; dispositivo em modo silencioso e sem conexão à internet | Mini game executado com sucesso; sessão diária consumida; acesso bloqueado até a próxima janela de 24 horas; funcionamento pleno sem áudio e sem internet |
+| Caso 3 | 3,4,7,10,13 | Usuário free tenta acessar mini game com sessão diária já encerrada; mini game utilizaria toque e arrastar; nenhum elemento competitivo; dispositivo em modo silencioso e sem conexão à internet | Acesso bloqueado; app exibe mensagem informando o tempo restante para liberação e oferece opção de upgrade para premium |
+| Caso 4 | 1,5,7,10,13 | Usuário premium acessa um mini game; usuário encerra a sessão antes de 2 minutos sem penalidade; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Saída imediata permitida sem penalidade; sessão encerrada normalmente; nenhum bloqueio ou punição aplicada ao usuário |
+| Caso 5 | 1,6,7,10,13 | Usuário premium acessa um mini game; sessão atinge 5 minutos sem encerramento automático pelo sistema; mini game utiliza toque e segurar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Sistema aciona encerramento automático ao atingir o limite de 5 minutos; sessão finalizada independentemente da ação do usuário |
+| Caso 6 | 1,4,8,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque, arrastar e segurar (3 tipos de interação); nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica uso de mais de 2 tipos de interação e impede a disponibilização do mini game |
+| Caso 7 | 1,4,9,10,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game exige toque e arrastar de forma simultânea e combinada; nenhum elemento competitivo; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica combinação simultânea de comandos e impede a disponibilização do mini game |
+| Caso 8 | 1,4,7,11,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; mini game exibe pontuação competitiva e ranking entre usuários; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica presença de pontuação competitiva e ranking, vetando sua disponibilização |
+| Caso 9 | 1,4,7,12,13 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; mini game exibe elementos que geram pressão de desempenho no usuário; dispositivo em modo silencioso e sem internet | Mini game rejeitado do catálogo; sistema identifica elementos de pressão de desempenho e impede sua disponibilização |
+| Caso 10 | 1,4,7,10,14 | Usuário premium tenta acessar um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo sem conexão à internet e mini game exige internet para funcionar | Mini game não carrega; sistema exibe mensagem informando que o mini game não está disponível sem conexão; funcionalidade bloqueada |
+| Caso 11 | 1,4,7,10,15 | Usuário premium acessa um mini game; sessão encerrada em 3 minutos; mini game utiliza toque e arrastar sem combinação simultânea; nenhum elemento competitivo; dispositivo em modo silencioso e mini game exige áudio obrigatório para funcionar | Mini game rejeitado do catálogo; sistema identifica dependência de áudio obrigatório, vetando sua disponibilização por impedir uso no modo silencioso |
+
+Casos de Teste da US-09.
 
 ---
 
@@ -218,6 +254,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Quantidade de Registros no Período | 3 ou mais registros emocionais no período selecionado (7) | 1 ou 2 registros emocionais no período selecionado (8) | Nenhum registro emocional no período selecionado (9) |
 | Valor do Registro no Termômetro | Registro com valor entre 1 e 7 na escala do termômetro (sem pico de estresse) (10) | Registro com valor igual ou superior a 8 na escala do termômetro (pico de estresse) (11) | Registro com valor fora da escala definida pelo termômetro (ex.: 0 ou 11) (12) |
 | Exportação de Relatório em PDF | Usuário premium solicita exportação do relatório do período selecionado em PDF (13) | Usuário free tenta exportar o relatório em PDF (14) | Usuário premium tenta exportar relatório sem nenhum registro no período (15) |
+
+Classes de Equivalência da US-10.
 
 | Caso | Classes | Entradas | Resultado Esperado |
 | ---- | ------- | -------- | ------------------ |
@@ -233,6 +271,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | 10 | 1,4,7,10,14 | Usuário free autenticado; seleciona filtro de 7 dias; período contém 4 registros com valores entre 1 e 7; tenta exportar relatório em PDF | Exportação em PDF bloqueada; sistema exibe opção com cadeado e, ao ser acionada, apresenta tela de convite para upgrade ao plano premium |
 | 11 | 1,4,7,10,15 | Usuário premium autenticado; seleciona filtro de 7 dias; nenhum registro emocional no período; tenta exportar relatório em PDF | Exportação em PDF indisponível; app exibe mensagem informando que não há registros no período selecionado para gerar o arquivo |
 
+Casos de Teste da US-10.
+
 ---
 
 ### US-11 — Perfil de Apoiador
@@ -245,18 +285,22 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Conteúdo da Mensagem | Entre 1 e 500 caracteres (10) | Mensagem vazia (11) | Acima de 500 caracteres (12) |
 | Limite de Apoiadores | Até 5 ativos (13) | — | 6º apoiador (14) |
 
+Classes de Equivalência da US-11.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 |---|---|---|---|
 | 1 | 1,4,7,10,13 | Convite válido, aceito, permissão definida, mensagem de 50 caracteres, 3º apoiador | Vínculo criado e mensagem enviada com sucesso |
-| 2 | 2,4,7,10,13 | E-mail digitado de forma inválida no convite | Sistema rejeita o envio do convite |
-| 3 | 3,4,7,10,13 | Link de convite utilizado após 24 horas | Convite rejeitado por expiração |
-| 4 | 1,5,7,10,13 | Convite enviado, convidado ainda não respondeu | Nenhum dado é compartilhado |
-| 5 | 1,6,7,10,13 | Convite enviado, convidado recusa o vínculo | Vínculo não estabelecido |
-| 6 | 1,4,8,10,13 | Vínculo aceito, mas sem nível de permissão definido | Sistema bloqueia o compartilhamento |
-| 7 | 1,4,9,10,13 | Vínculo ativo, usuário remove o apoiador | Compartilhamento interrompido imediatamente |
-| 8 | 1,4,7,11,13 | Vínculo ativo, mensagem de encorajamento vazia | Mensagem não enviada |
-| 9 | 1,4,7,12,13 | Vínculo ativo, mensagem com 600 caracteres | Mensagem rejeitada |
-| 10 | 1,4,7,10,14 | Usuário tenta vincular o 6º apoiador | Sistema rejeita (limite de 5 atingido) |
+| 2 | **2**,4,7,10,13 | E-mail digitado de forma inválida no convite | Sistema rejeita o envio do convite |
+| 3 | **3**,4,7,10,13 | Link de convite utilizado após 24 horas | Convite rejeitado por expiração |
+| 4 | 1,**5**,7,10,13 | Convite enviado, convidado ainda não respondeu | Nenhum dado é compartilhado |
+| 5 | 1,**6**,7,10,13 | Convite enviado, convidado recusa o vínculo | Vínculo não estabelecido |
+| 6 | 1,4,**8**,10,13 | Vínculo aceito, mas sem nível de permissão definido | Sistema bloqueia o compartilhamento |
+| 7 | 1,4,**9**,10,13 | Vínculo ativo, usuário remove o apoiador | Compartilhamento interrompido imediatamente |
+| 8 | 1,4,7,**11**,13 | Vínculo ativo, mensagem de encorajamento vazia | Mensagem não enviada |
+| 9 | 1,4,7,**12**,13 | Vínculo ativo, mensagem com 600 caracteres | Mensagem rejeitada |
+| 10 | 1,4,7,10,**14** | Usuário tenta vincular o 6º apoiador | Sistema rejeita (limite de 5 atingido) |
+
+Casos de Teste da US-11.
 
 ---
 
@@ -271,17 +315,21 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Cadastro do Emblema | Cadastro completo (11) | — | Cadastro incompleto (12) |
 | Compatibilidade do Plano | Plano compatível (13) | — | Plano incompatível (14) |
 
+Classes de Equivalência da US-12.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 |---|---|---|---|
 | 1 | 1,4,7,9,11,13 | Usuário autenticado conclui meta de emblema compatível com seu plano | Emblema desbloqueado com sucesso |
-| 2 | 2,4,7,9,11,13 | Usuário não autenticado tenta acessar emblemas | Operação negada |
-| 3 | 3,4,7,9,11,13 | Sessão expirada durante consulta de emblemas | Sistema solicita novo login |
-| 4 | 1,5,7,9,11,13 | Meta ainda não concluída | Emblema não concedido |
-| 5 | 1,6,7,9,11,13 | Meta marcada como inválida no sistema | Emblema não concedido, erro registrado |
-| 6 | 1,4,8,9,11,13 | Emblema referenciado não existe na base de dados | Operação rejeitada (erro: não encontrado) |
-| 7 | 1,4,7,10,11,13 | Emblema já conquistado anteriormente | Sistema não concede novamente |
-| 8 | 1,4,7,9,12,13 | Emblema cadastrado sem nome ou descrição | Emblema não exibido, erro reportado |
-| 9 | 1,4,7,9,11,14 | Usuário gratuito tenta desbloquear emblema exclusivo premium | Cadeado exibido, meta oculta |
+| 2 | **2**,4,7,9,11,13 | Usuário não autenticado tenta acessar emblemas | Operação negada |
+| 3 | **3**,4,7,9,11,13 | Sessão expirada durante consulta de emblemas | Sistema solicita novo login |
+| 4 | 1,**5**,7,9,11,13 | Meta ainda não concluída | Emblema não concedido |
+| 5 | 1,**6**,7,9,11,13 | Meta marcada como inválida no sistema | Emblema não concedido, erro registrado |
+| 6 | 1,4,**8**,9,11,13 | Emblema referenciado não existe na base de dados | Operação rejeitada (erro: não encontrado) |
+| 7 | 1,4,7,**10**,11,13 | Emblema já conquistado anteriormente | Sistema não concede novamente |
+| 8 | 1,4,7,9,**12**,13 | Emblema cadastrado sem nome ou descrição | Emblema não exibido, erro reportado |
+| 9 | 1,4,7,9,11,**14** | Usuário gratuito tenta desbloquear emblema exclusivo premium | Cadeado exibido, meta oculta |
+
+Casos de Teste da US-12.
 
 ---
 
@@ -295,16 +343,20 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Faixa de XP | Atinge o XP mínimo — 100, 250 ou 500 (8) | Abaixo do mínimo — ex: 40, 90 XP (9) | Acima do nível máximo — acima de 500 (10) |
 | Limite de Missões Diárias | Até 3 concluídas no dia (11) | — | 4ª missão no mesmo dia (12) |
 
+Classes de Equivalência da US-13.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 |---|---|---|---|
 | 1 | 1,3,6,8,11 | Missão existente, primeira conclusão do dia, conta válida, XP chega a 100, dentro do limite | Pet evolui para o nível 2, 10 XP concedidos |
-| 2 | 2,3,6,8,11 | Usuário tenta concluir missão que não existe mais no sistema | Operação rejeitada |
-| 3 | 1,4,6,8,11 | Missão já concluída hoje, tentativa de repetir | XP não concedido |
-| 4 | 1,5,6,8,11 | Missão expirada após renovação diária | Missão não pode ser concluída |
-| 5 | 1,3,7,8,11 | Usuário com conta inválida tenta concluir missão | Acesso negado |
-| 6 | 1,3,6,9,11 | Usuário acumula 40 XP (abaixo do próximo marco de 100) | Pet não evolui, permanece no nível atual |
-| 7 | 1,3,6,10,11 | Usuário acumula 520 XP (acima de 500) | Nenhuma evolução adicional, XP continua acumulando |
-| 8 | 1,3,6,8,12 | Usuário gratuito tenta concluir a 4ª missão do dia (já completou 3) | Sistema bloqueia, exibe aviso de limite diário atingido |
+| 2 | **2**,3,6,8,11 | Usuário tenta concluir missão que não existe mais no sistema | Operação rejeitada |
+| 3 | 1,**4**,6,8,11 | Missão já concluída hoje, tentativa de repetir | XP não concedido |
+| 4 | 1,**5**,6,8,11 | Missão expirada após renovação diária | Missão não pode ser concluída |
+| 5 | 1,3,**7**,8,11 | Usuário com conta inválida tenta concluir missão | Acesso negado |
+| 6 | 1,3,6,**9**,11 | Usuário acumula 40 XP (abaixo do próximo marco de 100) | Pet não evolui, permanece no nível atual |
+| 7 | 1,3,6,**10**,11 | Usuário acumula 520 XP (acima de 500) | Nenhuma evolução adicional, XP continua acumulando |
+| 8 | 1,3,6,8,**12** | Usuário gratuito tenta concluir a 4ª missão do dia (já completou 3) | Sistema bloqueia, exibe aviso de limite diário atingido |
+
+Casos de Teste da US-13.
 
 ---
 
@@ -316,15 +368,19 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Nome do Pet | Entre 1 e 20 caracteres (4) | Nome vazio (5) | Acima de 20 caracteres (6) |
 | Preferência de Orientação | Selecionado (7) | Não selecionado (8) | Valor inválido (9) |
 
+Classes de Equivalência da US-14.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 |---|---|---|---|
 | 1 | 1,4,7 | Primeiro acesso, nome válido, estilo de orientação selecionado | Onboarding concluído com sucesso, usuário direcionado à tela principal |
-| 2 | 2,4,7 | Segundo acesso ao app | Onboarding não é exibido |
-| 3 | 3,4,7 | Usuário inválido tenta iniciar onboarding | Acesso negado |
-| 4 | 1,5,7 | Primeiro acesso, nome do pet vazio | Finalização bloqueada |
-| 5 | 1,6,7 | Primeiro acesso, nome do pet acima de 20 caracteres | Finalização bloqueada |
-| 6 | 1,4,8 | Primeiro acesso, nome válido, estilo de orientação não selecionado | Finalização bloqueada |
-| 7 | 1,4,9 | Primeiro acesso, nome válido, valor inválido enviado para o estilo de orientação | Sistema rejeita e solicita nova seleção |
+| 2 | **2**,4,7 | Segundo acesso ao app | Onboarding não é exibido |
+| 3 | **3**,4,7 | Usuário inválido tenta iniciar onboarding | Acesso negado |
+| 4 | 1,**5**,7 | Primeiro acesso, nome do pet vazio | Finalização bloqueada |
+| 5 | 1,**6**,7 | Primeiro acesso, nome do pet acima de 20 caracteres | Finalização bloqueada |
+| 6 | 1,4,**8** | Primeiro acesso, nome válido, estilo de orientação não selecionado | Finalização bloqueada |
+| 7 | 1,4,**9** | Primeiro acesso, nome válido, valor inválido enviado para o estilo de orientação | Sistema rejeita e solicita nova seleção |
+
+Casos de Teste da US-14.
 
 ---
 
@@ -336,15 +392,19 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Validação do Horário | Formato HH:MM válido (4) | Horário inválido (5) | Horário duplicado (6) |
 | Status da Notificação | Ativada (7) | Desativada (8) | Configuração inconsistente (9) |
 
+Classes de Equivalência da US-15.
+
 | Caso | Classes | Entradas | Resultado Esperado |
 |---|---|---|---|
 | 1 | 1,4,7 | Permissão concedida, horário 23:00 válido, notificação ativada | Notificação enviada com sucesso |
-| 2 | 2,4,7 | Permissão negada pelo sistema operacional | Aviso exibido ao usuário, com atalho para configurações |
-| 3 | 3,4,7 | Permissão ainda não definida pelo usuário | Sistema solicita definição antes de configurar notificações |
-| 4 | 1,5,7 | Permissão concedida, horário configurado como "25:80" | Configuração rejeitada |
-| 5 | 1,6,7 | Permissão concedida, dois horários iguais cadastrados para o mesmo tipo de notificação | Cadastro rejeitado |
-| 6 | 1,4,8 | Permissão concedida, horário válido, notificação desativada pelo usuário | Nenhuma notificação enviada |
-| 7 | 1,4,9 | Permissão concedida, horário válido, configuração salva com dados inconsistentes | Sistema rejeita, mantém última configuração válida |
+| 2 | **2**,4,7 | Permissão negada pelo sistema operacional | Aviso exibido ao usuário, com atalho para configurações |
+| 3 | **3**,4,7 | Permissão ainda não definida pelo usuário | Sistema solicita definição antes de configurar notificações |
+| 4 | 1,**5**,7 | Permissão concedida, horário configurado como "25:80" | Configuração rejeitada |
+| 5 | 1,**6**,7 | Permissão concedida, dois horários iguais cadastrados para o mesmo tipo de notificação | Cadastro rejeitado |
+| 6 | 1,4,**8** | Permissão concedida, horário válido, notificação desativada pelo usuário | Nenhuma notificação enviada |
+| 7 | 1,4,**9** | Permissão concedida, horário válido, configuração salva com dados inconsistentes | Sistema rejeita, mantém última configuração válida |
+
+Casos de Teste da US-15.
 
 ---
 
@@ -355,6 +415,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Endereço de E-mail | Com @ e domínio correto (1) | E-mail sem @ (2) | E-mail sem domínio (ex: `.com`) (3) |
 | Criação da Senha | Letras, números e min. 6 chars (4) | Senha sem usar números (5) | Senha menor que 6 caracteres (6) |
 | Código Recebido | Código exato e não expirado (7) | Código expirado (passou 15m) (8) | Digitou código errado (9) |
+
+Classes de Equivalência da US-16.
 
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
@@ -367,6 +429,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **EXTRA03**| 1, 6, 7 | Senha: `Ab1` | Rejeitada (Senha com apenas 3 caracteres) |
 | **EXTRA05**| 1, 4, 9 | Digita "000000" em vez do número correto | Rejeitado (Código inválido) |
 
+Casos de Teste da US-16.
+
 ---
 
 ### US-17 — Assinatura e Comparativo de Planos
@@ -376,6 +440,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Status do Pagamento | Cartão aprovado com sucesso (1) | Cartão recusado / sem limite (2) | Pagamento em análise (3) |
 | Tempo de Vigência | Fez a compra agora ou já tem (4) | Já venceu (passou de 30 dias) (5) | Cancelou hoje (ainda tem dias sobrando) (6) |
 
+Classes de Equivalência da US-17.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 4 | Sistema do cartão retorna OK | Libera todas as funções e remove cadeados na hora |
@@ -383,6 +449,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **Caso 3** | 3, 4 | Sistema do cartão diz EM ANÁLISE | Deixa a conta gratuita até o dinheiro cair na conta |
 | **Caso 4** | 1, 6 | Assinou dia 01 e cancelou dia 15 | Exibe mensagem dizendo que continuará VIP até o dia 30, de graça |
 | **Caso 5** | 1, 5 | Passou o dia 30 e a pessoa cancelou antes | O app tira a conta VIP e devolve os cadeados nas funções |
+
+Casos de Teste da US-17.
 
 ---
 
@@ -394,12 +462,16 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Relógio de Fechar | Temporizador marcado 30 min (3) | Temporizador quebrado/negativo (4) | — |
 | Foco no Celular | App minimizado / Celular apagado (5) | Fechou o aplicativo totalmente (6) | — |
 
+Classes de Equivalência da US-18.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 3, 5 | Gratuito; Marca 30 min e apaga a tela | A música roda por meia hora e o app silencia sozinho para a pessoa dormir |
 | **Caso 2** | 2, 3, 5 | Gratuito tenta a 3ª música | Bloqueia a música e manda uma tela de assinatura |
 | **Caso 3** | 1, 4, 5 | Marca -10 minutos | Rejeita na hora e volta pro padrão |
 | **Caso 4** | 1, 3, 6 | Ouve 5 minutos e fecha o app removendo-o da memória | O áudio é cortado abruptamente na mesma hora |
+
+Casos de Teste da US-18.
 
 ---
 
@@ -411,6 +483,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | Onde vai clicar | Toca áudio que já está salvo (3) | Toca áudio que não baixou (4) | Tenta abrir a IA do Chatbot (5) |
 | Digitação de Dados | Preenche o Diário Emocional (6) | Tenta compartilhar link com amigo (7) | — |
 
+Classes de Equivalência da US-19.
+
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
 | **Caso 1** | 1, 3 | Sem rede; Clica na música que baixou em casa | Toca imediatamente |
@@ -418,6 +492,8 @@ Os testes foram construídos rigorosamente através da técnica de **Particionam
 | **Caso 3** | 1, 5 | Sem rede; Tenta conversar com o robô (IA) | Bloqueia a tela e avisa "Conecte-se para usar a Inteligência Artificial" |
 | **Caso 4** | 1, 6 | Sem rede; Escreve "estou triste" no diário | Salva na memória do celular e guarda |
 | **Caso 5** | 2, 6 | Wi-Fi retornou | O aplicativo pega o diário escondido e sobe automaticamente para o servidor central sem a pessoa precisar clicar |
+
+Casos de Teste da US-19.
 
 ---
 
