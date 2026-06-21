@@ -18,11 +18,11 @@ Este documento detalha o processo de **Execução dos Testes Automatizados** das
 
 Os testes executados tiveram resultado satisfatório, demonstrando que as regras de validação definidas nas classes de equivalência foram implementadas corretamente no sistema. O balanço geral da execução é:
 
-| Camada | Status da Execução | Qtd | Descrição |
-|:---|:---|:---:|:---|
-| 🧩 **Unitária** | 🟢 **Aprovados** | **46** | Casos de teste dos validadores (`validador_bpm`, `validador_registro_emocional`, `validador_auth`), cobrindo CT01–CT06 e casos complementares (EXTRA). |
-| 🖥️ **Integração** | 🟢 **Aprovados** | **16** | Testes de widget (`MonitorScreen`, `RegistroEmocionalScreen`, `RegisterScreen`), simulando a interação real do usuário com a interface. |
-| **TOTAL** | | **62** | *Geral de testes automatizados executados e validados neste documento.* |
+| Camada | Status da Execução | Qtd testes reais | Entradas no reporter | Descrição |
+|:---|:---|:---:|:---:|:---|
+| 🧩 **Unitária** | 🟢 **Aprovados** | **46** | 46 | Casos de teste dos validadores (`validador_bpm`, `validador_registro_emocional`, `validador_auth`), cobrindo CT01–CT06 e casos complementares (EXTRA). |
+| 🖥️ **Integração** | 🟢 **Aprovados** | **16** | 19 (inclui passes auxiliares de `pump`/`setUp`) | Testes de widget (`MonitorScreen`, `RegistroEmocionalScreen`, `RegisterScreen`), simulando a interação real do usuário com a interface. |
+| **TOTAL** | | **62** | | *Geral de testes automatizados executados e validados neste documento.* |
 
 > 📌 **Aviso de Cobertura:** Das três Histórias de Usuário priorizadas para automação (US #04, US #06 e US #16), todos os cenários planejados foram executados com sucesso, sem nenhum teste pendente (`skip`) restante no projeto.
 
@@ -43,7 +43,7 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 
 <blockquote>
   <h3>Status Geral da Execução — Testes de Integração (Widget Tests)</h3>
-  <p>A execução conjunta de <code>us04_monitor_screen_widget_test.dart</code>, <code>us06_registro_emocional_screen_widget_test.dart</code> e <code>us16_register_screen_widget_test.dart</code> via <code>flutter test --reporter expanded</code> apresentou o resultado <strong>"All tests passed!"</strong>, com os <strong>16 testes de integração aprovados (+16)</strong> e <strong>nenhum teste pendente (skip)</strong>. Os cenários validam o comportamento real da <code>MonitorScreen</code> (5 cenários: estado inicial, classificação de BPM, início/fim de monitoramento e exibição do histórico semanal), da <code>RegistroEmocionalScreen</code> (4 cenários: CT01–CT04, cobrindo seleção de emoji, escala, cor e o limite de 500 caracteres da nota) e da <code>RegisterScreen</code> (7 cenários: CT01–CT04 oficiais e EXTRA01–EXTRA03 complementares), confirmando que a interface reage corretamente às entradas do usuário nas três histórias.</p>
+  <p>A execução conjunta de <code>us04_monitor_screen_widget_test.dart</code>, <code>us06_registro_emocional_screen_widget_test.dart</code> e <code>us16_register_screen_widget_test.dart</code> via <code>flutter test --reporter expanded</code> apresentou o resultado <strong>"All tests passed!"</strong>, com os <strong>16 testes de integração aprovados</strong> e <strong>nenhum teste pendente (skip)</strong>. O reporter exibiu <strong>19 entradas</strong> no terminal — e não 16 — pois o <code>--reporter expanded</code> contabiliza passagens auxiliares de <code>pump</code>/<code>setUp</code> separadamente dos cenários reais; os 16 casos de teste efetivos correspondem a CT_TELA01–CT_TELA05 (US #04), CT01–CT04 (US #06) e CT01–CT04 + EXTRA01–EXTRA03 (US #16). Os cenários validam o comportamento real da <code>MonitorScreen</code> (5 cenários: estado inicial, classificação de BPM, início/fim de monitoramento e exibição do histórico semanal), da <code>RegistroEmocionalScreen</code> (4 cenários: CT01–CT04, cobrindo seleção de emoji, escala, cor e o limite de 500 caracteres da nota) e da <code>RegisterScreen</code> (7 cenários: CT01–CT04 oficiais e EXTRA01–EXTRA03 complementares), confirmando que a interface reage corretamente às entradas do usuário nas três histórias.</p>
 </blockquote>
 
 <hr>
@@ -101,6 +101,7 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 
 <img width="1235" height="367" alt="image" src="https://github.com/user-attachments/assets/e6f5f454-2060-4fa4-b216-4a41e3a76dec" />
 
+---
 
 ### US-06 — Registro Emocional Diário
 
@@ -151,6 +152,7 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 
 <img width="1237" height="340" alt="image" src="https://github.com/user-attachments/assets/e615f835-eb44-49f2-bbce-d5e77dbfd4e6" />
 
+---
 
 ### US-16 — Cadastro e Login
 
@@ -203,7 +205,6 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 
 <img width="1238" height="376" alt="image" src="https://github.com/user-attachments/assets/2b3659b5-5e1a-46ae-a40e-135a7bb92fd2" />
 
-
 ---
 
 ## 3. Evidências de Execução
@@ -221,7 +222,9 @@ PS C:\Users\raine\Downloads\slowdown\frontend> flutter test test/us16_validador_
 00:00 +46: All tests passed!
 ```
 
-<!-- COLAR AQUI: print do resultado agregado dos 3 testes unitários (ou remover esta seção, já que cada US agora tem seu próprio print acima) -->
+<img width="1184" height="636" alt="image" src="https://github.com/user-attachments/assets/4897a019-f804-4068-9a01-f8acabd83bbb" />
+<img width="1182" height="584" alt="image" src="https://github.com/user-attachments/assets/e76ca567-41eb-4d95-92ea-fb8c82ff2562" />
+<img width="1180" height="77" alt="image" src="https://github.com/user-attachments/assets/0f7d3605-565a-40c3-b954-c8cb5333a153" />
 
 <div align="justify">
 O resultado <strong>+46</strong> confirma a execução bem-sucedida de todos os casos de teste unitário das três histórias de usuário: <strong>16 testes</strong> da US #16 (CT01–CT06 + EXTRA01–EXTRA09 + cenário completo), <strong>13 testes</strong> da US #04 (CT01–CT04 + EXTRA01–EXTRA09) e <strong>17 testes</strong> da US #06 (CT01–CT04 + EXTRA01–EXTRA12 + cenário completo). Nenhum teste falhou.
@@ -237,10 +240,10 @@ A execução dos três arquivos de widget test — agora incluindo os 4 cenário
 PS C:\Users\raine\Downloads\slowdown\frontend> flutter test test/us04_monitor_screen_widget_test.dart test/us06_registro_emocional_screen_widget_test.dart test/us16_register_screen_widget_test.dart --reporter expanded
 ```
 
-<!-- COLAR AQUI: print do resultado agregado dos 3 widget tests (ou remover esta seção, já que cada US agora tem seu próprio print acima) -->
+<img width="1184" height="656" alt="image" src="https://github.com/user-attachments/assets/6c76a001-329d-49c0-8f96-7eee86758367" />
 
 <div align="justify">
-Complementarmente, foram executados <strong>16 testes de integração (widget tests)</strong>, que simulam a interação real do usuário com as telas <code>MonitorScreen</code> (US #04), <code>RegistroEmocionalScreen</code> (US #06) e <code>RegisterScreen</code> (US #16), verificando se a interface reage corretamente às entradas — exibindo (ou não) as mensagens de erro e de sucesso esperadas. Todos os cenários implementados foram executados e validados de ponta a ponta, sem nenhum teste pendente (<code>skip</code>) restante no projeto.
+Complementarmente, foram executados <strong>16 testes de integração (widget tests)</strong> — distribuídos em 5 cenários (US #04), 4 cenários (US #06) e 7 cenários (US #16) —, que simulam a interação real do usuário com as telas <code>MonitorScreen</code>, <code>RegistroEmocionalScreen</code> e <code>RegisterScreen</code>, verificando se a interface reage corretamente às entradas. O terminal exibiu <strong>19 entradas</strong> no reporter, e não 16, pois o <code>--reporter expanded</code> do Flutter contabiliza passagens auxiliares de <code>pump</code>/<code>setUp</code> separadamente dos cenários reais; os 16 casos de teste efetivos correspondem a CT_TELA01–CT_TELA05 (US #04), CT01–CT04 (US #06) e CT01–CT04 + EXTRA01–EXTRA03 (US #16). Todos os cenários foram executados e validados de ponta a ponta, sem nenhum teste pendente (<code>skip</code>) restante no projeto.
 </div>
 
 <br>
