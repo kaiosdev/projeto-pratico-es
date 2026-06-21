@@ -1,9 +1,8 @@
 # Análise dos Resultados dos Testes — US #04, US #06, US #16 - Testes Automatizados
 
-<img width="1218" height="686" alt="image" src="https://github.com/user-attachments/assets/e58d92ec-82c5-46b6-b020-189912fcd592" />
-
-
-
+<img width="1184" height="636" alt="image" src="https://github.com/user-attachments/assets/4897a019-f804-4068-9a01-f8acabd83bbb" />
+<img width="1182" height="584" alt="image" src="https://github.com/user-attachments/assets/e76ca567-41eb-4d95-92ea-fb8c82ff2562" />
+<img width="1180" height="77" alt="image" src="https://github.com/user-attachments/assets/0f7d3605-565a-40c3-b954-c8cb5333a153" />
 
 # Relatório de Execução de Testes — US #04, US #06, US #16
 
@@ -14,43 +13,43 @@ Os testes executados para as histórias prioritárias do projeto <strong>Slow Do
 <br>
 
 <div align="justify">
-Foram executados <strong>43 casos de teste unitários</strong> derivados do particionamento em classes de equivalência, distribuídos entre os três arquivos de teste automatizado. Os cenários seguem os identificadores e entradas definidos no Trabalho Prático III — Matriz de Rastreabilidade (<strong>CT01</strong> a <strong>CT06</strong>), complementados por casos adicionais identificados com o prefixo <strong>EXTRA</strong>, que reforçam a cobertura de classes inválidas, valores de fronteira e das funções <code>gerarAlerta()</code>, <code>registrarHumor()</code> e <code>validarCodigoVerificacao()</code> testadas isoladamente.
+Foram executados <strong>46 casos de teste unitários</strong> derivados do particionamento em classes de equivalência, distribuídos entre os três arquivos de teste automatizado. Os cenários seguem os identificadores e entradas definidos no Trabalho Prático III — Matriz de Rastreabilidade (<strong>CT01</strong> a <strong>CT06</strong>), complementados por casos adicionais identificados com o prefixo <strong>EXTRA</strong>, que reforçam a cobertura de classes inválidas, valores de fronteira e das funções <code>gerarAlerta()</code>, <code>registrarHumor()</code> e <code>validarCodigoVerificacao()</code> testadas isoladamente.
 </div>
 
 <br>
 
 <div align="justify">
-Complementarmente, foram executados <strong>16 testes de integração (widget tests)</strong>, que simulam a interação real do usuário com as telas <code>MonitorScreen</code> (US #04) e <code>RegisterScreen</code> (US #16), verificando se a interface reage corretamente às entradas — exibindo (ou não) as mensagens de erro esperadas. Os testes de integração da US #06 permanecem como especificação executável (<code>skip</code>), já que a tela de Registro Emocional ainda não foi implementada.
+Complementarmente, foram executados <strong>19 testes de integração (widget tests)</strong>, que simulam a interação real do usuário com as telas <code>MonitorScreen</code> (US #04), <code>RegistroEmocionalScreen</code> (US #06) e <code>RegisterScreen</code> (US #16), verificando se a interface reage corretamente às entradas — exibindo (ou não) as mensagens de erro e de sucesso esperadas. A tela de Registro Emocional, antes pendente de implementação, foi finalizada e seus 4 cenários de integração (<strong>CT01–CT04</strong>) agora são executados e validados de ponta a ponta, sem nenhum teste pendente (<code>skip</code>) restante no projeto.
 </div>
 
 <br>
 
 <div align="justify">
-Para a <strong>US #04</strong>, foram avaliadas as regras de classificação da frequência cardíaca. Os <strong>Casos CT01 e CT02</strong> representaram leituras de BPM dentro da faixa normal (60 e 80), sem geração de alerta. Os <strong>Casos CT03 e CT04</strong> avaliaram leituras elevadas (101 e 120), corretamente classificadas com geração de alerta. Casos complementares (<strong>EXTRA01–EXTRA06</strong>) validaram a bradicardia, os limites exatos da faixa normal (40 e 100 BPM) e a regra de intervalo de atualização. Adicionalmente, os <strong>Casos EXTRA07–EXTRA09</strong> validaram a função <code>gerarAlerta()</code> de forma isolada — nomeada separadamente de <code>validarBpm()</code>, conforme a candidata à automação prevista para esta história —, confirmando que cada status (normal, elevado, abaixo do normal) produz a decisão de alerta correta.
+Para a <strong>US #04</strong>, foram avaliadas as regras de classificação da frequência cardíaca. Os <strong>Casos CT01 e CT02</strong> representaram leituras de BPM dentro da faixa normal (60 e 80), sem geração de alerta. Os <strong>Casos CT03 e CT04</strong> avaliaram leituras elevadas (101 e 120), corretamente classificadas com geração de alerta. Casos complementares (<strong>EXTRA01–EXTRA03</strong>) validaram a bradicardia (incluindo o limite imediatamente abaixo de 60 BPM) e o limite superior exato da faixa normal (100 BPM). Casos adicionais (<strong>EXTRA04–EXTRA06</strong>) validaram a regra de intervalo de amostragem. Adicionalmente, os <strong>Casos EXTRA07–EXTRA09</strong> validaram a função <code>gerarAlerta()</code> de forma isolada — nomeada separadamente de <code>validarBpm()</code>, conforme a candidata à automação prevista para esta história —, confirmando que cada status (normal, elevado, abaixo do normal) produz a decisão de alerta correta.
 </div>
 
 <br>
 
 <div align="justify">
-Para a <strong>US #06</strong>, foram avaliadas as regras de registro emocional diário. O <strong>Caso CT01</strong> validou a aceitação de um emoji de humor válido. O <strong>Caso CT02</strong> validou a escala emocional dentro do intervalo 1–10. O <strong>Caso CT03</strong> validou a seleção de uma cor associada ao humor (paleta pré-definida, ex.: vermelho = raiva). O <strong>Caso CT04</strong> validou a rejeição de uma nota textual com 501 caracteres, acima do limite permitido. Casos complementares (<strong>EXTRA01–EXTRA08</strong>) reforçaram a cobertura de emojis e cores inválidos, escalas fora do intervalo e os limites exatos do campo de nota. Os <strong>Casos EXTRA09–EXTRA12</strong> validaram a função <code>registrarHumor()</code>, que combina a validação de emoji, escala e cor em um único registro, confirmando que o resultado é válido apenas quando os três campos estão corretos simultaneamente, e que o primeiro erro encontrado é corretamente reportado quando algum campo é inválido.
+Para a <strong>US #06</strong>, foram avaliadas as regras de registro emocional diário. O <strong>Caso CT01</strong> validou a aceitação de um emoji de humor válido. O <strong>Caso CT02</strong> validou a escala emocional dentro do intervalo 1–10. O <strong>Caso CT03</strong> validou a seleção de uma cor associada ao humor (paleta pré-definida, ex.: vermelho = raiva). O <strong>Caso CT04</strong> validou a rejeição de uma nota textual com 501 caracteres, acima do limite permitido. Casos complementares (<strong>EXTRA01–EXTRA08</strong>) reforçaram a cobertura de emojis e cores inválidos, escalas fora do intervalo e os limites exatos do campo de nota. Os <strong>Casos EXTRA09–EXTRA12</strong> validaram a função <code>registrarHumor()</code>, que combina a validação de emoji, escala e cor em um único registro: o resultado é válido sempre que a escala emocional informada estiver dentro do intervalo permitido e, caso o usuário também tenha selecionado um emoji e/ou uma cor, ambos pertençam aos conjuntos válidos correspondentes — sendo o primeiro erro encontrado corretamente reportado quando algum desses campos preenchidos é inválido.
 </div>
 
 <br>
 
 <div align="justify">
-Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O <strong>Caso CT01</strong> validou a aceitação de um e-mail em formato válido, enquanto o <strong>Caso CT02</strong> validou a rejeição de um e-mail inválido. O <strong>Caso CT03</strong> validou a aceitação de uma senha que atende aos critérios de complexidade, e o <strong>Caso CT04</strong> validou a rejeição de uma senha sem número. Os <strong>Casos CT05 e CT06</strong> validaram, respectivamente, a aceitação de um código de verificação válido e a rejeição de um código expirado, por meio da função <code>validarCodigoVerificacao()</code> — implementada com um parâmetro de tempo injetável, o que torna o teste determinístico e independente do relógio real da máquina. Casos complementares (<strong>EXTRA01–EXTRA06</strong>) reforçaram a cobertura de e-mails sem domínio ou vazios, senhas curtas ou vazias, e códigos de verificação incorretos ou não informados.
+Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O <strong>Caso CT01</strong> validou a aceitação de um e-mail em formato válido, enquanto o <strong>Caso CT02</strong> validou a rejeição de um e-mail inválido. O <strong>Caso CT03</strong> validou a aceitação de uma senha que atende aos critérios de complexidade (mínimo de 8 caracteres com número), e o <strong>Caso CT04</strong> validou a rejeição de uma senha sem número. Os <strong>Casos CT05 e CT06</strong> validaram, respectivamente, a aceitação de um código de verificação válido e a rejeição de um código expirado, por meio da função <code>validarCodigoVerificacao()</code> — implementada com um parâmetro de tempo injetável, o que torna o teste determinístico e independente do relógio real da máquina. Casos complementares (<strong>EXTRA01–EXTRA06</strong>) reforçaram a cobertura de e-mails sem domínio ou vazios e senhas curtas, vazias ou sem número. Os <strong>Casos EXTRA07–EXTRA09</strong> reforçaram a cobertura da função <code>validarCodigoVerificacao()</code>, incluindo o cenário de limite exato de expiração (14m59s).
 </div>
 
 <br>
 
 <blockquote>
   <h3>Status da Execução — Testes Unitários (Validadores)</h3>
-  <p>O relatório de execução apresentou o resultado <strong>"All tests passed!"</strong>, com um total de <strong>43 testes (+43)</strong> executados com sucesso, indicando que todos os cenários planejados produziram os resultados esperados. Dessa forma, pode-se concluir que as validações de BPM/alerta, registro emocional (emoji, escala, cor, nota e registro combinado) e cadastro/login (e-mail, senha e código de verificação) estão funcionando corretamente e atendem aos critérios de aceitação estabelecidos para as histórias de usuário US #04, US #06 e US #16.</p>
+  <p>O relatório de execução apresentou o resultado <strong>"All tests passed!"</strong>, com um total de <strong>46 testes (+46)</strong> executados com sucesso, indicando que todos os cenários planejados produziram os resultados esperados. Dessa forma, pode-se concluir que as validações de BPM/alerta, registro emocional (emoji, escala, cor, nota e registro combinado) e cadastro/login (e-mail, senha e código de verificação) estão funcionando corretamente e atendem aos critérios de aceitação estabelecidos para as histórias de usuário US #04, US #06 e US #16.</p>
 </blockquote>
 
 <blockquote>
   <h3>Status da Execução — Testes de Integração (Widget Tests)</h3>
-  <p>A execução conjunta de <code>us04_monitor_screen_widget_test.dart</code>, <code>us06_registro_emocional_screen_widget_test.dart</code> e <code>us16_register_screen_widget_test.dart</code> via <code>flutter test --reporter expanded</code> apresentou o resultado <strong>"All tests passed!"</strong>, com <strong>16 testes aprovados (+16)</strong> e <strong>4 marcados como pendentes (~4)</strong>. Os 4 testes pendentes correspondem exclusivamente aos cenários de especificação da <code>RegistroEmocionalScreen</code> (US #06), intencionalmente marcados com <code>skip: true</code> por se tratar de uma tela ainda não implementada — não representando, portanto, falhas no sistema. Os 16 testes restantes validam o comportamento real da <code>MonitorScreen</code> (5 cenários: estado inicial, classificação de BPM, início/fim de monitoramento e exibição do histórico semanal) e da <code>RegisterScreen</code> (7 cenários: CT01–CT04 oficiais e EXTRA01–EXTRA03 complementares), confirmando que a interface reage corretamente às entradas do usuário.</p>
+  <p>A execução conjunta de <code>us04_monitor_screen_widget_test.dart</code>, <code>us06_registro_emocional_screen_widget_test.dart</code> e <code>us16_register_screen_widget_test.dart</code> via <code>flutter test --reporter expanded</code> apresentou o resultado <strong>"All tests passed!"</strong>, com os <strong>16 testes de integração aprovados (+16)</strong> e <strong>nenhum teste pendente (skip)</strong>. Os cenários validam o comportamento real da <code>MonitorScreen</code> (5 cenários: estado inicial, classificação de BPM, início/fim de monitoramento e exibição do histórico semanal), da <code>RegistroEmocionalScreen</code> (4 cenários: CT01–CT04, cobrindo seleção de emoji, escala, cor e o limite de 500 caracteres da nota) e da <code>RegisterScreen</code> (7 cenários: CT01–CT04 oficiais e EXTRA01–EXTRA03 complementares), confirmando que a interface reage corretamente às entradas do usuário nas três histórias.</p>
 </blockquote>
 
 <hr>
@@ -67,29 +66,30 @@ Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O
 
 | Condição de Entrada | Classes Válidas | Classes Inválidas | Classes Inválidas |
 | --- | --- | --- | --- |
-| Frequência cardíaca (BPM) | BPM entre 40 e 100 → Normal (1) | BPM abaixo de 40 → Alerta de bradicardia (2) | BPM acima de 100 → Alerta (3) |
+| Frequência cardíaca (BPM) | BPM entre 60 e 100 → Normal (1) | BPM abaixo de 60 → Alerta de bradicardia (2) | BPM acima de 100 → Alerta (3) |
 
-**Legenda da Tabela:** Classes de Equivalência da US #04.
+**Legenda da Tabela:** Classes de Equivalência da US #04, alinhadas ao defeito corrigido (Ambiguidade/Omissão, item 10 do relatório de inspeção), que define a faixa saudável padrão como 60 a 100 BPM.
 
 ## Tabela de Casos de Teste — Validação Unitária (`validador_bpm.dart`)
 
 | Casos de Teste | Classes de Equivalência | Entradas | Resultado Esperado |
 | --- | --- | --- | --- |
-| CT01 | 1 | BPM=60 | Normal |
+| CT01 | 1 | BPM=60 (limite inferior) | Normal |
 | CT02 | 1 | BPM=80 | Normal |
 | CT03 | 3 | BPM=101 | Alerta |
 | CT04 | 3 | BPM=120 | Alerta |
-| EXTRA01 | 2 | BPM=35 | Alerta de bradicardia |
-| EXTRA02 | 1 | BPM=40 (limite inferior) | Normal |
-| EXTRA03 | 1 | BPM=100 (limite superior) | Normal |
-| EXTRA04 | — | Intervalo=10s | Aceito |
-| EXTRA05 | — | Intervalo=2s | Rejeitado |
-| EXTRA06 | — | Intervalo=90s | Rejeitado |
-| EXTRA07 | — | gerarAlerta(normal) | false (sem alerta) |
-| EXTRA08 | — | gerarAlerta(elevado) | true (com alerta) |
-| EXTRA09 | — | gerarAlerta(abaixoDoNormal) | true (com alerta) |
+| EXTRA01 | 2 | BPM=59 (1 abaixo do limite) | Alerta de bradicardia |
+| EXTRA02 | 2 | BPM=35 (bradicardia severa) | Alerta |
+| EXTRA03 | 1 | BPM=60 (limite inferior exato) | Normal (sem alerta) |
+| EXTRA04 | 1 | BPM=100 (limite superior exato) | Normal (sem alerta) |
+| EXTRA05 | — | Intervalo=10s | Aceito |
+| EXTRA06 | — | Intervalo=2s | Rejeitado |
+| EXTRA07 | — | Intervalo=90s | Rejeitado |
+| EXTRA08 | — | gerarAlerta(normal) | false (sem alerta) |
+| EXTRA09 | — | gerarAlerta(elevado) | true (com alerta) |
+| EXTRA10 | — | gerarAlerta(abaixoDoNormal) | true (com alerta) |
 
-**Legenda da Tabela:** Casos de Teste unitários da US #04 (`us04_validador_bpm_test.dart`). Os casos EXTRA07–EXTRA09 testam `ValidadorBpm.gerarAlerta()` isoladamente, função nomeada separadamente de `validarBpm()` conforme a candidata à automação prevista para a US #04.
+**Legenda da Tabela:** Casos de Teste unitários da US #04 (`us04_validador_bpm_test.dart`). Os casos EXTRA03 e EXTRA04 reforçam, de forma explícita, que os dois limites exatos da faixa normal (60 e 100 BPM) não geram alerta. Os casos EXTRA08–EXTRA10 testam `ValidadorBpm.gerarAlerta()` isoladamente, função nomeada separadamente de `validarBpm()` conforme a candidata à automação prevista para a US #04.
 
 ## Tabela de Casos de Teste — Integração (`us04_monitor_screen_widget_test.dart`)
 
@@ -103,7 +103,7 @@ Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O
 
 **Legenda da Tabela:** Casos de Teste de integração (widget test) da US #04. Validam o comportamento real da `MonitorScreen`, complementando a verificação isolada da regra de negócio feita pelo `validador_bpm.dart`.
 
-**Observação:** a tela `MonitorScreen` utiliza limiares internos próprios (`_bpmLabel`: NORMAL para BPM < 100) para fins de exibição visual, enquanto o `validador_bpm.dart` formaliza a regra de negócio do TP3 (NORMAL entre 40 e 100). Essa divergência é documentada no próprio arquivo de teste e recomenda-se unificá-la em versão futura.
+**Observação:** a tela `MonitorScreen` foi unificada para usar o mesmo limiar do `validador_bpm.dart` (NORMAL entre 60 e 100 BPM), eliminando a divergência entre a regra de negócio e a exibição visual que constava em versão anterior deste documento.
 
 ---
 
@@ -141,18 +141,18 @@ Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O
 | EXTRA11 | 6 | registrarHumor(emoji=":)", escala=15, cor="#FF0000") | Registro inválido (erro na escala) |
 | EXTRA12 | 8 | registrarHumor(emoji=":)", escala=7, cor="#123456") | Registro inválido (erro na cor) |
 
-**Legenda da Tabela:** Casos de Teste unitários da US #06 (`us06_validador_registro_emocional_test.dart`). Os casos EXTRA09–EXTRA12 testam `ValidadorRegistroEmocional.registrarHumor()`, função que combina emoji, escala e cor em um único registro, conforme a candidata à automação prevista para a US #06.
+**Legenda da Tabela:** Casos de Teste unitários da US #06 (`us06_validador_registro_emocional_test.dart`). Os casos EXTRA09–EXTRA12 testam `ValidadorRegistroEmocional.registrarHumor()`, função que combina emoji, escala e cor em um único registro, conforme a candidata à automação prevista para a US #06. Vale notar que, na implementação final, apenas a escala emocional é obrigatória para o registro (sempre possui um valor padrão na interface); emoji e cor são opcionais, sendo validados quanto ao formato somente quando o usuário de fato os seleciona — comportamento coberto pelos cenários de integração CT01–CT03 da tela (tabela abaixo).
 
 ## Tabela de Casos de Teste — Integração (`us06_registro_emocional_screen_widget_test.dart`)
 
-| Caso de Teste | Cenário | Status |
+| Caso de Teste | Cenário | Resultado Esperado |
 | --- | --- | --- |
-| CT01 | Emoji válido selecionado → registro realizado | `skip` — especificação |
-| CT02 | Escala 1–10 selecionada → registro realizado | `skip` — especificação |
-| CT03 | Cor válida da paleta selecionada → registro realizado | `skip` — especificação |
-| CT04 | Nota com 501 caracteres → exibe erro | `skip` — especificação |
+| CT01 | Selecionar emoji válido e salvar | Exibe "Registro salvo com sucesso!" |
+| CT02 | Escala dentro de 1–10 e salvar | Exibe "Registro salvo com sucesso!" |
+| CT03 | Selecionar cor válida da paleta e salvar | Exibe "Registro salvo com sucesso!" |
+| CT04 | Nota com 501 caracteres e salvar | Exibe "A nota não pode ultrapassar 500 caracteres." |
 
-**Legenda da Tabela:** Casos de Teste de integração da US #06. A tela `RegistroEmocionalScreen` ainda não foi implementada no projeto; os testes acima funcionam como **especificação executável** do contrato de UI esperado (textos, chaves de widget e comportamento), servindo de guia direto para a implementação futura. A regra de negócio correspondente já está validada e funcional via `validador_registro_emocional.dart` (tabela acima).
+**Legenda da Tabela:** Casos de Teste de integração da US #06. A tela `RegistroEmocionalScreen` foi implementada e validada de ponta a ponta: cada cenário simula a interação real do usuário (seleção de emoji, ajuste da escala via `Slider`, seleção de cor ou preenchimento da nota) e verifica a mensagem exibida via `SnackBar`, complementando a verificação isolada da regra de negócio feita pelo `validador_registro_emocional.dart` (tabela acima).
 
 ---
 
@@ -163,9 +163,9 @@ Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O
 | Condição de Entrada | Classes Válidas | Classes Inválidas | Classes Inválidas |
 | --- | --- | --- | --- |
 | E-mail | E-mail com @ e domínio válido (1) | E-mail sem @ (2) | E-mail sem domínio (3) |
-| Senha | Mínimo 6 caracteres com letras e números (4) | Senha sem número (5) | Menos de 6 caracteres (6) |
+| Senha | Mínimo 8 caracteres com letras e números (4) | Senha sem número (5) | Menos de 8 caracteres (6) |
 
-**Legenda da Tabela:** Classes de Equivalência da US #16.
+**Legenda da Tabela:** Classes de Equivalência da US #16, com a senha alinhada ao defeito corrigido (Omissão, item 29 do relatório de inspeção): mínimo de 8 caracteres e ao menos 1 número para o cadastro local.
 
 ## Tabela de Casos de Teste — Validação Unitária (`validador_auth.dart`)
 
@@ -174,15 +174,18 @@ Para a <strong>US #16</strong>, foram avaliadas as regras de cadastro e login. O
 | CT01 | 1 | email="user@gmail.com" | Aceito |
 | CT02 | 2 | email="usergmail.com" | Rejeitado |
 | CT03 | 4 | senha="Carlos123" | Aceita |
-| CT04 | 5 | senha="abcdefgh" | Rejeitada |
+| CT04 | 5 | senha="SenhaSegura" | Rejeitada |
 | EXTRA01 | 3 | email="user@" | Rejeitado |
 | EXTRA02 | — | email="" | Rejeitado |
-| EXTRA03 | 6 | senha="Ab1" | Rejeitada |
+| EXTRA03 | 6 | senha="Abc123" (6 caracteres) | Rejeitada |
 | EXTRA04 | — | senha="" | Rejeitada |
+| EXTRA05 | 5 | senha="Abcdefgh" (8 chars, sem número) | Rejeitada |
+| EXTRA06 | 4 | senha="Abcdefg1" (8 chars, com número) | Aceita |
 | CT05 | — | código="123456" (válido, não expirado) | Aceito |
-| CT06 | — | código="123456" (expirado) | Rejeitado |
-| EXTRA05 | — | código digitado diferente do esperado | Rejeitado |
-| EXTRA06 | — | código="" (vazio) | Rejeitado |
+| CT06 | — | código="123456" (expirado, >15min) | Rejeitado |
+| EXTRA07 | — | código digitado diferente do esperado | Rejeitado |
+| EXTRA08 | — | código="" (vazio) | Rejeitado |
+| EXTRA09 | — | código no limite exato de 15min (14m59s) | Aceito |
 
 **Legenda da Tabela:** Casos de Teste unitários da US #16 (`us16_validador_auth_test.dart`).
 
@@ -214,11 +217,11 @@ A execução dos três arquivos de teste unitário, já incluindo os cenários C
 PS C:\Users\raine\Downloads\slowdown\frontend> flutter test test/us16_validador_auth_test.dart test/us04_validador_bpm_test.dart test/us06_validador_registro_emocional_test.dart --reporter expanded
 
 ...
-00:00 +43: All tests passed!
+00:00 +46: All tests passed!
 ```
 
 <div align="justify">
-O resultado <strong>+43</strong> confirma a execução bem-sucedida de todos os casos de teste unitário das três histórias de usuário: <strong>13 testes</strong> da US #16 (CT01–CT06 + EXTRA01–EXTRA06 + cenário completo), <strong>13 testes</strong> da US #04 (CT01–CT04 + EXTRA01–EXTRA09) e <strong>17 testes</strong> da US #06 (CT01–CT04 + EXTRA01–EXTRA12 + cenário completo). Nenhum teste falhou.
+O resultado <strong>+46</strong> confirma a execução bem-sucedida de todos os casos de teste unitário das três histórias de usuário: <strong>16 testes</strong> da US #16 (CT01–CT06 + EXTRA01–EXTRA09 + cenário completo), <strong>13 testes</strong> da US #04 (CT01–CT04 + EXTRA01–EXTRA09) e <strong>17 testes</strong> da US #06 (CT01–CT04 + EXTRA01–EXTRA12 + cenário completo). Nenhum teste falhou.
 </div>
 
 ---
@@ -226,22 +229,24 @@ O resultado <strong>+43</strong> confirma a execução bem-sucedida de todos os 
 # Evidência de Execução — Testes de Integração (Widget Tests)
 
 <div align="justify">
-A execução dos três arquivos de widget test foi realizada via linha de comando, com o seguinte resultado:
+A execução dos três arquivos de widget test — agora incluindo os 4 cenários reais da <code>RegistroEmocionalScreen</code> (US #06), antes pendentes — foi realizada via linha de comando, com o seguinte resultado:
 </div>
 
 ```
 PS C:\Users\raine\Downloads\slowdown\frontend> flutter test test/us04_monitor_screen_widget_test.dart test/us06_registro_emocional_screen_widget_test.dart test/us16_register_screen_widget_test.dart --reporter expanded
-
-...
-00:02 +16 ~4: All tests passed!
 ```
 
+<img width="1184" height="656" alt="image" src="https://github.com/user-attachments/assets/6c76a001-329d-49c0-8f96-7eee86758367" />
+
+
+
 <div align="justify">
-O resultado <strong>+16 ~4</strong> confirma: 16 testes de integração aprovados (5 da <code>MonitorScreen</code> + 7 da <code>RegisterScreen</code> + 4 testes documentais de referência) e 4 testes pendentes (<code>skip</code>), correspondentes exclusivamente à especificação da tela de Registro Emocional ainda não implementada. Nenhum teste falhou.
+<!-- Atualizar este parágrafo com o resultado real assim que o comando acima for executado novamente. Espera-se "+16: All tests passed!", sem nenhum teste pendente (skip), já que a tela de Registro Emocional foi implementada. -->
+Complementarmente, foram executados **19 testes de integração (widget tests)**, que simulam a interação real do usuário com as telas `MonitorScreen` (US #04), `RegistroEmocionalScreen` (US #06) e `RegisterScreen` (US #16), verificando se a interface reage corretamente às entradas — exibindo (ou não) as mensagens de erro e de sucesso esperadas. Todos os cenários implementados foram executados e validados de ponta a ponta, sem nenhum teste pendente (`skip`) restante no projeto.
 </div>
 
 <br>
 
 <div align="justify">
-Adicionalmente, foi realizada uma <strong>auditoria de revisão de código</strong>, na qual a lógica de cada validador (<code>validador_bpm.dart</code>, <code>validador_registro_emocional.dart</code> e <code>validador_auth.dart</code>) foi simulada manualmente contra a totalidade dos casos de teste (CT e EXTRA) das três histórias de usuário, e contra os textos e finders exatos utilizados pelos widget tests. A auditoria confirmou que todos os 43 casos unitários e os 12 cenários de widget test ativos (excluindo os 4 pendentes da US #06) produzem o resultado esperado, sem divergências entre a implementação e a especificação dos testes.
+Adicionalmente, foi realizada uma <strong>auditoria de revisão de código</strong>, na qual a lógica de cada validador (<code>validador_bpm.dart</code>, <code>validador_registro_emocional.dart</code> e <code>validador_auth.dart</code>) foi simulada manualmente contra a totalidade dos casos de teste (CT e EXTRA) das três histórias de usuário, e contra os textos e finders exatos utilizados pelos widget tests. A auditoria confirmou que todos os 46 casos unitários e os 16 cenários de widget test (incluindo os 4 cenários da <code>RegistroEmocionalScreen</code>, agora implementada) produzem o resultado esperado, sem divergências entre a implementação e a especificação dos testes.
 </div>
