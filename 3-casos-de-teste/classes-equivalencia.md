@@ -282,8 +282,8 @@ Casos de Teste da US-10.
 | Validação do Convite | Convite válido (1) | E-mail inválido (2) | Link expirado (3) |
 | Status do Vínculo | Convite aceito (4) | Convite pendente (5) | Convite recusado (6) |
 | Nível de Compartilhamento | Nível definido (7) | Sem permissão definida (8) | Permissão removida (9) |
-| Conteúdo da Mensagem | Entre 1 e 500 caracteres (10) | Mensagem vazia (11) | Acima de 500 caracteres (12) |
-| Limite de Apoiadores | Até 5 ativos (13) | — | 6º apoiador (14) |
+| Conteúdo da Mensagem | Entre 1 e 1000 caracteres (10) | Mensagem vazia (11) | Acima de 1000 caracteres (12) |
+| Limite de Apoiadores | Até 5 ativos (13) | 6º apoiador (14) | — |
 
 Classes de Equivalência da US-11.
 
@@ -297,7 +297,7 @@ Classes de Equivalência da US-11.
 | 6 | 1,4,**8**,10,13 | Vínculo aceito, mas sem nível de permissão definido | Sistema bloqueia o compartilhamento |
 | 7 | 1,4,**9**,10,13 | Vínculo ativo, usuário remove o apoiador | Compartilhamento interrompido imediatamente |
 | 8 | 1,4,7,**11**,13 | Vínculo ativo, mensagem de encorajamento vazia | Mensagem não enviada |
-| 9 | 1,4,7,**12**,13 | Vínculo ativo, mensagem com 600 caracteres | Mensagem rejeitada |
+| 9 | 1,4,7,**12**,13 | Vínculo ativo, mensagem com 1010 caracteres | Mensagem rejeitada |
 | 10 | 1,4,7,10,**14** | Usuário tenta vincular o 6º apoiador | Sistema rejeita (limite de 5 atingido) |
 
 Casos de Teste da US-11.
@@ -310,10 +310,10 @@ Casos de Teste da US-11.
 |---|---|---|---|
 | Autenticação do Usuário | Autenticado (1) | Não autenticado (2) | Sessão expirada (3) |
 | Status da Meta | Concluída (4) | Não concluída (5) | Meta inválida (6) |
-| Disponibilidade do Emblema | Emblema existente (7) | — | Emblema inexistente (8) |
+| Disponibilidade do Emblema | Emblema existente (7) | Emblema inexistente(8) | — |
 | Histórico de Conquista | Não conquistado (9) | Já conquistado (10) | — |
-| Cadastro do Emblema | Cadastro completo (11) | — | Cadastro incompleto (12) |
-| Compatibilidade do Plano | Plano compatível (13) | — | Plano incompatível (14) |
+| Cadastro do Emblema | Cadastro completo (11) | Cadastro incompleto (12) | — |
+| Compatibilidade do Plano | Plano compatível (13) | Plano incompatível (14) | — |
 
 Classes de Equivalência da US-12.
 
@@ -337,11 +337,11 @@ Casos de Teste da US-12.
 
 | Condição de Entrada | Classes Válidas | Classes Inválidas | Classes Inválidas |
 |---|---|---|---|
-| Disponibilidade da Missão | Missão existente (1) | — | Missão inexistente (2) |
+| Disponibilidade da Missão | Missão existente (1) | Missão inexistente (2) | — |
 | Status da Missão | Primeira conclusão do dia (3) | Já concluída hoje (4) | Expirada (5) |
-| Situação da Conta | Conta válida (6) | — | Conta inválida (7) |
+| Situação da Conta | Conta válida (6) | Conta inválida (7) | — |
 | Faixa de XP | Atinge o XP mínimo — 100, 250 ou 500 (8) | Abaixo do mínimo — ex: 40, 90 XP (9) | Acima do nível máximo — acima de 500 (10) |
-| Limite de Missões Diárias | Até 3 concluídas no dia (11) | — | 4ª missão no mesmo dia (12) |
+| Limite de Missões Diárias | Até 3 concluídas no dia (11) | 4ª missão no mesmo dia (12) | — |
 
 Classes de Equivalência da US-13.
 
