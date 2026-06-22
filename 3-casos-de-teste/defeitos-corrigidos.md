@@ -15,13 +15,13 @@
 Este documento detalha o processo de **Correção dos Defeitos** identificados no Backlog do Produto do projeto SlowDown. A análise utilizou a taxonomia oficial de defeitos e manteve a rastreabilidade direta com as *issues* apontadas pela equipe auditora no GitHub.
 
 ### 1.1 Resumo Quantitativo
-O projeto possui 19 Histórias de Usuário. A auditoria externa reportou exatamente **46 apontamentos**. Adicionalmente, nossa equipe conduziu uma **auto-auditoria** para identificar e corrigir falhas que passaram despercebidas pelos inspetores externos. O balanço matemático oficial é:
+O projeto possui 19 Histórias de Usuário. A auditoria externa reportou exatamente **46 apontamentos**. 
 
 | Origem | Status da Avaliação | Qtd | Descrição |
 |:---|:---|:---:|:---|
 | 🔍 **Auditoria** | 🟢 **Corrigidos** | **44** | Apontamentos externos válidos que resultaram em alteração no backlog. |
 | 🔍 **Auditoria** | 🔴 **Falsos Positivos** | **2** | Apontamentos que não configuravam defeitos. Foram desconsiderados. |
-| 🛡️ **Interno** | 🔵 **Auto-Auditoria** | **4** | Defeitos não apontados pela auditoria, mas que a própria equipe de desenvolvimento notou e reavaliou de forma proativa. |
+| 🛡️ **Interno** | 🔵 **Auto-Auditoria** | **2** | Defeitos não apontados pela auditoria, mas que a própria equipe de desenvolvimento notou e reavaliou. |
 | **TOTAL** | | **50** | *Geral de itens avaliados e tratados neste documento.* |
 
 > 📌 **Aviso de Cobertura:** Das 19 Histórias de Usuário, as histórias **US-05 e US-14** não receberam nenhum apontamento de defeito da auditoria e não possuíam falhas internas aparentes. Portanto, estão estruturalmente corretas e não constam nas tabelas abaixo.
@@ -121,19 +121,17 @@ O projeto possui 19 Histórias de Usuário. A auditoria externa reportou exatame
 | **7** | Omissão de Tipos de Notificação | 🟢 Corrigido | Criamos 3 opções claras: lembrar missões, lembrar meditação e lembrar registro de humor. |
 | **8** | Tempo do lembrete | 🟢 Corrigido | Definido que o sistema fará a limpeza automática das missões do dia sempre à meia-noite local. |
 
-### US-16 (H16-2) — Autenticação de Usuário e Cadastro
+### US-16 — Autenticação de Usuário e Cadastro
 | ID | Título do Apontamento Original | Status | Solução Implementada |
 |:---:|:---|:---:|:---|
 | **12** | Omissão de Fluxo para Login Social (Google) | 🟢 Corrigido | O sistema deixará de pedir senha e código caso o usuário faça a autenticação diretamente pelo Google. |
 | **13** | Validação e-mail | 🟢 Corrigido | O sistema enviará um código numérico de validação para o e-mail, que perde a validade em 15 minutos. |
-| **INT-03** | *(Auto-Auditoria)* Erro de Rastreabilidade | 🔵 Interno | Notamos a duplicação do ID US-16 e a renomeamos oficialmente para H16-2 para manter a organização. |
 
 ### US-17 — Assinatura e Comparativo de Planos
 | ID | Título do Apontamento Original | Status | Solução Implementada |
 |:---:|:---|:---:|:---|
 | **41** | Ambiguidade no Gatilho de "Confirmação por E-mail" | 🟢 Corrigido | Reescrito para liberar o acesso pago e mandar o e-mail apenas após o sistema de pagamento do banco aprovar a transação. |
 | **42** | Omissão de Fluxo de Assinatura | 🟢 Corrigido | O fluxo de pagamento agora pode ser iniciado de qualquer tela do aplicativo que exiba um recurso bloqueado. |
-| **INT-04** | *(Auto-Auditoria)* Omissão de Cancelamento | 🔵 Interno | Nossa equipe identificou que faltava tratar o cancelamento: o acesso pago continuará liberado até o fim dos dias que já foram pagos. |
 
 ### US-18 — Sleepcasts e Histórias para Dormir
 | ID | Título do Apontamento Original | Status | Solução Implementada |
