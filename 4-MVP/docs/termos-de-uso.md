@@ -63,7 +63,7 @@ O usuário declara estar ciente de que:
 
 O usuário compromete-se a fornecer apenas informações necessárias para utilização da plataforma.
 
-O SlowDown compromete-se a tratar os dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD), utilizando-os exclusivamente para:
+O SlowDown compromete-se a tratar os dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD) nº 13.709/2018, utilizando-os exclusivamente para:
 
 - funcionamento do aplicativo;
 - personalização da experiência;
