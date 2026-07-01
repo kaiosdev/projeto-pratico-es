@@ -1,0 +1,7 @@
+node_modules/
+.env
+npm-debug.log
+
+# Credencial do Firebase Admin SDK — NUNCA suba isso pro GitHub
+firebase-service-account.json
+*-firebase-adminsdk-*.json
