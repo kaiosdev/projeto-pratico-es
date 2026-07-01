@@ -1,20 +1,97 @@
-# US-02 — Musicoterapia com Modo Offline
-Enquanto Geilson (Premium), desejo baixar playlists da curadoria de relaxamento para ouvir músicas de forma contínua em locais sem acesso à internet.
+# Rastreabilidade de Telas
 
-# US-03 — Pet Virtual Tamagotchi
-Enquanto Ana (Acessibilidade), desejo interagir com um pet virtual personalizável com nome, para manter o engajamento diário com o aplicativo de forma inclusiva.
+## Histórias de Usuário
 
-# US-04 — Monitoramento Cardíaco
-Enquanto usuário Padrão, desejo acompanhar minha frequência cardíaca pelo aplicativo com intervalos de atualização definidos, para monitorar sinais físicos de esgotamento sem drenar excessivamente a bateria do meu dispositivo móvel.
+Este documento tem como objetivo apresentar a rastreabilidade das telas do sistema em relação às **Histórias de Usuário (US)** do projeto.
 
-# US-06 — Registro Emocional Diário
-Enquanto usuário do aplicativo, desejo registrar meu estado emocional diariamente, para acompanhar meu progresso e identificar padrões de esgotamento ao longo do tempo.
+Neste documento está registrada cada História de Usuário, bem como as telas relacionadas encontradas no diretório:
 
-# US-09 — Mini Games Antiestresse
-Enquanto usuário cadastrado no aplicativo, desejo acessar mini games de antiestresse durante pausas, para obter alívio imediato do estresse de forma leve e divertida, sem exigir concentração ou esforço cognitivo elevado.
+```text
+frontend/lib/screens/
+```
 
-# US-16 — Cadastro e Login
-Enquanto novo usuário, desejo criar uma conta e fazer login no aplicativo, para acessar minhas informações pessoais e histórico de bem-estar com segurança.
+Foram listadas apenas as Histórias de Usuário que possuem telas identificadas no código-fonte.
 
-# US-18 — Músicas Relaxantes e Sleepcasts
-Enquanto usuário, desejo acessar experiências de áudio narradas com paisagens sonoras e histórias descritivas voltadas para o relaxamento, para me ajudar a desligar e adormecer de forma natural ao fim do dia.
+---
+
+## (US-01) - Meditação (kaiosdev/projeto-pratico-es#1)
+
+### Telas relacionadas
+
+- **meditation_screen.dart** — Biblioteca de Meditação: tela de listagem das meditações disponíveis.
+- **meditation_session_screen.dart** — Sessão de Meditação: tela de execução de uma sessão de meditação.
+- **about_meditation_screen.dart** — Sobre Meditação: tela informativa sobre a prática de meditação.
+- **meditation_history_screen.dart** — Histórico de Meditação: tela de histórico das sessões realizadas *(implementação parcial)*.
+
+---
+
+## (US-02) - Música (kaiosdev/projeto-pratico-es#2)
+
+### Telas relacionadas
+
+- **music_screen.dart** — Biblioteca Musical: tela de listagem das faixas e playlists disponíveis.
+- **spotify_screen.dart** — Spotify: tela de integração com o Spotify.
+
+---
+
+## (US-03) - Pet Virtual (kaiosdev/projeto-pratico-es#3)
+
+### Telas relacionadas
+
+- **pet_screen.dart** — Tela principal de visualização e interação com o pet virtual.
+- **pet_items_screen.dart** — Tela de gerenciamento dos itens do pet.
+- **pet_skin_screen.dart** — Tela de seleção e personalização das skins do pet.
+
+---
+
+## (US-04) - Monitoramento (kaiosdev/projeto-pratico-es#4)
+
+### Telas relacionadas
+
+- **monitor_screen.dart** — Monitor BPM: tela de monitoramento dos batimentos cardíacos (BPM).
+
+---
+
+## (US-05) - Acessibilidade (kaiosdev/projeto-pratico-es#5)
+
+### Telas relacionadas
+
+- **accessibility_screen.dart** — Tela de configuração das opções de acessibilidade.
+
+---
+
+## (US-06) - Registro Emocional (kaiosdev/projeto-pratico-es#6)
+
+### Telas relacionadas
+
+- **registro_emocional_screen.dart** — Tela de registro do estado emocional do usuário.
+- **emotional_record_screen.dart** — Segunda implementação da tela de registro emocional.
+
+---
+
+## (US-09) - Minijogos (kaiosdev/projeto-pratico-es#9)
+
+### Telas relacionadas
+
+- **games_screen.dart** — Menu de Jogos: tela de seleção dos minijogos disponíveis.
+- **quiz_screen.dart** — Tela do minijogo Quiz.
+- **race_screen.dart** — Tela do minijogo Corrida.
+- **checkers_screen.dart** — Tela do minijogo Damas.
+
+---
+
+## (US-15) - Configurações (kaiosdev/projeto-pratico-es#15)
+
+### Telas relacionadas
+
+- **settings_screen.dart** — Tela de configurações gerais do aplicativo.
+
+---
+
+## (US-16) - Autenticação (kaiosdev/projeto-pratico-es#16)
+
+### Telas relacionadas
+
+- **login_screen.dart** — Tela de autenticação do usuário.
+- **register_screen.dart** — Tela de criação de nova conta.
+- **forgot_password_screen.dart** — Tela de recuperação de senha.
