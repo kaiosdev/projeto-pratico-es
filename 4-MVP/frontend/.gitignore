@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Arquivos sensíveis
+firebase-service-account.json
+*.json
+.env
+
+# Se estiver usando Node.js no backend
+node_modules/
+backend/node_modules/
+backend/.env
