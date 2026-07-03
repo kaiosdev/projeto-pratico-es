@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "550018273495",
+    "project_id": "slowdown-app-c2d1c",
+    "storage_bucket": "slowdown-app-c2d1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550018273495:android:d06bc0665b79f64505a092",
+        "android_client_info": {
+          "package_name": "com.example.slowdown"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550018273495-q5hfcj5lnnlnk97grkac8ji9272u6b9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm8VojLJPh97Pjk5TqWm7xDo6J3x5rFtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550018273495-q5hfcj5lnnlnk97grkac8ji9272u6b9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
