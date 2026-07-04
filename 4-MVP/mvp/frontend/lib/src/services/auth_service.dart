@@ -40,7 +40,8 @@ class AuthService {
       }
 
       return AuthResult.erro(body['mensagem'] ?? 'E-mail ou senha incorretos.');
-    } catch (_) {
+    } catch (e) {
+      print('🚨 ERRO REAL DA REDE: $e'); // O espião entra aqui!
       return AuthResult.erro('Não foi possível conectar ao servidor. Verifique sua conexão.');
     }
   }
