@@ -26,7 +26,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         
-        manifestPlaceholders = [redirectSchemeName: "spotify-app-remote", redirectHostName: "callback"]
+        manifestPlaceholders += mapOf("redirectSchemeName" to "spotify-app-remote", "redirectHostName" to "callback")
         // Adicione estas linhas para o login do Spotify funcionar:
         manifestPlaceholders += mapOf(
             "redirectSchemeName" to "slowdown",

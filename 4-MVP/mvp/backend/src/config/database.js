@@ -1,3 +1,4 @@
+console.log("🚨 Senha que o Node está tentando usar:", process.env.DB_PASSWORD);
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
