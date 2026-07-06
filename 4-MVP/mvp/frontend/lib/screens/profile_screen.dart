@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'premium_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -194,6 +195,39 @@ class ProfileScreen extends StatelessWidget {
                             fontWeight: FontWeight.w800,
                             letterSpacing: 2,
                             color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // ── Botão Premium ─────────────────────────────────
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: OutlinedButton.icon(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const PremiumScreen()),
+                        ),
+                        icon: const Icon(Icons.workspace_premium_rounded,
+                            color: Color(0xFFD4A017)),
+                        label: const Text(
+                          'SEJA PREMIUM',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 2,
+                            color: kDark,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(
+                              color: Color(0xFFD4A017), width: 1.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
                           ),
                         ),
                       ),

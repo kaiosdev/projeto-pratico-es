@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'spotify_screen.dart'; // Import da tela do Spotify
+import 'sleepcasts_screen.dart';
 
 class MusicScreen extends StatefulWidget {
   const MusicScreen({super.key});
@@ -112,6 +113,11 @@ class _MusicScreenState extends State<MusicScreen> {
                             selected: _selectedTab == 1,
                             onTap: () => setState(() => _selectedTab = 1),
                           ),
+                          _Tab(
+                            label: 'SLEEPCASTS',
+                            selected: _selectedTab == 2,
+                            onTap: () => setState(() => _selectedTab = 2),
+                          ),
                         ],
                       ),
                     ),
@@ -123,7 +129,9 @@ class _MusicScreenState extends State<MusicScreen> {
                       duration: const Duration(milliseconds: 300),
                       child: _selectedTab == 0
                           ? _buildAmbientSoundsList()
-                          : _buildSpotifyIntegrationCard(context),
+                          : _selectedTab == 1
+                              ? _buildSpotifyIntegrationCard(context)
+                              : _buildSleepcastsCard(context),
                     ),
                   ),
 
@@ -250,9 +258,88 @@ class _MusicScreenState extends State<MusicScreen> {
       ),
     );
   }
+  // ─── Card do Sleepcasts (Tab 2) ───
+  Widget _buildSleepcastsCard(BuildContext context) {
+    const kNightBlue = Color(0xFF2B2B45);
+    return Center(
+      key: const ValueKey('SleepcastsTab'),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: kNightBlue,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: kNightBlue.withOpacity(0.3),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  )
+                ],
+              ),
+              child: const Icon(Icons.bedtime_rounded, color: Colors.white, size: 40),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              'Sleepcasts',
+              style: TextStyle(
+                color: kDark,
+                fontSize: 22,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Histórias relaxantes narradas pra você dormir melhor, com temporizador de soneca.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kDark.withOpacity(0.6),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SleepcastsScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kNightBlue,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+                child: const Text(
+                  'ABRIR SLEEPCASTS',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 60),
+          ],
+        ),
+      ),
+    );
+  }
 }
-
-// ─── Componentes Visuais (Tabs, Cards, MiniPlayer, Logo) ─────────────
 
 class _Tab extends StatelessWidget {
   final String label;

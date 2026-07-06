@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slowdown/screens/register_screen.dart';
+import '../src/providers/auth_provider.dart';
 
 import '../src/providers/auth_provider.dart'; // Import do Riverpod (Felipe)
 import '../src/services/auth_service.dart'; // Import do Google (Seu)
@@ -8,8 +9,7 @@ import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'menu_screen.dart';
 
-// Transformado em ConsumerStatefulWidget para escutar o Riverpod
-class LoginScreen extends ConsumerStatefulWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
@@ -36,8 +36,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  // ─── Lógica Tradicional via Riverpod (Felipe) ──────────────────────────
-  Future<void> _handleLogin() async {
+  void _handleLogin() {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
@@ -51,59 +50,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
 
-    try {
-      await ref.read(authNotifierProvider.notifier).login(email, password);
-
-      if (!mounted) return;
-      
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString().replaceAll('Exception: ', ''), style: const TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red.shade700,
-        ),
-      );
-    }
+    // TODO: Integrar com Firebase Auth (US-16)
+    debugPrint('Login local: $email');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
   }
 
-  // ─── Lógica do Google Atualizada (Sua) ──────────────────────────
-  Future<void> _handleGoogleLogin() async {
-    setState(() => _isLoadingGoogle = true);
-
-    try {
-      final result = await AuthService.loginComGoogle();
-      
-      if (!mounted) return;
-
-      if (result.sucesso) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(result.mensagemErro ?? 'Erro ao conectar com Google', style: const TextStyle(color: Colors.white)),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _isLoadingGoogle = false);
-    }
+  void _handleGoogleLogin() {
+    // TODO: Integrar com Google OAuth (US-16 / Persona Ana)
+    debugPrint('Iniciando Login via Google');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // Escutando o estado global para desativar o botão durante o login local
-    final authState = ref.watch(authNotifierProvider);
-    final isLoadingLocal = authState.isLoading;
-
     return Scaffold(
       body: Column(
         children: [
@@ -210,16 +175,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             SizedBox(
                               height: 52,
                               child: ElevatedButton(
-                                onPressed: isLoadingLocal || _isLoadingGoogle ? null : _handleLogin,
+                                onPressed: _handleLogin,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
+                                  disabledBackgroundColor:
+                                      Colors.white.withOpacity(0.5),
+                                  foregroundColor: kDark,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                                   disabledBackgroundColor: Colors.white.withOpacity(0.5),
                                 ),
-                                child: isLoadingLocal
-                                    ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2.5, color: kDark))
-                                    : const Text('ENTRAR', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900, letterSpacing: 2, color: kDark)),
+                                child: const Text(
+                                  'ENTRAR',
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900, letterSpacing: 2, color: kDark),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 16),
@@ -268,6 +237,41 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _handleLogin() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Preencha email e senha.'),
+          backgroundColor: Color(0xFF1C1C1C),
+        ),
+      );
+      return;
+    }
+
+    try {
+      // Chamada real ao Riverpod + Firebase + Node.js (mesmo fluxo do cadastro)
+      await ref.read(authNotifierProvider.notifier).login(email, password);
+
+      if (!mounted) return;
+      // Usuário já existente: vai direto pra Home, sem passar pelo onboarding
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', '')),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+    }
   }
 }
 
