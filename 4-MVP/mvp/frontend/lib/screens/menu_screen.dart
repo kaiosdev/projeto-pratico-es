@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
 import 'settings_screen.dart';
+import 'notifications_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -84,6 +85,18 @@ class MenuScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (_) => const SettingsScreen()),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Botão NOTIFICAÇÕES
+                    _MenuButton(
+                      label: 'NOTIFICAÇÕES',
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const NotificationsScreen()),
                       ),
                     ),
 

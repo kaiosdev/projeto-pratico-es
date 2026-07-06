@@ -4,6 +4,7 @@ import 'pet_screen.dart';
 import 'monitor_screen.dart';
 import 'menu_screen.dart';
 import 'music_screen.dart'; // 👉 Novo import para a tela de Música
+import 'social_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -81,54 +82,73 @@ class HomeScreen extends StatelessWidget {
                   // ── Botões de navegação ───────────────────────────
                   Padding(
                     padding: const EdgeInsets.only(bottom: 52),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Melhor distribuição para 4 botões
-                      children: [
-                        // Botão Meditação
-                        _NavButton(
-                          icon: Icons.self_improvement_rounded,
-                          label: 'Meditação',
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) =>
-                                    const AboutMeditationScreen()),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Botão Meditação
+                          _NavButton(
+                            icon: Icons.self_improvement_rounded,
+                            label: 'Meditação',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      const AboutMeditationScreen()),
+                            ),
                           ),
-                        ),
+                          const SizedBox(width: 18),
 
-                        // 👉 NOVO: Botão Sons/Música
-                        _NavButton(
-                          icon: Icons.music_note_rounded,
-                          label: 'Sons',
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const MusicScreen()),
+                          // 👉 Botão Sons/Música
+                          _NavButton(
+                            icon: Icons.music_note_rounded,
+                            label: 'Sons',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const MusicScreen()),
+                            ),
                           ),
-                        ),
+                          const SizedBox(width: 18),
 
-                        // Botão Pet
-                        _NavButton(
-                          icon: Icons.pets_rounded,
-                          label: 'Pet',
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const PetScreen()),
+                          // Botão Pet
+                          _NavButton(
+                            icon: Icons.pets_rounded,
+                            label: 'Pet',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const PetScreen()),
+                            ),
                           ),
-                        ),
+                          const SizedBox(width: 18),
 
-                        // Botão Saúde/Monitor
-                        _NavButton(
-                          icon: Icons.favorite_rounded,
-                          label: 'Saúde',
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const MonitorScreen()),
+                          // Botão Saúde/Monitor
+                          _NavButton(
+                            icon: Icons.favorite_rounded,
+                            label: 'Saúde',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const MonitorScreen()),
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 18),
+
+                          // 👉 Novo: Botão Social
+                          _NavButton(
+                            icon: Icons.people_alt_rounded,
+                            label: 'Social',
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const SocialScreen()),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

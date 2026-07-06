@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'health_sync_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -9,6 +11,48 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _silentMode = false;
+
+  // ── Acessibilidade ──────────────────────────────────────────────────
+  // TODO: comandos de voz ainda dependem do pacote `speech_to_text`
+  // (não está no pubspec.yaml ainda). O toggle abaixo já persiste a
+  // preferência do usuário; falta plugar o listener real quando o
+  // pacote for adicionado.
+  bool _voiceCommandsEnabled = false;
+  bool _largeTextEnabled = false;
+  bool _highContrastEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAccessibilityPrefs();
+  }
+
+  Future<void> _loadAccessibilityPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _voiceCommandsEnabled = prefs.getBool('a11y_voice_commands') ?? false;
+      _largeTextEnabled = prefs.getBool('a11y_large_text') ?? false;
+      _highContrastEnabled = prefs.getBool('a11y_high_contrast') ?? false;
+    });
+  }
+
+  Future<void> _setVoiceCommands(bool value) async {
+    setState(() => _voiceCommandsEnabled = value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('a11y_voice_commands', value);
+  }
+
+  Future<void> _setLargeText(bool value) async {
+    setState(() => _largeTextEnabled = value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('a11y_large_text', value);
+  }
+
+  Future<void> _setHighContrast(bool value) async {
+    setState(() => _highContrastEnabled = value);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('a11y_high_contrast', value);
+  }
 
   static const Color kYellow = Color(0xFFF5B800);
   static const Color kDark = Color(0xFF1C1C1C);
@@ -192,6 +236,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   const SizedBox(height: 10),
 
+                  // ── Item: HealthKit / Google Fit ─────────────────────
+                  _SettingsItem(
+                    icon: Icons.favorite_rounded,
+                    title: 'HEALTHKIT & GOOGLE FIT',
+                    subtitle: 'CONNECT YOUR HEALTH DATA',
+                    trailing: const Icon(
+                      Icons.chevron_right_rounded,
+                      color: Color(0xFF1C1C1C),
+                      size: 22,
+                    ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const HealthSyncScreen()),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
                   // ── Item: Mobile Data ────────────────────────────────
                   _SettingsItem(
                     icon: Icons.storage_rounded,
@@ -201,6 +264,82 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: () {
                       // TODO: tela de qualidade de dados
                     },
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // ── Label ACCESSIBILITY ──────────────────────────────
+                  Text(
+                    'ACCESSIBILITY',
+                    style: TextStyle(
+                      color: kDark.withOpacity(0.45),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ── Item: Comandos de voz ─────────────────────────────
+                  _SettingsItem(
+                    icon: Icons.mic_rounded,
+                    title: 'VOICE COMMANDS',
+                    subtitle: 'CONTROL THE APP BY SPEAKING',
+                    trailing: Transform.scale(
+                      scale: 0.85,
+                      child: Switch(
+                        value: _voiceCommandsEnabled,
+                        onChanged: _setVoiceCommands,
+                        activeColor: Colors.white,
+                        activeTrackColor: kDark,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: kDark,
+                      ),
+                    ),
+                    onTap: () => _setVoiceCommands(!_voiceCommandsEnabled),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // ── Item: Texto grande ────────────────────────────────
+                  _SettingsItem(
+                    icon: Icons.text_fields_rounded,
+                    title: 'LARGE TEXT',
+                    subtitle: 'INCREASE TEXT SIZE ACROSS THE APP',
+                    trailing: Transform.scale(
+                      scale: 0.85,
+                      child: Switch(
+                        value: _largeTextEnabled,
+                        onChanged: _setLargeText,
+                        activeColor: Colors.white,
+                        activeTrackColor: kDark,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: kDark,
+                      ),
+                    ),
+                    onTap: () => _setLargeText(!_largeTextEnabled),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // ── Item: Alto contraste ──────────────────────────────
+                  _SettingsItem(
+                    icon: Icons.contrast_rounded,
+                    title: 'HIGH CONTRAST',
+                    subtitle: 'IMPROVE READABILITY',
+                    trailing: Transform.scale(
+                      scale: 0.85,
+                      child: Switch(
+                        value: _highContrastEnabled,
+                        onChanged: _setHighContrast,
+                        activeColor: Colors.white,
+                        activeTrackColor: kDark,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: kDark,
+                      ),
+                    ),
+                    onTap: () => _setHighContrast(!_highContrastEnabled),
                   ),
                 ],
               ),

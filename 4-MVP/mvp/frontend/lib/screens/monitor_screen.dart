@@ -1,5 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'chatbot_screen.dart';
+import 'emotional_record_screen.dart';
+import 'emotional_thermometer_screen.dart';
+import 'report_screen.dart';
 
 class MonitorScreen extends StatefulWidget {
   const MonitorScreen({super.key});
@@ -219,6 +223,81 @@ class _MonitorScreenState extends State<MonitorScreen>
                             max: h['max'],
                           ),
                         )),
+
+                    const SizedBox(height: 32),
+
+                    // ── Saúde emocional ──────────────────────────────
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'SAÚDE EMOCIONAL',
+                        style: TextStyle(
+                          color: kDark.withOpacity(0.5),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    _EmotionalActionCard(
+                      icon: Icons.mood_rounded,
+                      title: 'REGISTRAR HUMOR',
+                      subtitle: 'Como você está se sentindo agora?',
+                      color: const Color(0xFFF5B800),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const EmotionalRecordScreen()),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    _EmotionalActionCard(
+                      icon: Icons.chat_bubble_rounded,
+                      title: 'CONVERSAR COM O ASSISTENTE',
+                      subtitle: 'Desabafe ou peça uma sugestão',
+                      color: const Color(0xFFAA8A5C),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ChatbotScreen()),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    _EmotionalActionCard(
+                      icon: Icons.history_rounded,
+                      title: 'HISTÓRICO EMOCIONAL',
+                      subtitle: 'Veja seus registros anteriores',
+                      color: const Color(0xFF9B8EC4),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const EmotionalHistoryScreen()),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    _EmotionalActionCard(
+                      icon: Icons.thermostat_rounded,
+                      title: 'TERMÔMETRO EMOCIONAL',
+                      subtitle: 'Insights e evolução do seu humor',
+                      color: const Color(0xFF6AAA7C),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const EmotionalThermometerScreen()),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    _EmotionalActionCard(
+                      icon: Icons.summarize_rounded,
+                      title: 'RELATÓRIO',
+                      subtitle: 'Emocional, meditação e BPM em um só lugar',
+                      color: const Color(0xFF5C7AAA),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ReportScreen()),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -364,6 +443,72 @@ class _HistoryRow extends StatelessWidget {
           ),
           const Icon(Icons.favorite_rounded, color: Color(0xFF6AAA7C), size: 16),
         ],
+      ),
+    );
+  }
+}
+
+// ─── Widget: Card de acesso à saúde emocional ─────────────────────────────────
+
+class _EmotionalActionCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  final VoidCallback onTap;
+
+  static const Color kDark = Color(0xFF1C1C1C);
+
+  const _EmotionalActionCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: color.withOpacity(0.3), width: 1.5),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(
+                          color: kDark, fontSize: 13, fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 2),
+                  Text(subtitle,
+                      style: TextStyle(
+                          color: kDark.withOpacity(0.5),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500)),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: color, size: 26),
+          ],
+        ),
       ),
     );
   }
