@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'api_config.dart';
 import 'session_manager.dart';
-import 'package:flutter/foundation.dart'; // <--- ESTA LINHA RESOLVE O ERRO DO debugPrint
+import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthResult {
   final bool sucesso;
@@ -85,4 +87,63 @@ class AuthService {
     return false;
   }
 }
+  static Future<AuthResult> loginComGoogle() async {
+    try {
+      // 1. Inicia o fluxo de login nativo do Google
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      
+      if (googleUser == null) {
+        return AuthResult.erro('Login com Google cancelado.'); 
+      }
+
+      // 2. Obtém os detalhes de autenticação
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      // 3. Cria a credencial para o Firebase
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // 4. Autentica no Firebase
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
+
+      if (user == null) {
+        return AuthResult.erro('Erro interno ao processar dados do Google.');
+      }
+
+      // 5. Pega o Token JWT do Firebase
+      final String? tokenFirebase = await user.getIdToken();
+
+      // 6. Sincroniza com a sua API Node.js (CORRIGIDO PARA ApiConfig.baseUrl)
+      final response = await http.post(
+        Uri.parse('${ApiConfig.baseUrl}/auth/sync'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $tokenFirebase'
+        },
+        body: jsonEncode({
+          'nome': user.displayName ?? 'Usuário do Google',
+        }),
+      );
+
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await SessionManager.salvarSessao(
+          token: tokenFirebase ?? '', 
+          usuarioId: body['usuario']['id'] ?? 0,
+          usuarioNome: body['usuario']['nome'] ?? user.displayName ?? 'Usuário',
+        );
+        return AuthResult.sucessoCom(uid: user.uid);
+      }
+
+      return AuthResult.erro(body['mensagem'] ?? 'Erro ao sincronizar com servidor.');
+
+    } catch (e) {
+      debugPrint('🚨 ERRO GOOGLE SIGN-IN: $e');
+      return AuthResult.erro('Não foi possível conectar ao Google. Verifique sua conexão.');
+    }
+  }
 }

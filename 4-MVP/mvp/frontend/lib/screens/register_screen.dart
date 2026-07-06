@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../src/providers/auth_provider.dart';
-import '../src/utils/validador_auth.dart'; // Importante: Chamando o validador central!
+import '../src/utils/validador_auth.dart'; 
+import '../src/services/auth_service.dart'; // Import do Serviço de Autenticação
 import 'login_screen.dart';
 import 'otp_verification_screen.dart';
+import 'home_screen.dart'; // Import da HomeScreen para o redirecionamento do Google
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -21,6 +23,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   bool _obscurePassword = true;
   bool _obscureConfirm = true;
   bool _acceptTerms = false;
+  bool _isLoadingGoogle = false; // Novo estado para o loading do Google
 
   // Paleta SlowDown
   static const Color kYellow = Color(0xFFF5B800);
@@ -92,17 +95,34 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
   }
   
-  void _handleGoogleRegister() {
-    // Integração com Google OAuth (US-16 / Persona Ana)
-    debugPrint('Iniciando Cadastro via Google');
-    // TODO: Chamar o Provider do Google Sign In e navegar direto pra Home (dispensa OTP)
+  // ─── Lógica do Google Atualizada ──────────────────────────
+  Future<void> _handleGoogleRegister() async {
+    setState(() => _isLoadingGoogle = true);
+
+    try {
+      final result = await AuthService.loginComGoogle();
+      
+      if (!mounted) return;
+
+      if (result.sucesso) {
+        // Redireciona direto para a Home, dispensando OTP
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        _showSnackBar(result.mensagemErro ?? 'Erro ao cadastrar com Google', isError: true);
+      }
+    } finally {
+      if (mounted) setState(() => _isLoadingGoogle = false);
+    }
   }
 
   void _showSnackBar(String message, {bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: const TextStyle(color: Colors.white)),
-        backgroundColor: isError ? kError : Colors.green, // Verde para sucesso
+        backgroundColor: isError ? kError : Colors.green,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.all(16),
@@ -142,7 +162,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       ),
                     ),
                     const _SlowDownLogo(size: 28),
-                    const SizedBox(width: 40), // Espaçador para centralizar a logo
+                    const SizedBox(width: 40),
                   ],
                 ),
               ),
@@ -266,19 +286,22 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             ),
                             const SizedBox(height: 16),
                             
-                            // Botão Google
+                            // Botão Google Atualizado
                             SizedBox(
                               height: 52,
                               child: OutlinedButton.icon(
-                                onPressed: isLoading ? null : _handleGoogleRegister,
+                                onPressed: _isLoadingGoogle || isLoading ? null : _handleGoogleRegister,
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(color: Colors.white, width: 2),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                                  disabledForegroundColor: Colors.white.withOpacity(0.5),
                                 ),
-                                icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 32),
-                                label: const Text(
-                                  'Criar com Google',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                                icon: _isLoadingGoogle
+                                    ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                    : const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 32),
+                                label: Text(
+                                  _isLoadingGoogle ? 'Conectando...' : 'Criar com Google',
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
                                 ),
                               ),
                             ),
