@@ -1,82 +1,100 @@
-# Integração Auth — Flutter ↔ Backend
+<div align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
+  <img src="https://img.shields.io/badge/Riverpod-1A202C?style=for-the-badge&logo=dart&logoColor=white" alt="Riverpod">
+  
+  <h1>🧘 SlowDown App — Frontend</h1>
+  <p><b>Aplicativo focado em bem-estar, registro emocional e gamificação em saúde, desenvolvido em Flutter.</b></p>
+</div>
 
-Este pacote contém os arquivos **novos** e **alterados** para conectar as telas
-de login e cadastro do Flutter ao backend (`slowdown-backend`) que já está pronto.
+<hr>
 
-## 📂 Arquivos novos (criar)
+## 📋 Sobre o Projeto
+O **SlowDown** é a interface móvel (Frontend) de um ecossistema de saúde e bem-estar. O aplicativo consome uma API RESTful (Backend em Node.js) para gerenciar usuários, registros emocionais, autenticação em duas etapas (OTP) e persistência de dados.
 
-Copie estes 3 arquivos para dentro de `lib/src/services/` do seu projeto Flutter
-(crie a pasta `services` se não existir):
 
-- `lib/src/services/api_config.dart` — guarda a URL do backend
-- `lib/src/services/auth_service.dart` — faz as chamadas HTTP de login/cadastro
-- `lib/src/services/session_manager.dart` — guarda o token JWT no dispositivo
+## 🛠️ Ferramentas Necessárias
 
-## 📝 Arquivos alterados (substituir)
+Para rodar este projeto na sua máquina, você precisará ter instalado:
 
-Estes 2 arquivos já existiam no seu projeto e foram modificados — **substitua
-os originais por estes**:
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (Versão 3.10 ou superior)
+- [Dart SDK](https://dart.dev/get-dart)
+- Editor de código: [VS Code](https://code.visualstudio.com/) ou [Android Studio](https://developer.android.com/studio)
+- Um emulador configurado (Android/iOS) ou um dispositivo físico conectado.
+- **O Backend do SlowDown:** O servidor Node.js precisa estar rodando localmente.
 
-- `lib/screens/login_screen.dart`
-- `lib/screens/register_screen.dart`
 
-O que mudou neles: a função `_handleLogin` / `_handleRegister`, que antes só
-navegava direto pra Home (TODO comentado), agora chama o `AuthService` de
-verdade e trata erro (ex: email já cadastrado, senha errada, backend fora do ar).
+## 🔗 Conectando ao Backend e Banco de Dados
 
-## ⚙️ pubspec.yaml
+### Passo 1: Configurar a URL da API
+Para o Flutter "enxergar" o backend, você deve configurar o IP do servidor no arquivo de configuração de rede.
 
-Foram adicionadas 2 dependências novas:
-```yaml
-http: ^1.2.2
-shared_preferences: ^2.3.2
+1. Navegue até o arquivo: `lib/src/services/api_config.dart`.
+2. Altere a variável `baseUrl` de acordo com o seu ambiente de teste:
+
+```dart
+class ApiConfig {
+  // 📱 Para Emuladores Android (o emulador mapeia o localhost do seu PC para 10.0.2.2)
+  static const String baseUrl = '[http://10.0.2.2:3000](http://10.0.2.2:3000)';
+
+  // 🍎 Para Simuladores iOS ou Web
+  // static const String baseUrl = 'http://localhost:3000';
+
+  // ☁️ Para Produção (quando o backend estiver online)
+  // static const String baseUrl = '[https://api.slowdown.com.br](https://api.slowdown.com.br)';
+}
 ```
-Adicione essas linhas no seu `pubspec.yaml` (dentro de `dependencies:`) e rode:
+### Passo 2: Banco de Dados
+A conexão com o banco de dados MySQL é de inteira responsabilidade do Backend. Certifique-se de que o projeto `slowdown-backend` esteja com o arquivo `.env` configurado corretamente e o servidor executando na porta `3000` (ou a porta que você configurou acima).
+
+---
+
+## 🚀 Como Executar o Projeto
+
+Com as ferramentas instaladas e o Backend rodando, siga os passos abaixo no seu terminal:
+
+**1. Clone o repositório:**
+```bash
+git clone [https://github.com/seu-usuario/slowdown-frontend.git](https://github.com/seu-usuario/slowdown-frontend.git)
+cd slowdown-frontend
+```
+
+**2. Baixe as dependências do Flutter:**
 ```bash
 flutter pub get
 ```
 
-## ✅ Como testar (passo a passo)
+**3. Limpe o cache de builds anteriores (Recomendado):**
+```bash
+flutter clean
+```
 
-1. **Suba o backend primeiro** (na pasta `slowdown-backend`):
-   ```bash
-   npm run dev
-   ```
-   Confirme que aparece `🚀 Servidor rodando em http://localhost:3000` e
-   `✅ Conectado ao MySQL com sucesso!`
+**4. Execute o aplicativo:**
+Selecione o seu emulador no VS Code (canto inferior direito) ou rode diretamente no terminal:
+```bash
+flutter run
+```
 
-2. **Aplique os arquivos deste pacote** no seu projeto Flutter.
+---
 
-3. **Rode o app no Chrome**:
-   ```bash
-   flutter run -d chrome
-   ```
+## 📁 Estrutura do Projeto
 
-4. Na tela de **cadastro**, crie uma conta de teste (nome, email, senha com
-   6+ caracteres e pelo menos 1 número). Se der certo, você é redirecionado
-   para a Home — e o usuário já está salvo no MySQL.
+A arquitetura do projeto foi dividida para facilitar a manutenção e escalabilidade:
 
-5. Faça **logout** (se já tiver um botão) ou recarregue o app e tente
-   fazer **login** com o mesmo email/senha. Deve funcionar.
+```text
+lib/
+ ┣ 📂 screens/       # Telas da interface (Login, Register, Home, OTP, etc.)
+ ┣ 📂 src/
+ ┃ ┣ 📂 providers/   # Gerenciadores de estado (Riverpod)
+ ┃ ┣ 📂 services/    # Comunicação com a API (HTTP) e SharedPreferences
+ ┃ ┗ 📂 utils/       # Classes utilitárias (ValidadorAuth, Máscaras, etc.)
+ ┣ 📂 widgets/       # Componentes visuais reutilizáveis (Botões, Inputs customizados)
+ ┗ 📜 main.dart      # Ponto de entrada do aplicativo
+```
 
-6. Teste um erro de propósito: tente cadastrar o mesmo email duas vezes.
-   Deve aparecer a mensagem "Este email já está cadastrado." vinda direto
-   do backend.
+---
 
-## 🐛 Erros comuns
-
-- **"Não foi possível conectar ao servidor"** → o backend não está rodando,
-  ou está rodando em outra porta. Confirme em `api_config.dart` se a porta
-  bate com a do `.env` do backend (padrão: 3000).
-- **Erro de CORS no console do Chrome** → não deveria acontecer, pois o
-  backend já tem `app.use(cors())`. Se acontecer, confirme que está usando
-  o `server.js` mais recente do backend.
-- **"A senha deve conter pelo menos um número"** → essa validação já existe
-  no `ValidadorAuth` do projeto (não foi alterada); é regra do CT04, não bug.
-
-## ➡️ Próximo passo depois disso
-
-Com login/cadastro funcionando de ponta a ponta, o próximo passo natural é
-guardar o token nas próximas chamadas (ex: ao buscar dados do `Pet` ou
-salvar um registro emocional) usando `SessionManager.obterToken()` no
-header `Authorization: Bearer <token>`.
+<div align="center">
+  <sub>Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
+  Professor: Dr. Andrey Rodrigues</sub>
+</div>
