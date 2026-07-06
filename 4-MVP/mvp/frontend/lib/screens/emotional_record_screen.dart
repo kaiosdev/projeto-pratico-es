@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../src/utils/validador_registro_emocional.dart';
+import 'emotional_entry_storage.dart'; // Importação adicionada para persistência local
 
 class EmotionalRecordScreen extends StatefulWidget {
   const EmotionalRecordScreen({super.key});
@@ -70,8 +71,8 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
     }
 
     // SIMULAÇÃO: RN03 / AC5 - Verificar se já existe um registro hoje
-    // TODO: Substituir pela checagem real na API via Dio
-    bool jaExisteRegistroHoje = true; 
+    // TODO: Substituir pela checagem real na API via Dio no futuro
+    bool jaExisteRegistroHoje = false; // Mude para true para testar o Alert
 
     if (jaExisteRegistroHoje) {
       final confirmar = await showDialog<bool>(
@@ -98,9 +99,27 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
       if (confirmar != true) return;
     }
 
-    // TODO: enviar dados ao backend (humorController.js) via Dio
+    // Busca o label correto da cor selecionada para salvar no Storage
+    String labelCor = 'Registro';
+    if (_selectedColor != null) {
+      final colorData = _colors.firstWhere((c) => c['hex'] == _selectedColor, orElse: () => {'label': 'Registro'});
+      labelCor = colorData['label'] as String;
+    }
+
+    // Persiste localmente via EmotionalEntryStorage (Integração das duas versões)
+    await EmotionalEntryStorage.add(
+      EmotionalEntry(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        date: DateTime.now(),
+        emoji: _selectedEmoji!,
+        label: labelCor,
+        escala: _escala,
+        colorHex: _selectedColor!,
+        nota: _notaController.text,
+      ),
+    );
+
     setState(() => _saved = true);
-    _showSnackBar('Registro salvo com sucesso!');
   }
 
   void _showSnackBar(String msg, {bool isError = false}) {
