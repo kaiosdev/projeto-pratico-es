@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../src/utils/validador_registro_emocional.dart';
 
 class EmotionalRecordScreen extends StatefulWidget {
@@ -49,7 +50,8 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
     super.dispose();
   }
 
-  void _handleSave() {
+  // ─── Lógica de Validação e Salvamento (US-06) ──────────────────────────────
+  Future<void> _handleSave() async {
     final resultado = ValidadorRegistroEmocional.registrarHumor(
       emoji: _selectedEmoji,
       escala: _escala,
@@ -57,31 +59,57 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
     );
 
     if (!resultado.valido) {
-      _showSnackBar(resultado.primeiroErro ?? 'Preencha todos os campos.',
-          isError: true);
+      _showSnackBar(resultado.primeiroErro ?? 'Preencha todos os campos.', isError: true);
       return;
     }
 
-    final notaErro =
-        ValidadorRegistroEmocional.validarNota(_notaController.text);
+    final notaErro = ValidadorRegistroEmocional.validarNota(_notaController.text);
     if (notaErro != null) {
       _showSnackBar(notaErro, isError: true);
       return;
     }
 
-    // TODO: salvar no backend via Dio
+    // SIMULAÇÃO: RN03 / AC5 - Verificar se já existe um registro hoje
+    // TODO: Substituir pela checagem real na API via Dio
+    bool jaExisteRegistroHoje = true; 
+
+    if (jaExisteRegistroHoje) {
+      final confirmar = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: const Text('Registro já existente', style: TextStyle(fontWeight: FontWeight.bold)),
+          content: const Text('Você já possui um registro emocional salvo hoje. Deseja atualizá-lo com estas novas informações?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancelar', style: TextStyle(color: Colors.grey)),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              style: ElevatedButton.styleFrom(backgroundColor: kDark),
+              child: const Text('Atualizar', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      );
+
+      // Se o usuário cancelou o dialog, interrompe o salvamento
+      if (confirmar != true) return;
+    }
+
+    // TODO: enviar dados ao backend (humorController.js) via Dio
     setState(() => _saved = true);
-    _showSnackBar('Humor registrado com sucesso! 🎉');
+    _showSnackBar('Registro salvo com sucesso!');
   }
 
   void _showSnackBar(String msg, {bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg, style: const TextStyle(color: Colors.white)),
-        backgroundColor: isError ? Colors.red.shade700 : kDark,
+        backgroundColor: isError ? Colors.red.shade700 : (isError == false && msg.contains('sucesso') ? Colors.green : kDark),
         behavior: SnackBarBehavior.floating,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.all(16),
       ),
     );
@@ -106,8 +134,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
             child: SafeArea(
               bottom: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -120,13 +147,11 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                           color: Colors.white24,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.reply_rounded,
-                            color: Colors.white, size: 22),
+                        child: const Icon(Icons.reply_rounded, color: Colors.white, size: 22),
                       ),
                     ),
-                    _SlowDownLogo(size: 28),
-                    const Icon(Icons.menu_rounded,
-                        color: Colors.white, size: 28),
+                    const _SlowDownLogo(size: 28),
+                    const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
                   ],
                 ),
               ),
@@ -169,8 +194,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                 decoration: BoxDecoration(
                   color: _currentColor.withOpacity(0.2),
                   shape: BoxShape.circle,
-                  border:
-                      Border.all(color: _currentColor, width: 2),
+                  border: Border.all(color: _currentColor, width: 2),
                 ),
                 child: Center(
                   child: Text(
@@ -208,7 +232,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
           const SizedBox(height: 28),
 
           // ── Seção: Emoji ─────────────────────────────────────────────
-          _SectionLabel(label: 'HUMOR', icon: Icons.tag_faces_rounded),
+          const _SectionLabel(label: 'HUMOR', icon: Icons.tag_faces_rounded),
           const SizedBox(height: 12),
           GridView.count(
             crossAxisCount: 3,
@@ -220,8 +244,8 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
             children: _emojis.map((e) {
               final isSelected = _selectedEmoji == e['emoji'];
               return GestureDetector(
-                onTap: () =>
-                    setState(() => _selectedEmoji = e['emoji']),
+                key: Key('emoji_${e['emoji']}'), // Key para os testes automatizados
+                onTap: () => setState(() => _selectedEmoji = e['emoji']),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   decoration: BoxDecoration(
@@ -230,9 +254,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                         : Colors.white.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: isSelected
-                          ? e['color'] as Color
-                          : Colors.transparent,
+                      color: isSelected ? e['color'] as Color : Colors.transparent,
                       width: 2,
                     ),
                   ),
@@ -241,9 +263,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                     children: [
                       Text(
                         e['emoji'],
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -264,8 +284,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
           const SizedBox(height: 24),
 
           // ── Seção: Escala emocional ──────────────────────────────────
-          _SectionLabel(
-              label: 'ESCALA EMOCIONAL', icon: Icons.bar_chart_rounded),
+          const _SectionLabel(label: 'ESCALA EMOCIONAL', icon: Icons.bar_chart_rounded),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(16),
@@ -279,14 +298,10 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Muito mal',
-                        style: TextStyle(
-                            color: kDark.withOpacity(0.5),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500)),
+                        style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 11, fontWeight: FontWeight.w500)),
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                       decoration: BoxDecoration(
                         color: _currentColor,
                         borderRadius: BorderRadius.circular(50),
@@ -301,17 +316,13 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                       ),
                     ),
                     Text('Ótimo',
-                        style: TextStyle(
-                            color: kDark.withOpacity(0.5),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500)),
+                        style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 11, fontWeight: FontWeight.w500)),
                   ],
                 ),
                 SliderTheme(
                   data: SliderThemeData(
                     activeTrackColor: _currentColor,
-                    inactiveTrackColor:
-                        _currentColor.withOpacity(0.2),
+                    inactiveTrackColor: _currentColor.withOpacity(0.2),
                     thumbColor: _currentColor,
                     overlayColor: _currentColor.withOpacity(0.15),
                     trackHeight: 6,
@@ -321,8 +332,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                     min: 1,
                     max: 10,
                     divisions: 9,
-                    onChanged: (v) =>
-                        setState(() => _escala = v.round()),
+                    onChanged: (v) => setState(() => _escala = v.round()),
                   ),
                 ),
               ],
@@ -332,16 +342,15 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
           const SizedBox(height: 24),
 
           // ── Seção: Cor ───────────────────────────────────────────────
-          _SectionLabel(
-              label: 'COR DO HUMOR', icon: Icons.palette_rounded),
+          const _SectionLabel(label: 'COR DO HUMOR', icon: Icons.palette_rounded),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: _colors.map((c) {
               final isSelected = _selectedColor == c['hex'];
               return GestureDetector(
-                onTap: () =>
-                    setState(() => _selectedColor = c['hex']),
+                key: Key('cor_${c['hex']}'), // Key para os testes automatizados
+                onTap: () => setState(() => _selectedColor = c['hex']),
                 child: Column(
                   children: [
                     AnimatedContainer(
@@ -352,16 +361,13 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                         color: c['color'] as Color,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isSelected
-                              ? kDark
-                              : Colors.transparent,
+                          color: isSelected ? kDark : Colors.transparent,
                           width: 3,
                         ),
                         boxShadow: isSelected
                             ? [
                                 BoxShadow(
-                                  color: (c['color'] as Color)
-                                      .withOpacity(0.4),
+                                  color: (c['color'] as Color).withOpacity(0.4),
                                   blurRadius: 8,
                                   offset: const Offset(0, 3),
                                 )
@@ -369,8 +375,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                             : [],
                       ),
                       child: isSelected
-                          ? const Icon(Icons.check_rounded,
-                              color: Colors.white, size: 18)
+                          ? const Icon(Icons.check_rounded, color: Colors.white, size: 18)
                           : null,
                     ),
                     const SizedBox(height: 4),
@@ -391,9 +396,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
           const SizedBox(height: 24),
 
           // ── Seção: Nota textual ──────────────────────────────────────
-          _SectionLabel(
-              label: 'NOTA (OPCIONAL)',
-              icon: Icons.edit_note_rounded),
+          const _SectionLabel(label: 'NOTA (OPCIONAL)', icon: Icons.edit_note_rounded),
           const SizedBox(height: 12),
           Container(
             decoration: BoxDecoration(
@@ -401,20 +404,18 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: TextField(
+              key: const Key('campo_nota'), // Key para os testes automatizados
               controller: _notaController,
               maxLines: 4,
               maxLength: 500,
-              style: const TextStyle(
-                  color: kDark, fontSize: 14, height: 1.5),
+              maxLengthEnforcement: MaxLengthEnforcement.none,
+              style: const TextStyle(color: kDark, fontSize: 14, height: 1.5),
               decoration: InputDecoration(
-                hintText:
-                    'Como foi o seu dia? Descreva como está se sentindo...',
-                hintStyle: TextStyle(
-                    color: kDark.withOpacity(0.35), fontSize: 13),
+                hintText: 'Como foi o seu dia? Descreva como está se sentindo...',
+                hintStyle: TextStyle(color: kDark.withOpacity(0.35), fontSize: 13),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(16),
-                counterStyle: TextStyle(
-                    color: kDark.withOpacity(0.4), fontSize: 10),
+                counterStyle: TextStyle(color: kDark.withOpacity(0.4), fontSize: 10),
               ),
             ),
           ),
@@ -426,16 +427,16 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
             width: double.infinity,
             height: 52,
             child: ElevatedButton(
+              key: const Key('btn_salvar'), // Key para os testes automatizados
               onPressed: _handleSave,
               style: ElevatedButton.styleFrom(
                 backgroundColor: kDark,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
               ),
               child: const Text(
-                'REGISTRAR HUMOR',
+                'Salvar registro', // Texto exato exigido pelos testes
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w800,
@@ -452,8 +453,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
             child: GestureDetector(
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (_) => const EmotionalHistoryScreen()),
+                MaterialPageRoute(builder: (_) => const EmotionalHistoryScreen()),
               ),
               child: Text(
                 'Ver histórico emocional →',
@@ -492,8 +492,7 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
                 border: Border.all(color: _currentColor, width: 3),
               ),
               child: Center(
-                child: Text(_selectedEmoji ?? ':)',
-                    style: const TextStyle(fontSize: 36)),
+                child: Text(_selectedEmoji ?? ':)', style: const TextStyle(fontSize: 36)),
               ),
             ),
             const SizedBox(height: 24),
@@ -524,22 +523,17 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
               child: ElevatedButton(
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (_) => const EmotionalHistoryScreen()),
+                  MaterialPageRoute(builder: (_) => const EmotionalHistoryScreen()),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kDark,
                   foregroundColor: Colors.white,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                 ),
                 child: const Text(
                   'VER HISTÓRICO',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 2),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, letterSpacing: 2),
                 ),
               ),
             ),
@@ -578,14 +572,14 @@ class EmotionalHistoryScreen extends StatelessWidget {
   static const Color kBgTop = Color(0xFFF5F0A0);
   static const Color kBgBottom = Color(0xFFE8E4A0);
 
-  // TODO: substituir por dados reais do backend
+  // TODO: substituir por dados reais do backend (US-10)
   static final List<Map<String, dynamic>> _mockHistory = [
     {
       'date': 'Hoje',
       'emoji': ':)',
       'label': 'Feliz',
       'escala': 8,
-      'color': Color(0xFFFFD700),
+      'color': const Color(0xFFFFD700),
       'nota': 'Tive um ótimo dia no trabalho!',
     },
     {
@@ -593,7 +587,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
       'emoji': ':/',
       'label': 'Incerto',
       'escala': 5,
-      'color': Color(0xFF9B8EC4),
+      'color': const Color(0xFF9B8EC4),
       'nota': '',
     },
     {
@@ -601,7 +595,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
       'emoji': ':D',
       'label': 'Animado',
       'escala': 9,
-      'color': Color(0xFFFFA500),
+      'color': const Color(0xFFFFA500),
       'nota': 'Ótima sessão de meditação pela manhã.',
     },
     {
@@ -609,7 +603,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
       'emoji': ':(',
       'label': 'Triste',
       'escala': 3,
-      'color': Color(0xFF5C7AAA),
+      'color': const Color(0xFF5C7AAA),
       'nota': 'Dia difícil, mas consegui meditar.',
     },
     {
@@ -617,7 +611,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
       'emoji': '<3',
       'label': 'Amoroso',
       'escala': 7,
-      'color': Color(0xFFFF6B8A),
+      'color': const Color(0xFFFF6B8A),
       'nota': '',
     },
   ];
@@ -633,8 +627,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
             child: SafeArea(
               bottom: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -647,13 +640,11 @@ class EmotionalHistoryScreen extends StatelessWidget {
                           color: Colors.white24,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.reply_rounded,
-                            color: Colors.white, size: 22),
+                        child: const Icon(Icons.reply_rounded, color: Colors.white, size: 22),
                       ),
                     ),
-                    _SlowDownLogo(size: 28),
-                    const Icon(Icons.menu_rounded,
-                        color: Colors.white, size: 28),
+                    const _SlowDownLogo(size: 28),
+                    const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
                   ],
                 ),
               ),
@@ -705,26 +696,13 @@ class EmotionalHistoryScreen extends StatelessWidget {
                             color: Colors.white.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              _StatBox(
-                                  label: 'Média',
-                                  value: '6.4',
-                                  color: kYellow),
-                              _StatBox(
-                                  label: 'Melhor',
-                                  value: '9',
-                                  color: const Color(0xFF6AAA7C)),
-                              _StatBox(
-                                  label: 'Pior',
-                                  value: '3',
-                                  color: const Color(0xFF5C7AAA)),
-                              _StatBox(
-                                  label: 'Registros',
-                                  value: '5',
-                                  color: const Color(0xFF9B8EC4)),
+                              _StatBox(label: 'Média', value: '6.4', color: kYellow),
+                              _StatBox(label: 'Melhor', value: '9', color: Color(0xFF6AAA7C)),
+                              _StatBox(label: 'Pior', value: '3', color: Color(0xFF5C7AAA)),
+                              _StatBox(label: 'Registros', value: '5', color: Color(0xFF9B8EC4)),
                             ],
                           ),
                         ),
@@ -738,8 +716,7 @@ class EmotionalHistoryScreen extends StatelessWidget {
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       itemCount: _mockHistory.length,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(height: 10),
+                      separatorBuilder: (_, __) => const SizedBox(height: 10),
                       itemBuilder: (_, i) {
                         final h = _mockHistory[i];
                         return _HistoryCard(
@@ -802,21 +779,14 @@ class _StatBox extends StatelessWidget {
 
   static const Color kDark = Color(0xFF1C1C1C);
 
-  const _StatBox(
-      {required this.label, required this.value, required this.color});
+  const _StatBox({required this.label, required this.value, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value,
-            style: TextStyle(
-                color: color, fontSize: 22, fontWeight: FontWeight.w900)),
-        Text(label,
-            style: TextStyle(
-                color: kDark.withOpacity(0.5),
-                fontSize: 10,
-                fontWeight: FontWeight.w600)),
+        Text(value, style: TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w900)),
+        Text(label, style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 10, fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -860,9 +830,7 @@ class _HistoryCard extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: Text(emoji,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w800)),
+              child: Text(emoji, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
             ),
           ),
           const SizedBox(width: 12),
@@ -873,34 +841,22 @@ class _HistoryCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(label,
-                        style: const TextStyle(
-                            color: kDark,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700)),
-                    Text(date,
-                        style: TextStyle(
-                            color: kDark.withOpacity(0.4),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500)),
+                    Text(label, style: const TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w700)),
+                    Text(date, style: TextStyle(color: kDark.withOpacity(0.4), fontSize: 11, fontWeight: FontWeight.w500)),
                   ],
                 ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: color,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text(
                         '$escala/10',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w800),
+                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800),
                       ),
                     ),
                     if (nota.isNotEmpty) ...[
@@ -908,10 +864,7 @@ class _HistoryCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           nota,
-                          style: TextStyle(
-                              color: kDark.withOpacity(0.5),
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 11, fontWeight: FontWeight.w500),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -937,25 +890,12 @@ class _SlowDownLogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: size * 0.14, vertical: size * 0.08),
-          decoration: BoxDecoration(
-              color: const Color(0xFF1C1C1C),
-              borderRadius: BorderRadius.circular(4)),
-          child: Text('SLOW',
-              style: TextStyle(
-                  color: const Color(0xFFF5B800),
-                  fontSize: size * 0.45,
-                  fontWeight: FontWeight.w900,
-                  height: 1)),
+          padding: EdgeInsets.symmetric(horizontal: size * 0.14, vertical: size * 0.08),
+          decoration: BoxDecoration(color: const Color(0xFF1C1C1C), borderRadius: BorderRadius.circular(4)),
+          child: Text('SLOW', style: TextStyle(color: const Color(0xFFF5B800), fontSize: size * 0.45, fontWeight: FontWeight.w900, height: 1)),
         ),
         SizedBox(width: size * 0.08),
-        Text('DOWN',
-            style: TextStyle(
-                color: const Color(0xFF1C1C1C),
-                fontSize: size * 0.72,
-                fontWeight: FontWeight.w900,
-                height: 1)),
+        Text('DOWN', style: TextStyle(color: const Color(0xFF1C1C1C), fontSize: size * 0.72, fontWeight: FontWeight.w900, height: 1)),
       ],
     );
   }
