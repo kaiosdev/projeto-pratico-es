@@ -1,121 +1,109 @@
-# Slow Down — Backend v2 (Firebase Auth + MySQL)
+<div align="center">
+  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white" alt="Express">
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase">
+  
+  <h1>🧘 SlowDown App — Backend</h1>
+  <p><b>API RESTful para gestão de usuários, autenticação OTP e integração Firebase do ecossistema SlowDown.</b></p>
+</div>
 
-Backend do **Slow Down** em **Node.js + Express + MySQL**, agora usando
-**Firebase Authentication** (conforme decidido no documento de Tech Stack).
+<hr>
 
-## 🔄 O que mudou da v1 para a v2
+## 📋 Sobre o Projeto
+O **SlowDown Backend** é o motor de dados do nosso ecossistema de saúde e bem-estar. Esta API gerencia o banco de dados relacional (MySQL), a sincronização de usuários via **Firebase Authentication** e a lógica rigorosa de validação de segurança em duas etapas (OTP).
 
-| | v1 (JWT próprio) | v2 (Firebase Auth) |
-|---|---|---|
-| Senha | Hash com bcrypt, salva no MySQL | Gerenciada 100% pelo Firebase |
-| Login social (Google) | Não tinha | Sim, via Firebase |
-| Token | Gerado pelo nosso backend (JWT) | Gerado pelo Firebase, só validamos |
-| Tabela `users` | Tinha `senha_hash` | Tem `firebase_uid` (sem senha) |
+## 🛠️ Ferramentas Necessárias
 
-## 📁 Estrutura
+Para rodar o servidor localmente na sua máquina, você precisará ter instalado:
 
-```
-slowdown-backend/
-├── database.sql                       # Cria o banco e a tabela users (sem senha)
-├── .env.example                        # Modelo das variáveis de ambiente
-├── firebase-service-account.json       # ⚠️ VOCÊ precisa colocar este arquivo aqui (não incluso)
-├── src/
-│   ├── server.js
-│   ├── config/
-│   │   ├── database.js
-│   │   └── firebase.js                 # Inicializa o Firebase Admin SDK
-│   ├── models/userModel.js
-│   ├── controllers/authController.js   # Sincroniza usuário Firebase ↔ MySQL
-│   ├── middlewares/authMiddleware.js   # Valida o token do Firebase
-│   └── routes/authRoutes.js
-```
+- [Node.js](https://nodejs.org/pt-br/) (Versão 18 ou superior)
+- [MySQL Server](https://dev.mysql.com/downloads/) (Gerenciador do banco de dados)
+- Conta no [Firebase Console](https://console.firebase.google.com/) com acesso ao SDK Admin
+- Editor de código: [VS Code](https://code.visualstudio.com/)
+- Ferramenta de requisições REST (Opcional): [Insomnia](https://insomnia.rest/) ou Postman
 
-## 🚀 Como configurar (passo a passo)
 
-### 1. Coloque o arquivo de credencial do Firebase
+## 🔗 Configuração de Ambiente (Banco e Firebase)
 
-Você baixou um arquivo `.json` no Firebase Console (Configurações do projeto →
-Contas de serviço → Gerar nova chave privada). Esse arquivo tem um nome como:
+### Passo 1: Credenciais do Firebase
+O backend depende de uma chave privada do Firebase para validar os tokens de login social e as sessões do aplicativo.
 
-```
-slowdown-app-c2d1c-firebase-adminsdk-xxxxx.json
-```
+1. Baixe o arquivo `.json` no Firebase Console (*Configurações do projeto → Contas de serviço → Gerar nova chave privada*).
+2. Renomeie o arquivo baixado para `firebase-service-account.json`.
+3. Cole o arquivo na **raiz** do projeto backend (mesmo nível do arquivo `package.json`).
 
-**Renomeie esse arquivo para `firebase-service-account.json`** e coloque na
-**raiz** desta pasta do backend (mesmo nível do `package.json`).
+> ⚠️ **Atenção:** Este arquivo é uma credencial sensível. Ele já está configurado no `.gitignore` — **nunca** suba esse arquivo para o GitHub.
 
-> ⚠️ Esse arquivo é uma credencial sensível. Ele já está no `.gitignore` —
-> nunca remova essa linha nem suba ele pro GitHub.
-
-### 2. Configure o `.env`
+### Passo 2: Variáveis de Ambiente e Banco de Dados
+1. No terminal, faça uma cópia do arquivo de exemplo para criar o seu arquivo local de ambiente:
 ```bash
 copy .env.example .env
 ```
-O padrão já aponta para `./firebase-service-account.json`, então se você
-seguiu o passo 1 com o nome exato, não precisa editar nada além dos dados
-do MySQL (usuário/senha).
+2. Abra o `.env` e preencha as credenciais do seu MySQL local (usuário, senha e porta).
+3. Execute o script `database.sql` na sua interface de banco de dados (ex: MySQL Workbench) para criar a estrutura inicial da tabela `users`.
 
-### 3. Crie o banco de dados
-Execute o `database.sql` no seu MySQL (phpMyAdmin, Workbench, etc.)
+---
 
-### 4. Instale as dependências
+## 🚀 Como Executar o Projeto
+
+Com o banco de dados criado e o Firebase configurado, siga os passos abaixo no seu terminal:
+
+**1. Clone o repositório:**
+```bash
+git clone [https://github.com/kaiosdev/projeto-pratico-es/tree/main/4-MVP/mvp/backend.git](https://github.com/kaiosdev/projeto-pratico-es/tree/main/4-MVP/mvp/backend.git)
+cd slowdown-backend
+```
+
+**2. Instale as dependências do Node:**
 ```bash
 npm install
 ```
 
-### 5. Rode o servidor
+**3. Inicie o servidor (Modo de Desenvolvimento):**
 ```bash
 npm run dev
 ```
 
-Se tudo estiver certo:
-```
+Se tudo estiver configurado corretamente, o console exibirá:
+```text
 🚀 Servidor rodando em http://localhost:3000
 ✅ Conectado ao MySQL com sucesso!
 ```
 
-Se a credencial do Firebase estiver faltando ou for inválida, o servidor
-vai mostrar uma mensagem de erro clara apontando exatamente o problema,
-em vez de travar com um erro confuso.
+---
 
-## 🔌 Endpoints disponíveis
+## 🔌 Endpoints Principais Disponíveis
 
-### `POST /auth/sync`
-Chamado pelo Flutter **imediatamente após** o login/cadastro no Firebase
-(seja por email/senha ou Google). Sincroniza o usuário com o MySQL —
-cria se for a primeira vez, ou apenas retorna os dados se já existir.
+A API expõe as seguintes rotas para consumo do Frontend Flutter:
 
-**Header obrigatório:**
-```
-Authorization: Bearer <idToken do Firebase>
-```
+- `POST /auth/sync` — Sincroniza o usuário (Firebase ↔ MySQL) na criação da conta. Requer Header `Authorization: Bearer <token>`.
+- `POST /auth/verify-otp` —  Rota pública que valida o código de 6 dígitos gerado no fluxo de cadastro.
+- `GET /auth/me` — Retorna os dados completos do usuário autenticado no momento.
 
-**Body (JSON, opcional — só é necessário se for o primeiro login por email/senha,
-caso o nome não venha embutido no token):**
-```json
-{ "nome": "Maria Silva" }
-```
+---
 
-**Resposta (201 na primeira vez, 200 nas seguintes):**
-```json
-{
-  "mensagem": "Usuário criado com sucesso!",
-  "usuario": {
-    "id": 1,
-    "firebase_uid": "abc123...",
-    "nome": "Maria Silva",
-    "email": "maria@email.com",
-    "plano": "padrao"
-  }
-}
+## 📁 Estrutura do Projeto
+
+A arquitetura segue o padrão de roteamento modular do Express:
+
+```text
+slowdown-backend/
+ ┣ 📂 src/
+ ┃ ┣ 📂 config/        # Arquivos de conexão (database.js, firebase.js)
+ ┃ ┣ 📂 controllers/   # Lógica de negócio e respostas (authController.js)
+ ┃ ┣ 📂 middlewares/   # Interceptadores de segurança (authMiddleware.js)
+ ┃ ┣ 📂 models/        # Interação e queries no banco (userModel.js)
+ ┃ ┣ 📂 routes/        # Definição dos endpoints da API (authRoutes.js)
+ ┃ ┗ 📜 server.js      # Ponto de entrada e inicialização do servidor Express
+ ┣ 📜 database.sql     # Script de criação das tabelas relacionais
+ ┣ 📜 .env             # Variáveis de ambiente locais
+ ┗ 📜 package.json     # Gerenciamento de pacotes e scripts do Node
 ```
 
-### `GET /auth/me`
-Retorna os dados do usuário logado (mesmo header `Authorization` acima).
+---
 
-## ➡️ Próximos passos
-
-1. No Flutter, integrar o SDK do Firebase (`firebase_auth`) nas telas de
-   login/cadastro — chamando `/auth/sync` depois do login.
-2. Criar a próxima entidade: `emotional_logs` (US-06).
-3. Depois: `pets` (US-03).
+<div align="center">
+  <sub>Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
+  Professor: Dr. Andrey Rodrigues</sub>
+</div>
