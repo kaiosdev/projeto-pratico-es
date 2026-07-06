@@ -18,8 +18,7 @@ O **Slow Down** é uma solução móvel voltada à prevenção e controle do bur
 
 - **Mascote Virtual (Tamagotchi):** Pet personalizável que evolui conforme o autocuidado.
 - **Missões Diárias e XP:** Sistema de tarefas que gera pontos de experiência para desbloquear itens.
-- **Sistema de Conquistas:** Emblemas digitais, como o "Mente Blindada", ao atingir metas de saúde mental.
-- **Monitoramento Emocional:** Termômetro diário integrado com dados de frequência cardíaca (BPM) via **Google Fit**.
+- **Monitoramento Emocional:** Termômetro diário integrado com dados de frequência cardíaca (BPM).
 - **Conteúdo em Áudio:** Sleepcasts e meditações com suporte a download para modo offline.
 - **Assistente via IA:** Chatbot integrado com **Gemini API** para incentivo personalizado e análise de estresse.
 - **Acessibilidade:** Navegação *hands-free* via comandos de voz (**Google Speech-to-Text**).
@@ -67,7 +66,6 @@ O sistema segue o padrão **Model-View-Controller (MVC)** e a modelagem arquitet
 | :--- | :--- |
 | [`4-MVP/mvp/frontend`](4-MVP/mvp/frontend) | Código-fonte do aplicativo móvel (Flutter). |
 | [`4-MVP/mvp/backend`](4-MVP/mvp/backend) | Código-fonte do servidor API REST (Node.js). |
-| [rastreabilidade.md](4-MVP/rastreabilidade.md) | Rastreabilidade entre o Código Implementado e as Histórias de Usuário. |
 
 ## 👥 Equipe do Projeto
 
