@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'api_config.dart';
 import 'session_manager.dart';
+import 'package:flutter/foundation.dart'; // <--- ESTA LINHA RESOLVE O ERRO DO debugPrint
 
 class AuthResult {
   final bool sucesso;
@@ -41,7 +42,7 @@ class AuthService {
 
       return AuthResult.erro(body['mensagem'] ?? 'E-mail ou senha incorretos.');
     } catch (e) {
-      print('🚨 ERRO REAL DA REDE: $e'); // O espião entra aqui!
+      debugPrint('🚨 ERRO REAL DA REDE: $e');
       return AuthResult.erro('Não foi possível conectar ao servidor. Verifique sua conexão.');
     }
   }
@@ -70,4 +71,18 @@ class AuthService {
       return AuthResult.erro('Não foi possível conectar ao servidor. Verifique sua conexão.');
     }
   }
+  static Future<bool> verificarCodigo({required String email, required String codigo}) async {
+  try {
+    final response = await http.post(
+      Uri.parse('${ApiConfig.baseUrl}/auth/verify-otp'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'codigo': codigo}),
+    );
+
+    return response.statusCode == 200;
+  } catch (e) {
+    debugPrint("Erro ao verificar OTP: $e");
+    return false;
+  }
+}
 }

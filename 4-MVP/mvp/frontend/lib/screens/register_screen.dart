@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../src/providers/auth_provider.dart';
-import 'home_screen.dart';
+import '../src/utils/validador_auth.dart'; // Importante: Chamando o validador central!
+import 'login_screen.dart';
+import 'otp_verification_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -37,28 +39,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     super.dispose();
   }
 
-  // Validações
-  String? _validateName() {
-    if (_nameController.text.trim().isEmpty) return 'Informe seu nome.';
-    return null;
-  }
-
-  String? _validateEmail() {
-    final email = _emailController.text.trim();
-    if (email.isEmpty) return 'Informe seu e-mail.';
-    if (!RegExp(r'^[\w.-]+@[\w.-]+\.\w+$').hasMatch(email)) {
-      return 'E-mail inválido.';
-    }
-    return null;
-  }
-
-  String? _validatePassword() {
-    if (_passwordController.text.length < 6) {
-      return 'A senha deve ter no mínimo 6 caracteres.';
-    }
-    return null;
-  }
-
+  // ─── Validações Integradas com ValidadorAuth (US-16) ──────────────────────
   String? _validateConfirm() {
     if (_confirmPasswordController.text != _passwordController.text) {
       return 'As senhas não coincidem.';
@@ -67,7 +48,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   String? _validateRegisterForm() {
-    return _validateName() ?? _validateEmail() ?? _validatePassword() ?? _validateConfirm();
+    return ValidadorAuth.validarNome(_nameController.text) ?? 
+           ValidadorAuth.validarEmail(_emailController.text) ?? 
+           ValidadorAuth.validarSenha(_passwordController.text) ?? 
+           _validateConfirm();
   }
 
   Future<void> _handleRegister() async {
@@ -79,7 +63,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
 
     if (!_acceptTerms) {
-      _showSnackBar('Aceite os termos para continuar.', isError: true);
+      _showSnackBar('Você precisa aceitar os termos para continuar.', isError: true);
       return;
     }
 
@@ -92,22 +76,33 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       );
 
       if (!mounted) return;
-      _showSnackBar('Conta criada com sucesso!');
+      
+      _showSnackBar('Quase lá! Verifique seu e-mail.', isError: false);
+      
+      // Implementação da US-16: Redirecionamento para a tela de OTP
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(
+          builder: (_) => OtpVerificationScreen(email: _emailController.text.trim()),
+        ),
       );
     } catch (e) {
       if (!mounted) return;
       _showSnackBar(e.toString(), isError: true);
     }
   }
+  
+  void _handleGoogleRegister() {
+    // Integração com Google OAuth (US-16 / Persona Ana)
+    debugPrint('Iniciando Cadastro via Google');
+    // TODO: Chamar o Provider do Google Sign In e navegar direto pra Home (dispensa OTP)
+  }
 
   void _showSnackBar(String message, {bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: const TextStyle(color: Colors.white)),
-        backgroundColor: isError ? kError : kDark,
+        backgroundColor: isError ? kError : Colors.green, // Verde para sucesso
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.all(16),
@@ -147,10 +142,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       ),
                     ),
                     const _SlowDownLogo(size: 28),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
-                    ),
+                    const SizedBox(width: 40), // Espaçador para centralizar a logo
                   ],
                 ),
               ),
@@ -180,7 +172,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         style: TextStyle(
                           color: kDark.withOpacity(0.6),
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           letterSpacing: 0.4,
                         ),
                       ),
@@ -212,14 +204,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               onToggleVisibility: () => setState(() => _obscureConfirm = !_obscureConfirm),
                             ),
                             const SizedBox(height: 16),
+                            
+                            // Termos de Uso
                             GestureDetector(
                               onTap: () => setState(() => _acceptTerms = !_acceptTerms),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    width: 20,
-                                    height: 20,
+                                    width: 22,
+                                    height: 22,
                                     margin: const EdgeInsets.only(top: 1),
                                     decoration: BoxDecoration(
                                       color: _acceptTerms ? kDark : Colors.white.withOpacity(0.85),
@@ -230,7 +224,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                       ),
                                     ),
                                     child: _acceptTerms
-                                        ? const Icon(Icons.check, color: Colors.white, size: 13)
+                                        ? const Icon(Icons.check, color: Colors.white, size: 14)
                                         : null,
                                   ),
                                   const SizedBox(width: 10),
@@ -239,26 +233,20 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                       text: const TextSpan(
                                         style: TextStyle(
                                           color: kDark,
-                                          fontSize: 12.5,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
                                           height: 1.4,
                                         ),
                                         children: [
                                           TextSpan(text: 'Concordo com os '),
                                           TextSpan(
                                             text: 'Termos de Uso',
-                                            style: TextStyle(
-                                              decoration: TextDecoration.underline,
-                                              fontWeight: FontWeight.w700,
-                                            ),
+                                            style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.w800),
                                           ),
                                           TextSpan(text: ' e a '),
                                           TextSpan(
                                             text: 'Política de Privacidade',
-                                            style: TextStyle(
-                                              decoration: TextDecoration.underline,
-                                              fontWeight: FontWeight.w700,
-                                            ),
+                                            style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.w800),
                                           ),
                                           TextSpan(text: '.'),
                                         ],
@@ -268,30 +256,55 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 22),
+                            const SizedBox(height: 24),
+                            
+                            // Botão Cadastrar
                             _PrimaryActionButton(
                               isLoading: isLoading,
                               onPressed: _handleRegister,
                               label: 'CRIAR CONTA',
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 16),
+                            
+                            // Botão Google
+                            SizedBox(
+                              height: 52,
+                              child: OutlinedButton.icon(
+                                onPressed: isLoading ? null : _handleGoogleRegister,
+                                style: OutlinedButton.styleFrom(
+                                  side: const BorderSide(color: Colors.white, width: 2),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                                ),
+                                icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 32),
+                                label: const Text(
+                                  'Criar com Google',
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            
+                            // Fazer Login
                             Column(
                               children: [
                                 const Text(
-                                  'Já tem uma conta?',
+                                  'Já possui uma conta?',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w600),
                                 ),
-                                const SizedBox(height: 2),
+                                const SizedBox(height: 4),
                                 GestureDetector(
-                                  onTap: () => Navigator.of(context).maybePop(),
+                                  onTap: () => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const LoginScreen()),
+                                  ),
                                   child: const Text(
-                                    'Fazer login',
+                                    'Fazer Login',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: kDark,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
                                       decoration: TextDecoration.underline,
                                     ),
                                   ),
@@ -348,8 +361,8 @@ class _PrimaryActionButton extends StatelessWidget {
                 label,
                 style: const TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 2.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 2,
                   color: Color(0xFF1C1C1C),
                 ),
               ),
@@ -358,7 +371,7 @@ class _PrimaryActionButton extends StatelessWidget {
   }
 }
 
-// ─── Widget: Logo SlowDown ────────────────────────────────────────────────────
+// ─── Widgets Auxiliares Mantidos ──────────────────────────────────────────────
 class _SlowDownLogo extends StatelessWidget {
   final double size;
   const _SlowDownLogo({required this.size});
@@ -387,7 +400,6 @@ class _SlowDownLogo extends StatelessWidget {
   }
 }
 
-// ─── Widget: Campo de Input ───────────────────────────────────────────────────
 class _InputField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -419,12 +431,12 @@ class _InputField extends StatelessWidget {
         obscureText: obscureText,
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
-        style: const TextStyle(color: Color(0xFF1C1C1C), fontSize: 15, fontWeight: FontWeight.w400),
+        style: const TextStyle(color: Color(0xFF1C1C1C), fontSize: 15, fontWeight: FontWeight.w500),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 15),
-          prefixIcon: Icon(prefixIcon, color: Colors.grey.shade500, size: 22),
-          suffixIcon: suffixIcon != null ? GestureDetector(onTap: onSuffixTap, child: Icon(suffixIcon, color: Colors.grey.shade400, size: 20)) : null,
+          hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14, fontWeight: FontWeight.w400),
+          prefixIcon: Icon(prefixIcon, color: Colors.grey.shade600, size: 22),
+          suffixIcon: suffixIcon != null ? GestureDetector(onTap: onSuffixTap, child: Icon(suffixIcon, color: Colors.grey.shade600, size: 20)) : null,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         ),
@@ -435,9 +447,7 @@ class _InputField extends StatelessWidget {
 
 class _NameInputField extends StatelessWidget {
   final TextEditingController controller;
-
   const _NameInputField({required this.controller});
-
   @override
   Widget build(BuildContext context) {
     return _InputField(
@@ -452,14 +462,12 @@ class _NameInputField extends StatelessWidget {
 
 class _EmailInputField extends StatelessWidget {
   final TextEditingController controller;
-
   const _EmailInputField({required this.controller});
-
   @override
   Widget build(BuildContext context) {
     return _InputField(
       controller: controller,
-      hintText: 'Email',
+      hintText: 'E-mail',
       prefixIcon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,
     );
@@ -470,13 +478,7 @@ class _PasswordInputField extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final VoidCallback? onToggleVisibility;
-
-  const _PasswordInputField({
-    required this.controller,
-    required this.obscureText,
-    this.onToggleVisibility,
-  });
-
+  const _PasswordInputField({required this.controller, required this.obscureText, this.onToggleVisibility});
   @override
   Widget build(BuildContext context) {
     return _InputField(
@@ -494,13 +496,7 @@ class _ConfirmPasswordInputField extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final VoidCallback? onToggleVisibility;
-
-  const _ConfirmPasswordInputField({
-    required this.controller,
-    required this.obscureText,
-    this.onToggleVisibility,
-  });
-
+  const _ConfirmPasswordInputField({required this.controller, required this.obscureText, this.onToggleVisibility});
   @override
   Widget build(BuildContext context) {
     return _InputField(
