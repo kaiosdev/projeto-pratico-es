@@ -78,15 +78,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       
       _showSnackBar('Quase lá! Verifique seu e-mail.', isError: false);
       
-      // Correção da US-16: Redireciona para validação de OTP ao invés da HomeScreen
-      // TODO: Criar a tela de OTP (otp_verification_screen.dart)
-      debugPrint('Redirecionar para tela de OTP de 6 dígitos');
-      /*
+      // Implementação da US-16: Redirecionamento para a tela de OTP
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const OtpVerificationScreen()),
+        MaterialPageRoute(
+          builder: (_) => OtpVerificationScreen(email: _emailController.text.trim()),
+        ),
       );
-      */
     } catch (e) {
       if (!mounted) return;
       _showSnackBar(e.toString(), isError: true);
