@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../src/providers/auth_provider.dart';
 import '../src/utils/validador_auth.dart'; // Importante: Chamando o validador central!
 import 'login_screen.dart';
+import 'otp_verification_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
