@@ -47,6 +47,9 @@ dependencies:
   
   # Integração com o player do Spotify SDK
   spotify_sdk: ^3.0.1
+  
+  # Login Nativo do Google
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
