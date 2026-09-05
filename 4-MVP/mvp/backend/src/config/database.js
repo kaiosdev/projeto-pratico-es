@@ -1,7 +1,7 @@
-console.log("🚨 Senha que o Node está tentando usar:", process.env.DB_PASSWORD);
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
+// Pool de conexões com o MySQL, reutilizado em toda a aplicação.
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,

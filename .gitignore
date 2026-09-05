@@ -1,0 +1,23 @@
+# ─── Segurança — nunca commitar credenciais ─────────────────────────────────
+# Regra de segurança de todo o repositório (além dos .gitignore específicos
+# de frontend/ e backend/). Um arquivo de credencial do Firebase Admin SDK já
+# vazou no histórico deste projeto por ter sido salvo fora da pasta esperada
+# e com um nome ligeiramente diferente do padrão (extensão duplicada). Os
+# padrões abaixo cobrem variações de nome e de localização.
+firebase-service-account*.json
+*-firebase-adminsdk-*.json
+*serviceAccountKey*.json
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.jks
+*.keystore
+
+# ─── Arquivos de sistema e de IDE ────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml

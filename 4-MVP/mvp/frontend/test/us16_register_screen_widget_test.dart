@@ -8,8 +8,10 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 
 import '../lib/screens/register_screen.dart';
 
-// ─── 🛡️ MOCK INDESTRUTÍVEL DO FIREBASE (NÍVEL DART) ───
-// Isso intercepta a inicialização antes de chegar no sistema Pigeon/Android.
+// ─── Mock do Firebase para testes ───────────────────────────────────────────
+// Intercepta a inicialização do Firebase antes que ela chegue à camada
+// nativa (Pigeon/Android), permitindo rodar os testes sem um app Firebase
+// real configurado.
 class MockFirebasePlatform extends FirebasePlatform {
   @override
   FirebaseAppPlatform app([String name = defaultFirebaseAppName]) {
@@ -72,7 +74,7 @@ Future<void> _preencherEEnviarCadastro(
   );
 
   await tester.enterText(find.widgetWithText(TextField, 'Nome completo'), caso.nome);
-  await tester.enterText(find.widgetWithText(TextField, 'Email'), caso.email);
+  await tester.enterText(find.widgetWithText(TextField, 'E-mail'), caso.email);
   await tester.enterText(find.widgetWithText(TextField, 'Senha'), caso.senha);
   await tester.enterText(find.widgetWithText(TextField, 'Confirmar senha'), caso.confirmarSenha);
 
@@ -91,7 +93,7 @@ Future<void> _preencherEEnviarCadastro(
 }
 
 void main() {
-  // 🚀 INICIALIZA O MOCK FALSO ANTES DOS TESTES DA TELA
+  // Inicializa o mock do Firebase antes de qualquer teste da tela
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     FirebasePlatform.instance = MockFirebasePlatform();

@@ -47,7 +47,7 @@ class AuthNotifier extends AsyncNotifier<UsuarioModel?> {
     });
     
     if (state.hasError) {
-      print("🚨 ERRO NO CADASTRO: ${state.error}");
+      print("Erro no cadastro: ${state.error}");
       throw Exception(_tratarErroFirebase(state.error.toString()));
     }
   }
@@ -87,7 +87,7 @@ class AuthNotifier extends AsyncNotifier<UsuarioModel?> {
     });
 
     if (state.hasError) {
-      print("🚨 ERRO NO LOGIN: ${state.error}");
+      print("Erro no login: ${state.error}");
       throw Exception(_tratarErroFirebase(state.error.toString()));
     }
   }

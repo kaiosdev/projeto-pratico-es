@@ -1,5 +1,13 @@
 // backend/src/controllers/humorController.js
-const db = require('../config/db'); // Ajuste o caminho conforme o seu ficheiro de conexão ao banco
+//
+// Endpoint para persistir o registro emocional diário no MySQL.
+// Ainda não está registrado em nenhuma rota nem existe a tabela
+// `registros_emocionais` em database.sql — hoje o app grava o registro
+// emocional localmente (ver EmotionalEntryStorage no frontend). Para
+// ativar este endpoint: criar a tabela, registrar a rota (ex.: em
+// authRoutes.js ou em um humorRoutes.js dedicado) e trocar a chamada do
+// app para usar o backend em vez do armazenamento local.
+const db = require('../config/database');
 
 const registrarHumor = async (req, res) => {
     try {

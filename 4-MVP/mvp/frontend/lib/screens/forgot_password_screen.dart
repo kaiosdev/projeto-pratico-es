@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -44,18 +45,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     setState(() => _isLoading = true);
 
-    // TODO: integrar Firebase Auth
-    // await FirebaseAuth.instance.sendPasswordResetEmail(
-    //   email: _emailController.text.trim(),
-    // );
-
-    await Future.delayed(const Duration(seconds: 1)); // simula chamada
-    setState(() {
-      _isLoading = false;
-      _emailSent = true;
-    });
-
-    debugPrint('Reset enviado para: ${_emailController.text.trim()}');
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailController.text.trim(),
+      );
+      setState(() {
+        _isLoading = false;
+        _emailSent = true;
+      });
+    } on FirebaseAuthException catch (e) {
+      setState(() => _isLoading = false);
+      final mensagem = e.code == 'user-not-found'
+          ? 'Não encontramos uma conta com este e-mail.'
+          : 'Não foi possível enviar o e-mail de recuperação. Tente novamente.';
+      _showSnackBar(mensagem, isError: true);
+    } catch (e) {
+      setState(() => _isLoading = false);
+      _showSnackBar('Não foi possível conectar ao servidor. Verifique sua conexão.', isError: true);
+    }
   }
 
   void _showSnackBar(String message, {bool isError = false}) {

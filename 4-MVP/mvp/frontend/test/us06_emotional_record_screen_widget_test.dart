@@ -1,15 +1,15 @@
-// test/us06_registro_emocional_screen_widget_test.dart
+// test/us06_emotional_record_screen_widget_test.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/screens/registro_emocional_screen.dart';
+import '../lib/screens/emotional_record_screen.dart';
 
 void main() {
-  group('US-06 · RegistroEmocionalScreen — Testes de Integração', () {
+  group('US-06 · EmotionalRecordScreen — Testes de Integração', () {
     
     // Helper agora força um tamanho de tela gigante para que tudo caiba
     Future<void> _setupTeste(WidgetTester tester) async {
       await tester.binding.setSurfaceSize(const Size(400, 3000)); 
-      await tester.pumpWidget(const MaterialApp(home: RegistroEmocionalScreen()));
+      await tester.pumpWidget(const MaterialApp(home: EmotionalRecordScreen()));
       await tester.pumpAndSettle();
     }
 
@@ -22,7 +22,7 @@ void main() {
       await tester.tap(find.byKey(const Key('btn_salvar')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Registro salvo com sucesso!'), findsOneWidget);
+      expect(find.text('HUMOR REGISTRADO!'), findsOneWidget);
     });
 
     testWidgets('[CT02] Escala dentro de 1–10 → Registro realizado', (tester) async {
@@ -34,7 +34,7 @@ void main() {
       await tester.tap(find.byKey(const Key('btn_salvar')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Registro salvo com sucesso!'), findsOneWidget);
+      expect(find.text('HUMOR REGISTRADO!'), findsOneWidget);
     });
 
     testWidgets('[CT03] Selecionar cor válida da paleta → Sucesso', (tester) async {
@@ -46,7 +46,7 @@ void main() {
       await tester.tap(find.byKey(const Key('btn_salvar')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Registro salvo com sucesso!'), findsOneWidget);
+      expect(find.text('HUMOR REGISTRADO!'), findsOneWidget);
     });
 
     testWidgets('[CT04] Nota com 501 caracteres → exibe erro', (tester) async {

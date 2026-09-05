@@ -1,0 +1,79 @@
+SLOW DOWN — CHECKLIST DE CREDENCIAIS LOCAIS
+==============================================
+
+IMPORTANTE: este arquivo NÃO contém nenhuma chave ou senha real.
+Eu (Claude) nunca tive acesso ao conteúdo da sua chave privada do Firebase —
+só confirmei que ela existia, para poder te avisar do vazamento. Você
+precisa gerar uma chave NOVA e preencher os valores você mesmo, nos
+lugares abaixo. Nenhum desses arquivos deve ir para o Git (todos já estão
+no .gitignore).
+
+------------------------------------------------------------
+1) CHAVE NOVA DO FIREBASE ADMIN SDK (backend)
+------------------------------------------------------------
+Onde gerar:
+  Firebase Console > (seu projeto) > Configurações do projeto (ícone de
+  engrenagem) > Contas de serviço > "Gerar nova chave privada"
+
+  Isso baixa um arquivo .json.
+
+Onde colocar:
+  4-MVP/mvp/backend/firebase-service-account.json
+
+  ATENÇÃO ao nome do arquivo: tem que ser exatamente
+  "firebase-service-account.json" (sem repetir ".json" no final, sem
+  espaços). Foi um arquivo salvo com nome errado que causou o vazamento
+  anterior.
+
+Antes de gerar a nova chave:
+  Revogue a antiga em: Google Cloud Console > IAM e administrador >
+  Contas de serviço > (a conta usada pelo projeto) > aba "Chaves" >
+  excluir a chave antiga.
+
+------------------------------------------------------------
+2) ARQUIVO .env (backend)
+------------------------------------------------------------
+Onde colocar:
+  4-MVP/mvp/backend/.env
+
+Como criar:
+  Copie o modelo e edite com os dados do seu MySQL local:
+
+    cd 4-MVP/mvp/backend
+    cp .env.example .env
+
+  Preencha no .env:
+    DB_USER       -> seu usuário do MySQL local (ex.: root)
+    DB_PASSWORD   -> sua senha do MySQL local
+    DB_NAME       -> slowdown_db (ou o nome que você usou no database.sql)
+    FIREBASE_SERVICE_ACCOUNT_PATH  -> já vem certo como
+                                       ./firebase-service-account.json,
+                                       não precisa mudar se você seguiu o
+                                       passo 1
+
+------------------------------------------------------------
+3) CONFIGURAÇÃO DO FIREBASE NO APP FLUTTER (frontend)
+------------------------------------------------------------
+Se for continuar usando o MESMO projeto Firebase de antes, nada muda
+aqui — os arquivos abaixo já estão no projeto:
+  4-MVP/mvp/frontend/lib/firebase_options.dart
+  4-MVP/mvp/frontend/android/app/google-services.json
+
+Se você criar um projeto Firebase NOVO (recomendável, já que o antigo
+teve a chave de admin exposta), regenere esses arquivos com:
+
+    dart pub global activate flutterfire_cli
+    cd 4-MVP/mvp/frontend
+    flutterfire configure
+
+Isso substitui firebase_options.dart e google-services.json
+automaticamente com os dados do novo projeto.
+
+------------------------------------------------------------
+RESUMO — o que precisa existir só na sua máquina, nunca no Git
+------------------------------------------------------------
+  4-MVP/mvp/backend/firebase-service-account.json   (chave NOVA)
+  4-MVP/mvp/backend/.env                            (senha do seu MySQL)
+
+Confira que os dois aparecem como ignorados:
+    git status --ignored

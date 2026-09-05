@@ -1,7 +1,7 @@
 // src/models/userModel.js
 // Camada Model (MVC): só fala com o banco de dados. Não tem regra de negócio aqui.
 
-const { pool } = require('../config/database');
+const pool = require('../config/database');
 
 // Busca um usuário pelo uid do Firebase (usado em quase toda rota protegida)
 async function buscarPorFirebaseUid(firebaseUid) {

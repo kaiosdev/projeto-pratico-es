@@ -2,6 +2,9 @@ node_modules/
 .env
 npm-debug.log
 
-# Credencial do Firebase Admin SDK — NUNCA suba isso pro GitHub
-firebase-service-account.json
+# Credencial do Firebase Admin SDK — NUNCA subir isso para o GitHub.
+# O padrão é amplo de propósito: já aconteceu de o arquivo ser salvo com
+# nome ligeiramente diferente (ex.: "firebase-service-account.json.json",
+# com extensão duplicada) e escapar de um padrão exato, expondo a chave.
+firebase-service-account*.json
 *-firebase-adminsdk-*.json

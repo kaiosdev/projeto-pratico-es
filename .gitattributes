@@ -1,0 +1,16 @@
+# Normaliza todo arquivo de texto para LF no repositório, independente do
+# sistema operacional usado para editar. Evita que arquivos apareçam como
+# "modificados" só por causa da quebra de linha (CRLF x LF), o que estava
+# gerando diffs enormes e dificultando revisar merges neste projeto.
+* text=auto eol=lf
+
+# Binários: nunca tentar normalizar quebra de linha nem gerar diff textual.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.keystore binary
+*.ttf binary
+*.otf binary

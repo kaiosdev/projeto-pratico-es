@@ -1,34 +1,26 @@
-const db = require('../config/database');
+const { buscarPorFirebaseUid, buscarPorId, criar } = require('../models/userModel');
 
 const syncUser = async (req, res) => {
   try {
     const { uid, email } = req.user; // Dados extraídos e validados pelo middleware
-    
     const nome = req.body.nome || req.user.name || 'Usuário SlowDown';
 
-    // 1. Verifica se o firebase_uid já está no MySQL
-    const [rows] = await db.query('SELECT * FROM users WHERE firebase_uid = ?', [uid]);
-
-    if (rows.length > 0) {
-      // Login: Usuário já existe, retorna os dados dele
+    // 1. Login: usuário já sincronizado anteriormente
+    const usuarioExistente = await buscarPorFirebaseUid(uid);
+    if (usuarioExistente) {
       return res.status(200).json({
         mensagem: 'Usuário sincronizado.',
-        usuario: rows[0]
+        usuario: usuarioExistente,
       });
     }
 
-    // 2. Cadastro: Usuário não existe, cria a linha no banco
-    const [result] = await db.query(
-      'INSERT INTO users (firebase_uid, nome, email, plano) VALUES (?, ?, ?, ?)',
-      [uid, nome, email, 'padrao']
-    );
-
-    // 3. Busca o usuário recém-criado para devolver ao Flutter
-    const [newUser] = await db.query('SELECT * FROM users WHERE id = ?', [result.insertId]);
+    // 2. Cadastro: primeira sincronização deste uid do Firebase
+    const novoId = await criar({ firebaseUid: uid, nome, email });
+    const novoUsuario = await buscarPorId(novoId);
 
     return res.status(201).json({
       mensagem: 'Usuário criado com sucesso!',
-      usuario: newUser[0]
+      usuario: novoUsuario,
     });
 
   } catch (error) {

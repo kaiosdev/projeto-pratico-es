@@ -95,6 +95,5 @@ lib/
 ---
 
 <div align="center">
-  <sub>Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
-  Professor: Dr. Andrey Rodrigues</sub>
+  <sub>Desenvolvido para a disciplina de Engenharia de Software  · ICET/UFAM</sub>
 </div>

@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slowdown/screens/register_screen.dart';
 
+import '../src/providers/auth_provider.dart'; 
+import '../src/services/auth_service.dart'; 
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'menu_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _obscurePassword = true;
+  bool _isLoadingGoogle = false;
 
-  // Paleta SlowDown
   static const Color kYellow = Color(0xFFF5B800);
   static const Color kOrange = Color(0xFFF0A500);
   static const Color kDark = Color(0xFF1C1C1C);
@@ -32,43 +35,74 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
+  Future<void> _handleLogin() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Por favor, preencha e-mail e senha.'),
+          content: Text('Por favor, preencha e-mail e senha.', style: TextStyle(color: Colors.white)),
           backgroundColor: kDark,
         ),
       );
       return;
     }
 
-    // TODO: Integrar com Firebase Auth (US-16)
-    debugPrint('Login local: $email');
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
-    );
+    try {
+      await ref.read(authNotifierProvider.notifier).login(email, password);
+
+      if (!mounted) return;
+      
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString().replaceAll('Exception: ', ''), style: const TextStyle(color: Colors.white)),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+    }
   }
 
-  void _handleGoogleLogin() {
-    // TODO: Integrar com Google OAuth (US-16 / Persona Ana)
-    debugPrint('Iniciando Login via Google');
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
-    );
+  Future<void> _handleGoogleLogin() async {
+    setState(() => _isLoadingGoogle = true);
+
+    try {
+      final result = await AuthService.loginComGoogle();
+      
+      if (!mounted) return;
+
+      if (result.sucesso) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(result.mensagemErro ?? 'Erro ao conectar com Google', style: const TextStyle(color: Colors.white)),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoadingGoogle = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authNotifierProvider);
+    final isLoadingLocal = authState.isLoading;
+
     return Scaffold(
       body: Column(
         children: [
-          // AppBar customizada
           Container(
             color: kYellow,
             child: SafeArea(
@@ -83,10 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Container(
                         width: 40,
                         height: 40,
-                        decoration: const BoxDecoration(
-                          color: Colors.white24,
-                          shape: BoxShape.circle,
-                        ),
+                        decoration: const BoxDecoration(color: Colors.white24, shape: BoxShape.circle),
                         child: const Icon(Icons.reply_rounded, color: Colors.white, size: 22),
                       ),
                     ),
@@ -100,16 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-
-          // Conteúdo com gradiente
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [kBgTop, kBgBottom],
-                ),
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [kBgTop, kBgBottom]),
               ),
               child: SingleChildScrollView(
                 child: Padding(
@@ -119,13 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 48),
                       const _SlowDownLogo(size: 52),
                       const SizedBox(height: 40),
-
-                      // Card laranja com formulário
                       Container(
-                        decoration: BoxDecoration(
-                          color: kOrange,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
+                        decoration: BoxDecoration(color: kOrange, borderRadius: BorderRadius.circular(24)),
                         padding: const EdgeInsets.all(24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -146,8 +166,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               onSuffixTap: () => setState(() => _obscurePassword = !_obscurePassword),
                             ),
                             const SizedBox(height: 12),
-
-                            // Lembrar-me + Esqueci a Senha
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -172,62 +190,53 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ForgotPasswordScreen())),
-                                  child: const Text(
-                                    'Esqueci a Senha',
-                                    style: TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w700, decoration: TextDecoration.underline),
-                                  ),
+                                  child: const Text('Esqueci a Senha', style: TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w700, decoration: TextDecoration.underline)),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 24),
-
-                            // Botão LOGIN
                             SizedBox(
                               height: 52,
                               child: ElevatedButton(
-                                onPressed: _handleLogin,
+                                onPressed: isLoadingLocal || _isLoadingGoogle ? null : _handleLogin,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                                  disabledBackgroundColor: Colors.white.withOpacity(0.5),
                                 ),
-                                child: const Text(
-                                  'ENTRAR',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900, letterSpacing: 2, color: kDark),
-                                ),
+                                child: isLoadingLocal
+                                    ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2.5, color: kDark))
+                                    : const Text('ENTRAR', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900, letterSpacing: 2, color: kDark)),
                               ),
                             ),
                             const SizedBox(height: 16),
-
-                            // Botão Google OAuth (US-16 / AC1)
                             SizedBox(
                               height: 52,
                               child: OutlinedButton.icon(
-                                onPressed: _handleGoogleLogin,
+                                onPressed: isLoadingLocal || _isLoadingGoogle ? null : _handleGoogleLogin,
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(color: Colors.white, width: 2),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                                  disabledForegroundColor: Colors.white.withOpacity(0.5),
                                 ),
-                                icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 32),
-                                label: const Text(
-                                  'Continuar com Google',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                                icon: _isLoadingGoogle 
+                                    ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                    : const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 32),
+                                label: Text(
+                                  _isLoadingGoogle ? 'Conectando...' : 'Continuar com Google',
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
                                 ),
                               ),
                             ),
                             const SizedBox(height: 24),
-
-                            // Não tem conta?
                             Column(
                               children: [
                                 const Text('Ainda não possui uma conta?', style: TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w600)),
                                 const SizedBox(height: 4),
                                 GestureDetector(
                                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterScreen())),
-                                  child: const Text(
-                                    'Criar minha conta',
-                                    style: TextStyle(color: kDark, fontSize: 14, fontWeight: FontWeight.w800, decoration: TextDecoration.underline),
-                                  ),
+                                  child: const Text('Criar minha conta', style: TextStyle(color: kDark, fontSize: 14, fontWeight: FontWeight.w800, decoration: TextDecoration.underline)),
                                 ),
                               ],
                             ),
@@ -247,7 +256,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-// ─── Widgets Auxiliares Mantidos ──────────────────────────────────────────────
 class _SlowDownLogo extends StatelessWidget {
   final double size;
   const _SlowDownLogo({required this.size});

@@ -14,7 +14,8 @@ app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-// 👇 A MUDANÇA É AQUI 👇
+// Escuta em 0.0.0.0 (não apenas localhost) para aceitar conexões do
+// emulador Android, de dispositivos físicos na mesma rede, etc.
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Servidor SlowDown rodando na porta ${PORT}`);
+  console.log(`Servidor SlowDown rodando na porta ${PORT}`);
 });

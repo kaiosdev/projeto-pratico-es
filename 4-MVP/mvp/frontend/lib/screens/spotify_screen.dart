@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:spotify_sdk/spotify_sdk.dart';
-// 👉 ADICIONE ESTA LINHA ABAIXO:
 import 'package:spotify_sdk/models/player_state.dart';
 
 class SpotifyScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _SpotifyScreenState extends State<SpotifyScreen>
 
   // ─── Configuração Spotify ────────────────────────────────────────────────────
   // TODO: substitua pelos seus dados do Spotify Developer Dashboard
-  static const String _clientId = 'SEU_CLIENT_ID_AQUI';
+  static const String _clientId = '1e863277465641bb9dd1c9728b6e3e23';
   static const String _redirectUrl = 'slowdown://spotify-callback';
 
   // ─── Estado ──────────────────────────────────────────────────────────────────
@@ -93,7 +92,8 @@ class _SpotifyScreenState extends State<SpotifyScreen>
   Future<void> _fetchPlaylists() async {
     try {
       final response = await http.get(
-        Uri.parse('https://api.spotify.com/v1/me/playlists?limit=20'),
+        // Endpoint oficial do Spotify para as playlists do usuário
+        Uri.parse('https://api.spotify.com/v1/me/playlists'),
         headers: {'Authorization': 'Bearer $_authToken'},
       );
 
@@ -113,7 +113,8 @@ class _SpotifyScreenState extends State<SpotifyScreen>
   Future<void> _fetchLikedTracks() async {
     try {
       final response = await http.get(
-        Uri.parse('https://api.spotify.com/v1/me/tracks?limit=20'),
+        // Endpoint oficial do Spotify para as músicas curtidas
+        Uri.parse('https://api.spotify.com/v1/me/tracks'),
         headers: {'Authorization': 'Bearer $_authToken'},
       );
 
@@ -134,16 +135,15 @@ class _SpotifyScreenState extends State<SpotifyScreen>
     setState(() => _isLoading = true);
     try {
       final response = await http.get(
-        Uri.parse(
-            'https://api.spotify.com/v1/playlists/$playlistId/tracks?limit=20'),
+        // Endpoint oficial do Spotify, com o ID da playlist selecionada
+        Uri.parse('https://api.spotify.com/v1/playlists/$playlistId/tracks'),
         headers: {'Authorization': 'Bearer $_authToken'},
       );
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         setState(() {
-          _currentTracks =
-              List<Map<String, dynamic>>.from(data['items']);
+          _currentTracks = List<Map<String, dynamic>>.from(data['items']);
           _currentPlaylistName = name;
         });
       }

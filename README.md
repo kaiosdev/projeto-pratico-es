@@ -64,8 +64,13 @@ O sistema segue o padrão **Model-View-Controller (MVC)** e a modelagem arquitet
 ### 🚀 TP4 — Implementação e Produto Final
 | Pasta / Arquivo | Descrição |
 | :--- | :--- |
+| [`4-MVP/mvp/README.md`](4-MVP/mvp/README.md) | **Comece por aqui:** guia de execução do MVP (arquitetura, setup e status das funcionalidades). |
 | [`4-MVP/mvp/frontend`](4-MVP/mvp/frontend) | Código-fonte do aplicativo móvel (Flutter). |
 | [`4-MVP/mvp/backend`](4-MVP/mvp/backend) | Código-fonte do servidor API REST (Node.js). |
+| [`4-MVP/docs/rastreabilidade.md`](4-MVP/docs/rastreabilidade.md) | Rastreabilidade entre Histórias de Usuário e telas implementadas. |
+| [`4-MVP/docs/refatoracoes.md`](4-MVP/docs/refatoracoes.md) | Registro das refatorações aplicadas ao código. |
+| [`4-MVP/prints`](4-MVP/prints) | Capturas de tela do aplicativo em execução. |
+| [`4-MVP/video`](4-MVP/video) | Vídeo de demonstração do MVP. |
 
 ## 👥 Equipe do Projeto
 
@@ -91,6 +96,5 @@ O sistema segue o padrão **Model-View-Controller (MVC)** e a modelagem arquitet
 ---
 
 <div align="center">
-  <sub>Desenvolvido para a disciplina de Engenharia de Software A · ICET/UFAM<br>
-  Professor: Dr. Andrey Rodrigues</sub>
+  <sub>Desenvolvido para a disciplina de Engenharia de Software  · ICET/UFAM</sub>
 </div>

@@ -5,13 +5,18 @@ import 'firebase_options.dart';
 import 'splash_screen.dart';
 
 void main() async {
-  // Garante que os bindings nativos estejam prontos
+  // Garante que os bindings nativos estejam prontos antes de chamar código assíncrono
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializa o Firebase com as chaves que o CLI acabou de gerar
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Evita erro caso o Firebase já tenha sido inicializado anteriormente
+  // (pode ocorrer em hot restart durante o desenvolvimento).
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint('Firebase já estava inicializado. Ignorando erro: $e');
+  }
 
   // ProviderScope injeta o Riverpod para o gerenciamento de estado
   runApp(const ProviderScope(child: SlowDownApp()));

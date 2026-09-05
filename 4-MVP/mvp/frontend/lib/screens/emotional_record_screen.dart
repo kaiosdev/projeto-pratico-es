@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../src/utils/validador_registro_emocional.dart';
+import 'emotional_entry_storage.dart'; // Persistência local dos registros de humor
+import 'emotional_history_screen.dart'; // Tela que exibe o histórico salvo
 
 class EmotionalRecordScreen extends StatefulWidget {
   const EmotionalRecordScreen({super.key});
@@ -70,8 +72,8 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
     }
 
     // SIMULAÇÃO: RN03 / AC5 - Verificar se já existe um registro hoje
-    // TODO: Substituir pela checagem real na API via Dio
-    bool jaExisteRegistroHoje = true; 
+    // TODO: Substituir pela checagem real na API via Dio no futuro
+    bool jaExisteRegistroHoje = false; // Mude para true para testar o Alert
 
     if (jaExisteRegistroHoje) {
       final confirmar = await showDialog<bool>(
@@ -98,9 +100,29 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
       if (confirmar != true) return;
     }
 
-    // TODO: enviar dados ao backend (humorController.js) via Dio
+    // Busca o label correto da cor selecionada para salvar no Storage
+    String labelCor = 'Registro';
+    if (_selectedColor != null) {
+      final colorData = _colors.firstWhere((c) => c['hex'] == _selectedColor, orElse: () => {'label': 'Registro'});
+      labelCor = colorData['label'] as String;
+    }
+
+    // Persiste localmente via EmotionalEntryStorage. Emoji e cor são opcionais
+    // (ver ValidadorRegistroEmocional.registrarHumor): quando não selecionados,
+    // usa-se uma string vazia e a cor neutra da paleta como valores padrão.
+    await EmotionalEntryStorage.add(
+      EmotionalEntry(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        date: DateTime.now(),
+        emoji: _selectedEmoji ?? '',
+        label: labelCor,
+        escala: _escala,
+        colorHex: _selectedColor ?? '#808080',
+        nota: _notaController.text,
+      ),
+    );
+
     setState(() => _saved = true);
-    _showSnackBar('Registro salvo com sucesso!');
   }
 
   void _showSnackBar(String msg, {bool isError = false}) {
@@ -562,186 +584,6 @@ class _EmotionalRecordScreenState extends State<EmotionalRecordScreen> {
   }
 }
 
-// ─── Tela de Histórico Emocional ─────────────────────────────────────────────
-
-class EmotionalHistoryScreen extends StatelessWidget {
-  const EmotionalHistoryScreen({super.key});
-
-  static const Color kYellow = Color(0xFFF5B800);
-  static const Color kDark = Color(0xFF1C1C1C);
-  static const Color kBgTop = Color(0xFFF5F0A0);
-  static const Color kBgBottom = Color(0xFFE8E4A0);
-
-  // TODO: substituir por dados reais do backend (US-10)
-  static final List<Map<String, dynamic>> _mockHistory = [
-    {
-      'date': 'Hoje',
-      'emoji': ':)',
-      'label': 'Feliz',
-      'escala': 8,
-      'color': const Color(0xFFFFD700),
-      'nota': 'Tive um ótimo dia no trabalho!',
-    },
-    {
-      'date': 'Ontem',
-      'emoji': ':/',
-      'label': 'Incerto',
-      'escala': 5,
-      'color': const Color(0xFF9B8EC4),
-      'nota': '',
-    },
-    {
-      'date': '2 dias atrás',
-      'emoji': ':D',
-      'label': 'Animado',
-      'escala': 9,
-      'color': const Color(0xFFFFA500),
-      'nota': 'Ótima sessão de meditação pela manhã.',
-    },
-    {
-      'date': '3 dias atrás',
-      'emoji': ':(',
-      'label': 'Triste',
-      'escala': 3,
-      'color': const Color(0xFF5C7AAA),
-      'nota': 'Dia difícil, mas consegui meditar.',
-    },
-    {
-      'date': '4 dias atrás',
-      'emoji': '<3',
-      'label': 'Amoroso',
-      'escala': 7,
-      'color': const Color(0xFFFF6B8A),
-      'nota': '',
-    },
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          // AppBar
-          Container(
-            color: kYellow,
-            child: SafeArea(
-              bottom: false,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).maybePop(),
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: const BoxDecoration(
-                          color: Colors.white24,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.reply_rounded, color: Colors.white, size: 22),
-                      ),
-                    ),
-                    const _SlowDownLogo(size: 28),
-                    const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Corpo
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [kBgTop, kBgBottom],
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'HISTÓRICO EMOCIONAL',
-                          style: TextStyle(
-                            color: kDark,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Seus últimos registros de humor',
-                          style: TextStyle(
-                            color: kDark.withOpacity(0.5),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Resumo semanal
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _StatBox(label: 'Média', value: '6.4', color: kYellow),
-                              _StatBox(label: 'Melhor', value: '9', color: Color(0xFF6AAA7C)),
-                              _StatBox(label: 'Pior', value: '3', color: Color(0xFF5C7AAA)),
-                              _StatBox(label: 'Registros', value: '5', color: Color(0xFF9B8EC4)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  Expanded(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      itemCount: _mockHistory.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 10),
-                      itemBuilder: (_, i) {
-                        final h = _mockHistory[i];
-                        return _HistoryCard(
-                          date: h['date'],
-                          emoji: h['emoji'],
-                          label: h['label'],
-                          escala: h['escala'],
-                          color: h['color'],
-                          nota: h['nota'],
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 // ─── Widgets auxiliares ───────────────────────────────────────────────────────
 
 class _SectionLabel extends StatelessWidget {
@@ -768,114 +610,6 @@ class _SectionLabel extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _StatBox extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color color;
-
-  static const Color kDark = Color(0xFF1C1C1C);
-
-  const _StatBox({required this.label, required this.value, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(value, style: TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w900)),
-        Text(label, style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 10, fontWeight: FontWeight.w600)),
-      ],
-    );
-  }
-}
-
-class _HistoryCard extends StatelessWidget {
-  final String date;
-  final String emoji;
-  final String label;
-  final int escala;
-  final Color color;
-  final String nota;
-
-  static const Color kDark = Color(0xFF1C1C1C);
-
-  const _HistoryCard({
-    required this.date,
-    required this.emoji,
-    required this.label,
-    required this.escala,
-    required this.color,
-    required this.nota,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withOpacity(0.3), width: 1.5),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(emoji, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(label, style: const TextStyle(color: kDark, fontSize: 13, fontWeight: FontWeight.w700)),
-                    Text(date, style: TextStyle(color: kDark.withOpacity(0.4), fontSize: 11, fontWeight: FontWeight.w500)),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Text(
-                        '$escala/10',
-                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800),
-                      ),
-                    ),
-                    if (nota.isNotEmpty) ...[
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          nota,
-                          style: TextStyle(color: kDark.withOpacity(0.5), fontSize: 11, fontWeight: FontWeight.w500),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

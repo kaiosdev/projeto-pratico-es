@@ -12,5 +12,5 @@
   // Se for testar em celular físico, troque para o IP da sua máquina:
   //   http://192.168.0.X:3000
 class ApiConfig {
-  static const String baseUrl = 'http://localhost:3000';
+  static const String baseUrl = 'http://192.168.0.108:3000';
 }

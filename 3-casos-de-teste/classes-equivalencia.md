@@ -408,7 +408,7 @@ Casos de Teste da US-15.
 
 ---
 
-### US-16 — Autenticação de Cadastro (Sincronizado com Código)
+### US-16 (H16-2) — Autenticação de Cadastro (Sincronizado com Código)
 
 | Condição de Entrada | Classes Válidas | Classes Inválidas | Classes Inválidas |
 | :--- | :--- | :--- | :--- |
