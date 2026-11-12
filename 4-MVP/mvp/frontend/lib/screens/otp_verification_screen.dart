@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../src/utils/validador_auth.dart'; // Importação corrigida com src
 import '../src/services/auth_service.dart'; // Importação necessária para o AuthService
 import 'home_screen.dart';
+import 'onboarding_screen.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String email;
@@ -75,7 +76,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
       if (!mounted) return;
       if (sucesso) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+        // US-14: no primeiro acesso, mostra o onboarding guiado antes da Home.
+        final mostrarOnboarding = await OnboardingGate.shouldShow();
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => mostrarOnboarding
+                ? const OnboardingScreen()
+                : const HomeScreen(),
+          ),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Código incorreto.'), backgroundColor: Colors.red),
