@@ -1,0 +1,80 @@
+@startuml
+!include style.iuml
+title Mapa de navegação entre as telas (lib/screens)
+hide empty description
+skinparam StateBorderColor #8A6A00
+skinparam StateBackgroundColor #FFF6D5
+state "Splash" as Splash
+state "Acessibilidade\ninicial" as A11y
+state "Login" as Login
+state "Cadastro" as Reg
+state "Verificação\nOTP" as Otp
+state "Recuperar\nsenha" as Forgot
+state "Onboarding" as Onb
+state "Configurar\nperfil" as PSetup
+state "Home" as Home
+state "Menu" as Menu
+state "Sobre\nmeditação" as AboutM
+state "Meditações" as Med
+state "Sessão de\nmeditação" as MedS
+state "Sons" as Music
+state "Spotify" as Spot
+state "Sleepcasts" as Sleep
+state "Pet" as Pet
+state "Skins do pet" as Skin
+state "Saúde\n(Monitor BPM)" as Mon
+state "Registro\nemocional" as ER
+state "Histórico\nemocional" as EH
+state "Termômetro" as Th
+state "Relatório" as Rep
+state "Assistente\n(chatbot)" as Chat
+state "Comunidade" as Social
+state "Perfil" as Prof
+state "Premium" as Prem
+state "Configurações" as Set
+state "Saúde\nconectada" as HS
+state "Notificações" as Notif
+state "Missões" as Mis
+state "Jogos" as Games
+state "Quiz / Corrida /\nDamas" as G3
+state "Offline" as Off
+[*] --> Splash
+Splash --> A11y
+A11y --> Login
+Login --> Reg
+Login --> Forgot
+Login --> Home : login
+Reg --> Otp
+Reg --> Home : Google
+Otp --> Onb : 1º acesso
+Otp --> Home
+Onb --> PSetup
+PSetup --> Home
+Home --> Menu
+Home --> AboutM
+AboutM --> Med
+Med --> MedS
+Home --> Music
+Music --> Spot
+Music --> Sleep
+Home --> Pet
+Pet --> Skin
+Home --> Mon
+Mon --> ER
+ER --> EH
+Mon --> EH
+Mon --> Th
+Mon --> Rep
+Mon --> Chat
+Home --> Social
+Menu --> Prof
+Prof --> Prem
+Menu --> Set
+Set --> HS
+Menu --> Notif
+Menu --> Mis
+Menu --> Games
+Games --> G3
+Menu --> Off
+Menu --> Login : Sair
+@enduml

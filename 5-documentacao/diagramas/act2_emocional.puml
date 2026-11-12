@@ -1,0 +1,40 @@
+@startuml
+!include style.iuml
+title Diagrama de Atividades 2 — Registrar estado emocional (UC14)
+start
+:Abrir Saúde > Registro emocional;
+:Ajustar escala de humor (1 a 10);
+:Selecionar emoji (opcional);
+:Selecionar cor (opcional);
+:Escrever nota (opcional);
+:Tocar SALVAR;
+if (Escala entre 1 e 10?) then (não)
+  :Exibir erro da escala;
+  stop
+else (sim)
+endif
+if (Emoji informado fora do conjunto válido?) then (sim)
+  :Exibir "Emoji de humor inválido.";
+  stop
+else (não)
+endif
+if (Cor informada fora da paleta?) then (sim)
+  :Exibir "Cor inválida...";
+  stop
+else (não)
+endif
+if (Nota com mais de 500 caracteres?) then (sim)
+  :Exibir limite da nota;
+  stop
+else (não)
+endif
+:Montar EmotionalEntry\n(emoji vazio e cor #808080 quando não informados);
+:Gravar no armazenamento local;
+:Exibir confirmação;
+fork
+  :Histórico passa a listar o registro;
+fork again
+  :Termômetro recalcula médias,\ntendência e sugestões;
+end fork
+stop
+@enduml
