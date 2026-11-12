@@ -1,0 +1,49 @@
+@startuml
+!include style.iuml
+left to right direction
+title Diagrama de Casos de Uso 2 — Bem-estar e Engajamento
+actor "Usuário\nAutenticado" as U
+actor "Spotify" as SP <<sistema>>
+rectangle "SlowDown" {
+  package "Monitoramento emocional" {
+    usecase "UC14 Registrar estado\nemocional diário" as UC14
+    usecase "UC15 Consultar histórico\nemocional" as UC15
+    usecase "UC16 Visualizar termômetro\nemocional e insights" as UC16
+    usecase "UC17 Monitorar frequência\ncardíaca (BPM)" as UC17
+    usecase "UC18 Visualizar relatório\nde bem-estar" as UC18
+    usecase "UC19 Conversar com o\nassistente de apoio" as UC19
+    usecase "Encaminhar para ajuda\nprofissional (CVV 188)" as CVV
+  }
+  package "Relaxamento" {
+    usecase "UC20 Realizar sessão de\nmeditação guiada" as UC20
+    usecase "UC21 Ouvir sons ambiente\ne sleepcasts" as UC21
+    usecase "UC22 Controlar músicas\nno Spotify" as UC22
+    usecase "UC23 Gerenciar conteúdo\noffline" as UC23
+  }
+  package "Gamificação" {
+    usecase "UC24 Cuidar do pet virtual\n(alimentar, descansar, brincar)" as UC24
+    usecase "UC25 Personalizar o pet\n(raça, chapéu, óculos)" as UC25
+    usecase "UC26 Cumprir missões diárias\n(XP, nível e emblemas)" as UC26
+    usecase "UC27 Jogar minijogos\nantiestresse" as UC27
+    usecase "UC28 Interagir na\ncomunidade" as UC28
+  }
+}
+U --> UC14
+U --> UC15
+U --> UC16
+U --> UC17
+U --> UC18
+U --> UC19
+U --> UC20
+U --> UC21
+U --> UC22
+U --> UC23
+U --> UC24
+U --> UC25
+U --> UC26
+U --> UC27
+U --> UC28
+UC19 <. CVV : <<extend>>\n(mensagem de risco)
+UC14 <. UC15 : <<extend>>
+UC22 --> SP
+@enduml

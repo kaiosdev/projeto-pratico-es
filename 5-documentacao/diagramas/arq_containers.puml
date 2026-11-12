@@ -1,0 +1,32 @@
+@startuml
+!include style.iuml
+title Arquitetura implementada — visão de containers (C4 nível 2)
+
+actor "Usuário" as U
+node "Dispositivo Android" {
+  component "App Flutter\n(View: lib/screens)" as VIEW
+  component "Estado e acesso a dados\n(Riverpod providers, AuthRepository,\nAuthService, SessionManager)" as CORE
+  component "Regras de negócio puras\n(lib/src/utils: validadores)" as UTILS
+  database "SharedPreferences\n(sessão, humor, pet, missões,\nchat, preferências)" as LOCAL
+}
+node "Servidor (Node.js 18+)" {
+  component "API REST Express\nroutes → middleware → controllers" as API
+  component "Model\n(userModel)" as MODEL
+}
+database "MySQL 8\nslowdown_db.users" as DB
+cloud "Firebase Authentication" as FB
+cloud "Google Sign-In" as G
+cloud "Spotify App Remote" as SP
+U --> VIEW
+VIEW --> CORE
+VIEW --> UTILS
+VIEW --> LOCAL
+CORE --> LOCAL
+CORE --> FB : e-mail/senha,\nrecuperação de senha
+CORE --> G : OAuth
+CORE --> API : HTTP/JSON\nBearer <ID token>
+API --> FB : Admin SDK\nverifyIdToken
+API --> MODEL
+MODEL --> DB : mysql2 (pool)
+VIEW --> SP : spotify_sdk
+@enduml

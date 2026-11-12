@@ -1,0 +1,65 @@
+@startuml
+!include style.iuml
+title Diagrama de Classes 3 — App Flutter: modelos de domínio persistidos localmente (lib/screens) — parte A
+hide empty members
+package "Registro emocional (US-06, US-07, US-10)" as P1 {
+  class EmotionalEntry {
+    + id : String
+    + date : DateTime
+    + emoji : String
+    + label : String
+    + escala : int [1..10]
+    + colorHex : String
+    + nota : String
+    + toJson() / fromJson()
+    + relativeDateLabel : String
+  }
+  class EmotionalEntryStorage {
+    + {static} loadAll() : Future<List<EmotionalEntry>>
+    + {static} add(entry)
+    + {static} clearAll()
+  }
+  class EmotionalInsights {
+    + last7Days / last30Days
+    + weeklyAverage : double
+    + weeklyTrend : double
+    + suggestions : List<String>
+  }
+}
+package "Gamificação (US-03, US-12, US-13)" as P2 {
+  class GamificationStatus {
+    + xp : int
+    + streakDays : int
+    + totalMissionsCompleted : int
+    + lastCompletionDate : DateTime?
+    + unlockedBadgeIds : Set<String>
+    + level : int = xp / 100 + 1
+    + completeMission(id) : Set<String>
+    + resetDailyMissionsIfNeeded()
+    + save() / load()
+  }
+  class Mission {
+    + id : String
+    + title : String
+    + xpReward : int
+    + completed : bool
+  }
+  class BadgeInfo {
+    + id : String
+    + title : String
+    + unlockCondition : bool Function(GamificationStatus)
+  }
+  class PetStatus {
+    + hunger : double [0..100]
+    + happiness : double [0..100]
+    + energy : double [0..100]
+    + mood : String
+    + save() / load()
+  }
+}
+EmotionalEntryStorage "1" o-- "*" EmotionalEntry
+EmotionalInsights --> "*" EmotionalEntry
+GamificationStatus "1" *-- "4" Mission
+GamificationStatus ..> BadgeInfo : kBadgeCatalog (5)
+note "Estas classes persistem os dados no dispositivo via\n**SharedPreferences** (save()/load() ou classes *Storage).\nNesta versão não há chamada ao backend para esses dados." as N
+@enduml

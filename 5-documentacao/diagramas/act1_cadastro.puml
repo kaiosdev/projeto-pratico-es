@@ -1,0 +1,55 @@
+@startuml
+!include style.iuml
+title Diagrama de Atividades 1 — Cadastro com e-mail e senha (UC02/UC03)
+|Usuário|
+start
+:Preencher nome, e-mail, senha\ne confirmação;
+:Marcar "Concordo com os Termos";
+:Tocar CRIAR CONTA;
+|App (RegisterScreen)|
+if (Nome vazio?) then (sim)
+  :Exibir "Informe seu nome.";
+  stop
+elseif (E-mail inválido?) then (sim)
+  :Exibir "E-mail inválido.";
+  stop
+elseif (Senha < 6 caracteres\nou sem número?) then (sim)
+  :Exibir mensagem da regra de senha;
+  stop
+elseif (Senhas diferentes?) then (sim)
+  :Exibir "As senhas não coincidem.";
+  stop
+elseif (Termos não aceitos?) then (sim)
+  :Exibir "Aceite os termos para continuar.";
+  stop
+else (dados válidos)
+endif
+|Firebase Auth|
+:Criar usuário (e-mail/senha);
+if (E-mail já em uso?) then (sim)
+  |App (RegisterScreen)|
+  :Exibir "Este e-mail já está em uso.";
+  stop
+else (não)
+endif
+|API SlowDown|
+:Validar token (middleware);
+:Criar registro em users\n(plano = padrao);
+|App (RegisterScreen)|
+:Salvar sessão local;
+:Abrir verificação de código;
+|Usuário|
+:Digitar código de 6 dígitos;
+|App (RegisterScreen)|
+if (Código válido e dentro de 15 min?) then (sim)
+  if (Primeiro acesso?) then (sim)
+    :Exibir onboarding\ne configuração de perfil;
+  else (não)
+  endif
+  :Abrir Home;
+  stop
+else (não)
+  :Exibir erro de código;
+  stop
+endif
+@enduml
