@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../src/services/session_manager.dart';
 import 'profile_screen.dart';
 import 'settings_screen.dart';
 import 'notifications_screen.dart';
 import 'missions_screen.dart';
 import 'games_screen.dart';
 import 'offline_screen.dart';
+import 'login_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -145,11 +148,17 @@ class MenuScreen extends StatelessWidget {
                     // Botão SAIR
                     _MenuButton(
                       label: 'SAIR',
-                      onTap: () {
-                        // TODO: Firebase Auth signOut
-                        // FirebaseAuth.instance.signOut();
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
+                      onTap: () async {
+                        // Encerra a sessão no Firebase e apaga o token local,
+                        // depois volta para o Login limpando a pilha de telas.
+                        await FirebaseAuth.instance.signOut();
+                        await SessionManager.limparSessao();
+                        if (!context.mounted) return;
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (_) => const LoginScreen()),
+                          (route) => false,
+                        );
                       },
                     ),
 
