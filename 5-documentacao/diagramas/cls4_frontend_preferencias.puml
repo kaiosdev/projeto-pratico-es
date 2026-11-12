@@ -1,0 +1,82 @@
+@startuml
+!include style.iuml
+title Diagrama de Classes 4 — App Flutter: modelos de domínio persistidos localmente (lib/screens) — parte B
+hide empty members
+package "Premium e assistente (US-08, US-17)" as P3 {
+  enum PremiumPlan {
+    none
+    monthly
+    yearly
+  }
+  class PremiumStatus {
+    + isPremium : bool
+    + subscribedAt : DateTime?
+    + expiresAt : DateTime?
+    + daysLeft : int
+    + subscribe(plan)
+    + cancel()
+    + save() / load()
+  }
+  class ChatMessage {
+    + id : String
+    + text : String
+    + isUser : bool
+    + sentAt : DateTime
+    + isHelpReferral : bool
+  }
+  enum ChatbotStyle {
+    acolhedor
+    direto
+    motivacional
+  }
+  class ChatStorage {
+    + {static} loadHistory() / saveHistory()
+    + {static} loadStyle() / saveStyle()
+  }
+  class "_LocalChatEngine" as Engine {
+    + {static} isCrisisMessage(text) : bool
+    + {static} reply(text, style) : String
+  }
+}
+package "Preferências, offline e onboarding (US-04, US-14, US-15, US-19)" as P4 {
+  class NotificationSettings {
+    + masterEnabled : bool
+    + systemPermissionGranted : bool
+    + reminderTime : TimeOfDay = 20:00
+    + categories : Map<String,bool>
+    + save() / load()
+  }
+  class OfflineSettings {
+    + autoSyncEnabled : bool
+    + wifiOnly : bool = true
+    + totalSizeMb : double
+    + addItem() / removeItem() / clearAll()
+  }
+  class DownloadedItem {
+    + id, title : String
+    + type : OfflineContentType
+    + sizeMb : double
+    + downloadedAt : DateTime
+  }
+  class HealthSyncSettings {
+    + appleHealthConnected : bool
+    + googleFitConnected : bool
+    + lastSyncedAt : DateTime?
+    + anyConnected : bool
+  }
+  class OnboardingGate {
+    + {static} shouldShow() : Future<bool>
+    + {static} markCompleted()
+  }
+  class ProfileSetupData {
+    + {static} save(apelido, objetivo)
+    + {static} isConfigured() : Future<bool>
+  }
+}
+PremiumStatus --> PremiumPlan
+ChatStorage ..> ChatMessage
+ChatStorage ..> ChatbotStyle
+Engine ..> ChatbotStyle
+OfflineSettings "1" *-- "*" DownloadedItem
+note "Estas classes persistem os dados no dispositivo via\n**SharedPreferences** (save()/load() ou classes *Storage).\nNesta versão não há chamada ao backend para esses dados." as N
+@enduml

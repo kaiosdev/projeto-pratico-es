@@ -1,0 +1,27 @@
+@startuml
+!include style.iuml
+autonumber
+title Diagrama de Sequência 5 — Conversar com o assistente de apoio (UC19)
+actor Usuário as U
+participant "ChatbotScreen" as CS
+participant "_LocalChatEngine" as CE
+participant "ChatStorage" as ST
+database "SharedPreferences" as SP
+
+CS -> ST : loadHistory() / loadStyle()
+ST -> SP : chatbot_history, chatbot_style
+U -> CS : envia mensagem
+CS -> CS : adiciona ChatMessage(isUser = true)
+CS -> CE : isCrisisMessage(texto)
+alt contém palavra-chave de risco
+  CE --> CS : true
+  CS -> CS : adiciona mensagem de encaminhamento\n(isHelpReferral = true, CVV 188)
+else mensagem comum
+  CE --> CS : false
+  CS -> CE : reply(texto, estilo)
+  CE --> CS : resposta conforme estilo\n(acolhedor, direto ou motivacional)
+end
+CS -> ST : saveHistory(histórico)  [últimas 200]
+ST -> SP : setString(chatbot_history)
+CS --> U : exibe bolhas da conversa
+@enduml

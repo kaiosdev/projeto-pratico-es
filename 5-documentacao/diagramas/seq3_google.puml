@@ -1,0 +1,31 @@
+@startuml
+!include style.iuml
+autonumber
+title Diagrama de Sequência 3 — Entrar ou cadastrar com Google (UC05)
+actor Usuário as U
+participant "LoginScreen /\nRegisterScreen" as LS
+participant "AuthService" as AS
+participant "GoogleSignIn" as GS
+participant "FirebaseAuth" as FB
+participant "API /auth/sync" as API
+participant "SessionManager" as SM
+
+U -> LS : toca "Continuar com Google"
+LS -> AS : loginComGoogle()
+AS -> GS : signIn()
+alt usuário cancela a escolha de conta
+  GS --> AS : null
+  AS --> LS : AuthResult.erro("Login com Google cancelado.")
+  LS --> U : SnackBar de erro
+else conta escolhida
+  GS --> AS : GoogleSignInAccount
+  AS -> GS : authentication (accessToken, idToken)
+  AS -> FB : signInWithCredential(GoogleAuthProvider.credential)
+  FB --> AS : User + getIdToken()
+  AS -> API : POST /auth/sync { nome } (Bearer token)
+  API --> AS : 200 (existente) ou 201 (criado)
+  AS -> SM : salvarSessao(token, usuario.id, usuario.nome)
+  AS --> LS : AuthResult.sucessoCom(uid)
+  LS -> U : pushReplacement(HomeScreen) — sem OTP
+end
+@enduml
