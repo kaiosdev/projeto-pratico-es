@@ -1,0 +1,44 @@
+@startuml
+!include style.iuml
+title Diagrama de Atividades 4 — Cuidar do pet virtual (UC24)
+start
+:Abrir Pet;
+:Carregar status (fome, felicidade, energia),\nraça e acessórios;
+fork
+  repeat
+    :Aguardar 30 s;
+    :Fome −3, Felicidade −2, Energia −1,5\n(limites 0 a 100);
+    :Salvar status;
+  repeat while (Tela aberta?) is (sim) not (não)
+  :Cancelar temporizador (dispose);
+fork again
+  :Escolher ação;
+  switch (Ação)
+  case (Alimentar)
+    if (Fome = 100?) then (sim)
+      :Avisar "já está cheio";
+    else (não)
+      :Fome +20 e Felicidade +5;
+    endif
+  case (Descansar)
+    if (Energia = 100?) then (sim)
+      :Avisar "cheio de energia";
+    else (não)
+      :Energia +25;
+    endif
+  case (START — brincar)
+    if (Energia < 10?) then (sim)
+      :Avisar "pet cansado";
+    else (não)
+      :Abrir minijogo do pet;
+      :Aplicar ganho de felicidade\ne custo de energia e fome;
+      :Exibir fogos de artifício;
+    endif
+  case (SKINS)
+    :Escolher raça, chapéu e óculos;
+  endswitch
+  :Salvar status e aparência;
+  :Atualizar expressão pela média\n(≥70 feliz, ≥40 neutro, senão triste);
+end fork
+stop
+@enduml

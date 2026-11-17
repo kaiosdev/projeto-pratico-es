@@ -1,0 +1,66 @@
+@startuml
+!include style.iuml
+title Diagrama de Classes 1 — API REST (Node.js + Express), padrão MVC
+hide empty members
+skinparam linetype ortho
+package "src" {
+  class "server.js" as Server <<entrypoint>> {
+    - app : Express
+    - PORT : number = 3000
+    + listen(PORT, "0.0.0.0")
+  }
+  package "routes" {
+    class authRoutes <<Router>> {
+      + POST /auth/sync
+      + POST /auth/verify-otp
+    }
+  }
+  package "middlewares" {
+    class authMiddleware <<middleware>> {
+      + verifyFirebaseToken(req, res, next) : Promise<void>
+    }
+  }
+  package "controllers" <<Controller>> {
+    class authController {
+      + syncUser(req, res) : Promise<Response>
+      + verifyOtp(req, res) : Promise<Response>
+    }
+    class humorController <<não roteado>> {
+      + registrarHumor(req, res) : Promise<Response>
+    }
+  }
+  package "models" <<Model>> {
+    class userModel {
+      + buscarPorFirebaseUid(firebaseUid) : Promise<User>
+      + buscarPorId(id) : Promise<User>
+      + criar({firebaseUid, nome, email}) : Promise<number>
+    }
+  }
+  package "config" {
+    class database <<singleton>> {
+      + pool : mysql.Pool (connectionLimit = 10)
+    }
+    class firebase <<singleton>> {
+      + app : FirebaseApp
+    }
+  }
+}
+entity "users" as users <<tabela MySQL>> {
+  * id : INT <<PK>>
+  --
+  firebase_uid : VARCHAR(128) <<UNIQUE>>
+  nome : VARCHAR(120)
+  email : VARCHAR(150) <<UNIQUE>>
+  plano : ENUM('padrao','premium')
+  criado_em : DATETIME
+  atualizado_em : DATETIME
+}
+Server --> authRoutes : app.use('/auth')
+authRoutes --> authMiddleware : protege /sync
+authRoutes --> authController
+authMiddleware ..> firebase : getAuth().verifyIdToken()
+authController --> userModel
+humorController ..> database
+userModel --> database
+database ..> users : SQL
+@enduml

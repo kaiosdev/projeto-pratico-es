@@ -5,6 +5,7 @@ import 'emotional_history_screen.dart';
 import 'emotional_record_screen.dart';
 import 'emotional_thermometer_screen.dart';
 import 'report_screen.dart';
+import '../src/utils/validador_bpm.dart';
 
 class MonitorScreen extends StatefulWidget {
   const MonitorScreen({super.key});
@@ -75,17 +76,22 @@ class _MonitorScreenState extends State<MonitorScreen>
 
   // Faixa saudável padrão alinhada ao defeito corrigido (Ambiguidade/Omissão,
   // item 10 do relatório de inspeção) e ao ValidadorBpm: 60 a 100 BPM.
-  Color get _bpmColor {
-    if (_bpm < 60) return const Color(0xFF5C7AAA);
-    if (_bpm < 100) return const Color(0xFF6AAA7C);
-    return const Color(0xFFAA5C5C);
-  }
+  // A classificação vem do ValidadorBpm (mesma regra testada em
+  // us04_validador_bpm_test.dart), evitando duplicar os limites aqui.
+  StatusBpm get _bpmStatus =>
+      ValidadorBpm.validarBpm(_bpm).status ?? StatusBpm.normal;
 
-  String get _bpmLabel {
-    if (_bpm < 60) return 'ABAIXO DO NORMAL';
-    if (_bpm < 100) return 'NORMAL';
-    return 'ELEVADO';
-  }
+  Color get _bpmColor => switch (_bpmStatus) {
+        StatusBpm.abaixoDoNormal => const Color(0xFF5C7AAA),
+        StatusBpm.normal => const Color(0xFF6AAA7C),
+        StatusBpm.elevado => const Color(0xFFAA5C5C),
+      };
+
+  String get _bpmLabel => switch (_bpmStatus) {
+        StatusBpm.abaixoDoNormal => 'ABAIXO DO NORMAL',
+        StatusBpm.normal => 'NORMAL',
+        StatusBpm.elevado => 'ELEVADO',
+      };
 
   @override
   Widget build(BuildContext context) {

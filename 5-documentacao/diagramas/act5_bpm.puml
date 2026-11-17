@@ -1,0 +1,30 @@
+@startuml
+!include style.iuml
+title Diagrama de Atividades 5 — Monitorar frequência cardíaca (UC17)
+start
+:Abrir Saúde (MonitorScreen);
+:Tocar START;
+:Iniciar animação de pulso;
+:Obter leitura de BPM\n(MVP: valor simulado 72–87);
+:Classificar leitura
+(ValidadorBpm.validarBpm);
+if (BPM < 60?) then (sim)
+  :ABAIXO DO NORMAL
+(gerarAlerta = verdadeiro);
+elseif (BPM > 100?) then (sim)
+  :ELEVADO
+(gerarAlerta = verdadeiro);
+else (60 a 100)
+  :NORMAL
+(sem alerta);
+endif
+:Exibir velocímetro com a cor do status;
+:Exibir histórico semanal;
+if (Usuário toca PARAR?) then (sim)
+  :Parar monitoramento;
+  stop
+else (não)
+  :Acessar ações relacionadas\n(registro emocional, assistente,\ntermômetro, relatório);
+  stop
+endif
+@enduml

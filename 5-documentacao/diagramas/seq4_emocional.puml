@@ -1,0 +1,35 @@
+@startuml
+!include style.iuml
+autonumber
+title Diagrama de Sequência 4 — Registrar estado emocional diário (UC14)
+actor Usuário as U
+participant "EmotionalRecordScreen" as ER
+participant "ValidadorRegistroEmocional" as VR
+participant "EmotionalEntryStorage" as ST
+database "SharedPreferences\n(emotional_entries_v1)" as SP
+participant "EmotionalHistoryScreen" as EH
+
+U -> ER : escolhe escala (1–10), emoji e cor\n(opcionais) e escreve nota
+U -> ER : toca SALVAR
+ER -> VR : registrarHumor(emoji, escala, cor)
+VR --> ER : ResultadoRegistroHumor
+alt resultado inválido
+  ER --> U : SnackBar com primeiroErro
+else válido
+  ER -> VR : validarNota(nota)
+  alt nota com mais de 500 caracteres
+    VR --> ER : "A nota não pode ultrapassar 500 caracteres."
+    ER --> U : SnackBar de erro
+  else nota válida
+    ER -> ST : add(EmotionalEntry)
+    ST -> SP : getString → lista atual
+    ST -> SP : setString(lista + novo registro)
+    ER --> U : exibe confirmação (_saved = true)
+    opt ver histórico
+      U -> EH : abrir histórico
+      EH -> ST : loadAll()
+      ST --> EH : registros (mais recente primeiro)
+    end
+  end
+end
+@enduml

@@ -21,3 +21,9 @@ Thumbs.db
 .idea/
 .vscode/
 *.iml
+
+# ─── Dependências e artefatos gerados ───────────────────────────────────────
+node_modules/
+build/
+.dart_tool/
+*.log

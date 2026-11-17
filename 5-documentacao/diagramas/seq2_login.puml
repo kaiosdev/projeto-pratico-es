@@ -1,0 +1,41 @@
+@startuml
+!include style.iuml
+autonumber
+title Diagrama de Sequência 2 — Entrar com e-mail e senha (UC04)
+actor Usuário as U
+participant "LoginScreen" as LS
+participant "AuthNotifier\n(Riverpod)" as AN
+participant "FirebaseAuth" as FB
+participant "SessionManager" as SM
+participant "AuthRepository" as AR
+participant "dioProvider\n(interceptor)" as DIO
+participant "API /auth/sync\n(middleware → syncUser)" as API
+database "MySQL" as DB
+
+U -> LS : informa e-mail e senha e toca ENTRAR
+alt campo vazio
+  LS --> U : SnackBar "Por favor, preencha e-mail e senha."
+else campos preenchidos
+  LS -> AN : login(email, senha)
+  AN -> FB : signInWithEmailAndPassword()
+  alt credenciais inválidas
+    FB --> AN : FirebaseAuthException (invalid-credential)
+    AN --> LS : Exception "E-mail ou senha incorretos."
+    LS --> U : SnackBar de erro
+  else credenciais válidas
+    FB --> AN : UserCredential + getIdToken()
+    AN -> SM : salvarSessao(token, 0, displayName)
+    AN -> AR : syncUsuario(displayName)
+    AR -> DIO : post('/auth/sync')
+    DIO -> SM : obterToken()
+    DIO -> API : POST /auth/sync (Bearer token)
+    API -> DB : SELECT users WHERE firebase_uid = ?
+    DB --> API : usuário existente
+    API --> AR : 200 { mensagem, usuario }
+    AR --> AN : UsuarioModel.fromJson()
+    AN -> SM : salvarSessao(token, usuario.id, usuario.nome)
+    AN --> LS : AsyncData(usuario)
+    LS -> U : pushReplacement(HomeScreen)
+  end
+end
+@enduml

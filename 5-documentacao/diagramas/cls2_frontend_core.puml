@@ -1,0 +1,136 @@
+@startuml
+!include style.iuml
+title Diagrama de Classes 2 — App Flutter: autenticação, serviços e validadores (lib/src)
+hide empty members
+package "screens (View)" {
+  class LoginScreen <<ConsumerStatefulWidget>> {
+    - _handleLogin() : Future<void>
+    - _handleGoogleLogin() : Future<void>
+  }
+  class RegisterScreen <<ConsumerStatefulWidget>> {
+    - _acceptTerms : bool
+    - _validateRegisterForm() : String?
+    - _handleRegister() : Future<void>
+    - _handleGoogleRegister() : Future<void>
+  }
+  class OtpVerificationScreen <<StatefulWidget>> {
+    + email : String
+    - _secondsRemaining : int = 900
+    - _verifyOtp() : Future<void>
+  }
+  class ForgotPasswordScreen <<StatefulWidget>> {
+    - _handleSendLink() : Future<void>
+  }
+}
+package "providers" {
+  class AuthNotifier <<AsyncNotifier<UsuarioModel?>>> {
+    + build() : FutureOr<UsuarioModel?>
+    + registar(nome, email, senha) : Future<void>
+    + login(email, senha) : Future<void>
+    - _tratarErroFirebase(erro) : String
+  }
+  class "authNotifierProvider\nauthRepositoryProvider" as Prov <<provider>>
+}
+package "repositories" {
+  class AuthRepository {
+    - _client : Dio
+    + AuthRepository(Dio)
+    + syncUsuario(nomeOpcional) : Future<UsuarioModel>
+  }
+}
+package "services" {
+  class "dioProvider" as DioP <<provider>> {
+    baseUrl, timeouts 10 s
+    interceptor: Authorization Bearer
+  }
+  class ApiConfig {
+    + {static} baseUrl : String = "http://10.0.2.2:3000"
+  }
+  class SessionManager {
+    + {static} salvarSessao(token, usuarioId, usuarioNome)
+    + {static} obterToken() : Future<String?>
+    + {static} obterNomeUsuario() : Future<String?>
+    + {static} limparSessao()
+  }
+  class AuthService {
+    + {static} verificarCodigo(email, codigo) : Future<bool>
+    + {static} loginComGoogle() : Future<AuthResult>
+  }
+  class AuthResult {
+    + sucesso : bool
+    + mensagemErro : String?
+    + uid : String?
+    + AuthResult.sucessoCom(uid)
+    + AuthResult.erro(mensagem)
+  }
+}
+package "models" {
+  class UsuarioModel {
+    + id : int
+    + firebaseUid : String
+    + nome : String
+    + email : String
+    + plano : String
+    + UsuarioModel.fromJson(json)
+  }
+}
+package "utils (regras de negócio)" {
+  class ValidadorAuth {
+    + {static} validarNome(nome) : String?
+    + {static} validarEmail(email) : String?
+    + {static} validarSenha(senha) : String?
+    + {static} validarCodigoVerificacao(...) : String?
+  }
+  class ValidadorBpm {
+    + {static} bpmMin = 60, bpmMax = 100
+    + {static} intervaloMinSeg = 5, intervaloMaxSeg = 60
+    + {static} validarBpm(bpm) : ResultadoBpm
+    + {static} gerarAlerta(status) : bool
+    + {static} validarIntervalo(seg) : String?
+  }
+  enum StatusBpm {
+    abaixoDoNormal
+    normal
+    elevado
+  }
+  class ResultadoBpm {
+    + valido : bool
+    + status : StatusBpm?
+    + gerarAlerta : bool
+    + ResultadoBpm.aceito(status)
+    + ResultadoBpm.rejeitado(msg)
+  }
+  class ValidadorRegistroEmocional {
+    + {static} emojisValidos : Set<String>
+    + {static} coresValidas : Map<String,String>
+    + {static} registrarHumor(emoji, escala, cor) : ResultadoRegistroHumor
+    + {static} validarNota(nota) : String?
+  }
+  class ResultadoRegistroHumor {
+    + valido : bool
+    + primeiroErro : String?
+  }
+}
+LoginScreen --> AuthNotifier : ref.read / ref.watch
+RegisterScreen --> AuthNotifier
+RegisterScreen ..> ValidadorAuth
+RegisterScreen --> OtpVerificationScreen
+OtpVerificationScreen ..> ValidadorAuth
+OtpVerificationScreen ..> AuthService
+LoginScreen ..> AuthService
+RegisterScreen ..> AuthService
+Prov ..> AuthNotifier
+Prov ..> AuthRepository
+AuthNotifier --> AuthRepository
+AuthNotifier ..> SessionManager
+AuthRepository --> DioP : injetado
+DioP ..> ApiConfig
+DioP ..> SessionManager
+AuthService ..> SessionManager
+AuthService ..> ApiConfig
+AuthService ..> AuthResult : cria
+AuthRepository ..> UsuarioModel : cria
+ValidadorBpm ..> ResultadoBpm
+ResultadoBpm --> StatusBpm
+ValidadorRegistroEmocional ..> ResultadoRegistroHumor
+@enduml

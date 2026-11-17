@@ -1,0 +1,52 @@
+@startuml
+!include style.iuml
+autonumber
+title Diagrama de Sequência 1 — Cadastrar conta e verificar código (UC02 + UC03)
+actor Usuário as U
+participant "RegisterScreen" as RS
+participant "ValidadorAuth" as VA
+participant "AuthNotifier\n(Riverpod)" as AN
+participant "FirebaseAuth" as FB
+participant "SessionManager" as SM
+participant "AuthRepository\n(Dio)" as AR
+box "API REST (Node.js + Express)" #FFFDF2
+participant "authMiddleware\nverifyFirebaseToken" as MW
+participant "authController" as AC
+participant "userModel" as UM
+end box
+database "MySQL\nusers" as DB
+participant "OtpVerificationScreen" as OTP
+
+U -> RS : preenche nome, e-mail, senha,\nconfirmação e aceita termos
+RS -> VA : validarNome / validarEmail / validarSenha
+VA --> RS : null (sem erro)
+RS -> AN : registar(nome, email, senha)
+AN -> FB : createUserWithEmailAndPassword()
+FB --> AN : UserCredential
+AN -> FB : updateDisplayName(nome); getIdToken()
+FB --> AN : token JWT
+AN -> SM : salvarSessao(token, id = 0, nome)
+AN -> AR : syncUsuario(nome)
+AR -> MW : POST /auth/sync\nAuthorization: Bearer <token>
+MW -> FB : verifyIdToken(token)  [Admin SDK]
+FB --> MW : token decodificado (uid, email)
+MW -> AC : next() → syncUser(req, res)
+AC -> UM : buscarPorFirebaseUid(uid)
+UM -> DB : SELECT * FROM users WHERE firebase_uid = ?
+DB --> UM : vazio
+AC -> UM : criar({firebaseUid, nome, email})
+UM -> DB : INSERT INTO users (...)
+AC -> UM : buscarPorId(novoId)
+UM -> DB : SELECT ... WHERE id = ?
+AC --> AR : 201 { usuario }
+AR --> AN : UsuarioModel
+AN -> SM : salvarSessao(token, usuario.id, usuario.nome)
+AN --> RS : estado = data(usuario)
+RS -> OTP : pushReplacement(email)
+U -> OTP : digita código de 6 dígitos
+OTP -> VA : validarCodigoVerificacao(código, expiraEm)
+OTP -> AC : POST /auth/verify-otp → verifyOtp()
+note right of AC : MVP: aceita o código fixo 123456
+AC --> OTP : 200 "Código verificado com sucesso!"
+OTP -> U : abre Onboarding (1º acesso) ou Home
+@enduml

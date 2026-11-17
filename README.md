@@ -72,6 +72,16 @@ O sistema segue o padrão **Model-View-Controller (MVC)** e a modelagem arquitet
 | [`4-MVP/prints`](4-MVP/prints) | Capturas de tela do aplicativo em execução. |
 | [`4-MVP/video`](4-MVP/video) | Vídeo de demonstração do MVP. |
 
+### 📄 Documentação do Sistema (versão final)
+| Pasta / Arquivo | Descrição |
+| :--- | :--- |
+| [`5-documentacao/documentacao-slowdown-v2.0.pdf`](5-documentacao/documentacao-slowdown-v2.0.pdf) | Documentação atualizada conforme o MVP: requisitos, regras de negócio, UML, arquitetura, padrões de projeto e telas. |
+| [`5-documentacao/diagramas`](5-documentacao/diagramas) | Fontes PlantUML dos diagramas. |
+
+## 🔀 Versionamento
+
+O projeto segue **Git Flow** (`main` ← `release` ← `development` ← `feature/*`), com **commits semânticos** e merges por **Pull Request**. Veja [`CONTRIBUTING.md`](CONTRIBUTING.md) e o [`CHANGELOG.md`](CHANGELOG.md).
+
 ## 👥 Equipe do Projeto
 
 <table align="center">

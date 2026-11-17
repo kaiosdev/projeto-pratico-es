@@ -1,0 +1,36 @@
+@startuml
+!include style.iuml
+title Diagrama de Atividades 3 — Cumprir missão diária (UC26)
+start
+:Abrir Menu > Missões;
+:Carregar GamificationStatus;
+if (Última conclusão foi em outro dia?) then (sim)
+  :Reiniciar missões do dia;
+else (não)
+endif
+:Usuário marca uma missão;
+if (Missão já concluída hoje?) then (sim)
+  :Ignorar (não soma XP);
+  stop
+else (não)
+endif
+:Marcar como concluída;
+:Somar XP da missão\n(15 a 25 XP);
+:Incrementar total de missões;
+if (Primeira conclusão do dia?) then (sim)
+  if (Última conclusão foi ontem?) then (sim)
+    :Sequência + 1;
+  else (não)
+    :Sequência = 1;
+  endif
+else (não)
+endif
+:Recalcular nível\n(nível = XP / 100 + 1);
+:Verificar condições dos emblemas;
+if (Novo emblema desbloqueado?) then (sim)
+  :Destacar emblema na tela;
+else (não)
+endif
+:Salvar progresso localmente;
+stop
+@enduml

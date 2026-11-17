@@ -1,0 +1,47 @@
+@startuml
+!include style.iuml
+left to right direction
+title Diagrama de Casos de Uso 1 — Acesso e Conta
+actor "Visitante" as V
+actor "Usuário\nAutenticado" as U
+actor "Firebase\nAuthentication" as FB <<sistema>>
+actor "Google\nSign-In" as G <<sistema>>
+V <|-- U
+rectangle "SlowDown" {
+  usecase "UC01 Configurar\nacessibilidade inicial" as UC01
+  usecase "UC02 Cadastrar conta\n(e-mail e senha)" as UC02
+  usecase "UC03 Verificar código\nde confirmação (OTP)" as UC03
+  usecase "UC04 Entrar com\ne-mail e senha" as UC04
+  usecase "UC05 Entrar / cadastrar\ncom Google" as UC05
+  usecase "UC06 Recuperar senha" as UC06
+  usecase "Sincronizar usuário\ncom a API (/auth/sync)" as SYNC
+  usecase "UC07 Realizar\nonboarding" as UC07
+  usecase "UC08 Gerenciar perfil" as UC08
+  usecase "UC09 Assinar plano\nPremium" as UC09
+  usecase "UC10 Configurar\npreferências do app" as UC10
+  usecase "UC11 Configurar\nnotificações" as UC11
+  usecase "UC12 Conectar dados\nde saúde" as UC12
+  usecase "UC13 Sair do app" as UC13
+}
+V --> UC01
+V --> UC02
+V --> UC04
+V --> UC05
+V --> UC06
+UC02 .> UC03 : <<include>>
+UC02 .> SYNC : <<include>>
+UC04 .> SYNC : <<include>>
+UC05 .> SYNC : <<include>>
+UC03 <. UC07 : <<extend>>\n(primeiro acesso)
+U --> UC08
+U --> UC10
+U --> UC11
+U --> UC13
+UC08 <. UC09 : <<extend>>
+UC10 <. UC12 : <<extend>>
+UC02 --> FB
+UC04 --> FB
+UC06 --> FB
+UC05 --> G
+UC05 --> FB
+@enduml
