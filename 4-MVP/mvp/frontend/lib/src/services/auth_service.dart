@@ -18,6 +18,67 @@ class AuthResult {
 }
 
 class AuthService {
+  // ATENÇÃO: login e cadastrar abaixo chamam /auth/login e /auth/cadastro,
+  // rotas que o backend ainda NÃO possui (hoje só existem /auth/sync e
+  // /auth/verify-otp). O app usa o fluxo Firebase via auth_provider.dart;
+  // estes métodos ficam disponíveis para quando as rotas forem criadas.
+
+  /// Realiza login e já salva a sessão localmente em caso de sucesso.
+  static Future<AuthResult> login({
+    required String email,
+    required String senha,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiConfig.baseUrl}/auth/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'senha': senha}),
+      );
+
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+
+      if (response.statusCode == 200) {
+        // Salvando o JWT e os dados do usuário no dispositivo
+        await SessionManager.salvarSessao(
+          token: body['token'] ?? '', // Assumindo que sua API retorna um 'token'
+          usuarioId: body['id'] ?? 0,
+          usuarioNome: body['nome'] ?? 'Usuário',
+        );
+        return AuthResult.sucessoCom(uid: body['uid']?.toString());
+      }
+
+      return AuthResult.erro(body['mensagem'] ?? 'E-mail ou senha incorretos.');
+    } catch (e) {
+      debugPrint('🚨 ERRO REAL DA REDE: $e');
+      return AuthResult.erro('Não foi possível conectar ao servidor. Verifique sua conexão.');
+    }
+  }
+
+  /// Cria uma nova conta de usuário.
+  static Future<AuthResult> cadastrar({
+    required String nome,
+    required String email,
+    required String senha,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiConfig.baseUrl}/auth/cadastro'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'nome': nome, 'email': email, 'senha': senha}),
+      );
+
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return AuthResult.sucessoCom(uid: body['uid']?.toString());
+      }
+
+      return AuthResult.erro(body['mensagem'] ?? 'Não foi possível criar a conta.');
+    } catch (_) {
+      return AuthResult.erro('Não foi possível conectar ao servidor. Verifique sua conexão.');
+    }
+  }
+
   /// Verifica o código de confirmação enviado durante o cadastro (US-16).
   static Future<bool> verificarCodigo({required String email, required String codigo}) async {
     try {
