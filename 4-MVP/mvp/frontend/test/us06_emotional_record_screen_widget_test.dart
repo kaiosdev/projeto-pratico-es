@@ -1,6 +1,7 @@
 // test/us06_emotional_record_screen_widget_test.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../lib/screens/emotional_record_screen.dart';
 
 void main() {
@@ -8,7 +9,9 @@ void main() {
     
     // Helper agora força um tamanho de tela gigante para que tudo caiba
     Future<void> _setupTeste(WidgetTester tester) async {
-      await tester.binding.setSurfaceSize(const Size(400, 3000)); 
+      // Os registros são salvos em SharedPreferences: usa armazenamento vazio simulado.
+      SharedPreferences.setMockInitialValues({});
+      await tester.binding.setSurfaceSize(const Size(800, 3000));
       await tester.pumpWidget(const MaterialApp(home: EmotionalRecordScreen()));
       await tester.pumpAndSettle();
     }
