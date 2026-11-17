@@ -161,9 +161,9 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 | Condição de Entrada | Classes Válidas | Classes Inválidas | Classes Inválidas |
 | --- | --- | --- | --- |
 | E-mail | E-mail com @ e domínio válido (1) | E-mail sem @ (2) | E-mail sem domínio (3) |
-| Senha | Mínimo 8 caracteres com letras e números (4) | Senha sem número (5) | Menos de 8 caracteres (6) |
+| Senha | Mínimo 6 caracteres com letras e números (4) | Senha sem número (5) | Menos de 6 caracteres (6) |
 
-**Legenda da Tabela:** Classes de Equivalência da US #16, com a senha alinhada ao defeito corrigido (Omissão, item 29 do relatório de inspeção): mínimo de 8 caracteres e ao menos 1 número para o cadastro local.
+**Legenda da Tabela:** Classes de Equivalência da US #16, conforme `classes-equivalencia.md`: senha com no mínimo 6 caracteres e ao menos 1 número para o cadastro local.
 
 #### Tabela de Casos de Teste — Validação Unitária (`validador_auth.dart`)
 
@@ -175,10 +175,10 @@ A seguir, cada História de Usuário é detalhada com sua Tabela de Classes de E
 | CT04 | 5 | senha="SenhaSegura" | Rejeitada |
 | EXTRA01 | 3 | email="user@" | Rejeitado |
 | EXTRA02 | — | email="" | Rejeitado |
-| EXTRA03 | 6 | senha="Abc123" (6 caracteres) | Rejeitada |
+| EXTRA03 | 6 | senha="Ab1" (3 caracteres) | Rejeitada |
 | EXTRA04 | — | senha="" | Rejeitada |
-| EXTRA05 | 5 | senha="Abcdefgh" (8 chars, sem número) | Rejeitada |
-| EXTRA06 | 4 | senha="Abcdefg1" (8 chars, com número) | Aceita |
+| EXTRA05 | 5 | senha="Abcdef" (6 chars, sem número) | Rejeitada |
+| EXTRA06 | 4 | senha="Abcde1" (6 chars, com número) | Aceita |
 | CT05 | — | código="123456" (válido, não expirado) | Aceito |
 | CT06 | — | código="123456" (expirado, >15min) | Rejeitado |
 | EXTRA07 | — | código digitado diferente do esperado | Rejeitado |

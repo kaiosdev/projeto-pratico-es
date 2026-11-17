@@ -4,15 +4,16 @@
 // Cenários alinhados ao Trabalho Prático III — Matriz de Rastreabilidade
 //
 // Cenários oficiais do PDF:
-//   CT01  Email válido               → Aceito
-//   CT02  Email inválido             → Rejeitado
-//   CT03  Senha válida               → Aceita
-//   CT04  Senha sem número           → Rejeitada
-//   CT05  Código válido              → Aceito   (validarCodigoVerificacao)
-//   CT06  Código expirado            → Rejeitado (validarCodigoVerificacao)
+//   CT01  Email válido             → Aceito
+//   CT02  Email inválido           → Rejeitado
+//   CT03  Senha válida             → Aceita
+//   CT04  Senha sem número         → Rejeitada
+//   CT05  Código válido            → Aceito   (validarCodigoVerificacao)
+//   CT06  Código expirado          → Rejeitado (validarCodigoVerificacao)
 //
-// Senha alinhada ao defeito corrigido (Omissão, item 29 do relatório de
-// inspeção): mínimo de 8 caracteres e ao menos 1 número.
+// Senha conforme as Classes de Equivalência da US-16: mínimo de 6
+// caracteres e ao menos 1 número.
+// Código de verificação alinhado ao defeito corrigido: expiração de 15 minutos.
 //
 // CT05 e CT06 testam validarCodigoVerificacao(), que depende de tempo
 // (expiração). Para tornar o teste determinístico (sem depender do relógio
@@ -80,7 +81,7 @@ void main() {
     final casos = <_Caso<String>>[
       _Caso(
         id: 'CT03',
-        descricao: 'Senha válida (8+ chars, com número) → Aceita',
+        descricao: 'Senha válida (6+ chars, com número) → Aceita',
         entrada: 'Carlos123',
         erroEsperado: null,
       ),
@@ -130,26 +131,26 @@ void main() {
     final casosSenha = <_Caso<String>>[
       _Caso(
         id: 'EXTRA03',
-        descricao: 'Senha com 6 caracteres (abaixo do mínimo de 8) deve ser rejeitada',
-        entrada: 'Abc123',
-        erroEsperado: 'A senha deve ter no mínimo 8 caracteres.',
+        descricao: 'Senha com 3 caracteres (abaixo do mínimo de 6) deve ser rejeitada',
+        entrada: 'Ab1',
+        erroEsperado: 'A senha deve ter no mínimo 6 caracteres.',
       ),
       _Caso(
         id: 'EXTRA04',
         descricao: 'Senha vazia deve ser rejeitada',
         entrada: '',
-        erroEsperado: 'A senha deve ter no mínimo 8 caracteres.',
+        erroEsperado: 'A senha deve ter no mínimo 6 caracteres.',
       ),
       _Caso(
         id: 'EXTRA05',
-        descricao: 'Senha com 8 caracteres mas sem número deve ser rejeitada',
-        entrada: 'Abcdefgh',
+        descricao: 'Senha com 6 caracteres mas sem número deve ser rejeitada',
+        entrada: 'Abcdef',
         erroEsperado: 'A senha deve conter pelo menos um número.',
       ),
       _Caso(
         id: 'EXTRA06',
-        descricao: 'Senha com exatamente 8 caracteres e número deve ser aceita',
-        entrada: 'Abcdefg1',
+        descricao: 'Senha com exatamente 6 caracteres e número deve ser aceita',
+        entrada: 'Abcde1',
         erroEsperado: null,
       ),
     ];
@@ -168,8 +169,8 @@ void main() {
     // Instante fixo usado como "agora" em todos os testes deste grupo,
     // para que o resultado nunca dependa do relógio real da máquina.
     final agora = DateTime(2026, 6, 20, 12, 0, 0);
-    final expiraNoFuturo = agora.add(const Duration(minutes: 5));
-    final expirouNoPassado = agora.subtract(const Duration(minutes: 5));
+    final expiraNoFuturo = agora.add(const Duration(minutes: 15));
+    final expirouNoPassado = agora.subtract(const Duration(seconds: 1)); // Qualquer momento anterior a 'agora'
 
     test('[CT05] Código válido → Aceito', () {
       final resultado = ValidadorAuth.validarCodigoVerificacao(
@@ -181,7 +182,7 @@ void main() {
       expect(resultado, isNull);
     });
 
-    test('[CT06] Código expirado → Rejeitado', () {
+    test('[CT06] Código expirado (passou de 15 minutos) → Rejeitado', () {
       final resultado = ValidadorAuth.validarCodigoVerificacao(
         codigoDigitado: '123456',
         codigoEsperado: '123456',
@@ -209,6 +210,18 @@ void main() {
         agora: agora,
       );
       expect(resultado, 'Informe o código de verificação.');
+    });
+
+    test('[EXTRA09] Código no limite exato de 15min (14m59s) → Aceito', () {
+      // Se a expiração acontece 1 segundo no futuro, a janela de 15 minutos ainda está aberta
+      final limiteExato = agora.add(const Duration(seconds: 1)); 
+      final resultado = ValidadorAuth.validarCodigoVerificacao(
+        codigoDigitado: '123456',
+        codigoEsperado: '123456',
+        expiraEm: limiteExato,
+        agora: agora,
+      );
+      expect(resultado, isNull);
     });
   });
 

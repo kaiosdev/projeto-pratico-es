@@ -11,8 +11,8 @@
 //   CT05  Código válido            → Aceito   (validarCodigoVerificacao)
 //   CT06  Código expirado          → Rejeitado (validarCodigoVerificacao)
 //
-// Senha alinhada ao defeito corrigido (Omissão, item 29 do relatório de
-// inspeção): mínimo de 6 caracteres e ao menos 1 número.
+// Senha conforme as Classes de Equivalência da US-16: mínimo de 6
+// caracteres e ao menos 1 número.
 // Código de verificação alinhado ao defeito corrigido: expiração de 15 minutos.
 //
 // CT05 e CT06 testam validarCodigoVerificacao(), que depende de tempo

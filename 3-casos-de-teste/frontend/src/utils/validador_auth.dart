@@ -18,10 +18,9 @@ class ValidadorAuth {
   }
 
   static String? validarSenha(String? senha) {
-    // Defeito corrigido (Omissão, item 29 do relatório de inspeção):
-    // a senha de cadastro local deve ter no mínimo 8 caracteres.
-    if (senha == null || senha.length < 8) {
-      return 'A senha deve ter no mínimo 8 caracteres.';
+    // Regra de negócio (US-16 — Classes de Equivalência): mínimo de 6 caracteres.
+    if (senha == null || senha.length < 6) {
+      return 'A senha deve ter no mínimo 6 caracteres.';
     }
     // O TP3 exige a validação de números na senha (CT04). Vamos adicionar a regra aqui:
     if (!RegExp(r'[0-9]').hasMatch(senha)) {
